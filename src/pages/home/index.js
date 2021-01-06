@@ -1,7 +1,7 @@
 import { onNavigate } from '../../utils/history.js';
 export const Home = () => {
   //----------------- TODO: TRATAR ERROS ----------------\\
-  //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO -----\\
+  //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\
   window.addEventListener("load", event => {
     event.preventDefault();
     firebase.auth().onAuthStateChanged(user => {
@@ -13,7 +13,7 @@ export const Home = () => {
       }
     });
   })
-  //------------ CRIANDO O TEMPLATE DA PÁGINA -------------\\ 
+  //------------ CRIANDO O TEMPLATE DA PÁGINA -----------\\ 
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
       <section class="timeline">
@@ -22,17 +22,17 @@ export const Home = () => {
             <button id="home" class="button-icon-feed"><img src="../../img/ada-cover.png"></button>
             <figcaption class="logo-name-desktop">[ Ada ]</figcaption>
           </figure>
-          <ul class="nav-feed">
+          <section class="nav-feed">
             <input type="search" id="search">
             <button id="profile" class="button-icon-feed"><img src="../../img/google.svg" height="35px" width="35px"></button>
             <button id="about" class="button-icon-feed"><img src="../../img/google.svg" height="35px" width="35px"></button>
             <button id="logout" class="button-icon-feed"><img src="../../img/logout.svg" height="25px" width="25px"></button>
-          </ul>
+          </section>
         </nav>
         <section class="posts">
           <form id="postForm">
-            <textarea spellcheck="true" maxlength="1000" class="text" id="postText" placeholder="O que você quer compartilhar?" required></textarea>
-            <fieldset class="post-button"> 
+            <textarea spellcheck="true" maxlength="1000" wrap="hard" class="text" id="postText" placeholder="O que você quer compartilhar?" required></textarea>
+            <fieldset class="publish-button"> 
               <label for="file">
                 <figure>
                   <img src="../../img/icon-picture.svg" height="20px" width="20px">
@@ -43,8 +43,8 @@ export const Home = () => {
             </fieldset>  
           </form  
         </section>
-        <ul id="feed" class="posts">
-        </ul>
+        <section id="feed" class="posts">
+        </section>
       </section>
   `;
   //-------------- GUARDANDO TODOS OS INPUTS -------------\\
@@ -59,8 +59,8 @@ export const Home = () => {
   publish.addEventListener("submit", event => {
     event.preventDefault();
     const text = rootElement.querySelector("#postText").value;
-  //-------- TODO: pegar nome, avatar e ID do usuário --------\\
     const now = new Date;
+  //-------- TODO: pegar nome, avatar e ID do usuário --------\\
     const post = {
       userID: "",
       userName: "",
@@ -86,29 +86,47 @@ export const Home = () => {
 //------- TODO: Completar os dados e ajustar o HTML -------\\
 function printPosts(post) {
   const templatePost = `
-    <ul class="postFeed" id="${post.id}">
-      <figure class="avatar">
-        ${post.avatar}
-        <figcaption class="username">${post.userName}</figcaption>
-      </figure>  
-      <p class="text-posts">${post.data().text}</p>
-      <p class="text-posts">${(post.data().comments)}</p>
-      <p class="text-posts">${post.data().likes}</p>
-      <p class="text-posts">${post.data().date}/${post.data().month}/${post.data().year}</p>
+    <section class="postFeed" id="${post.id}">
+      <section class="user-info"
+        <figure class="avatar">
+          ${post.avatar}
+          <figcaption class="username">${post.userName}</figcaption>
+        </figure>
+        <article class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</article>
+      </section>  
+      <article class="text-posts">${post.data().text}</article>
+      <article class="text-posts">${(post.data().comments)}</article>
       <section class="buttons-posts"> 
-        <button id="like" class="icon-post">
-          <img src="../../img/heart.png" height="20px" width="20px"> 
+        <button class="icon-post">
+          <figure class="likes-counting">
+            <img id="like" class="like" src="../../img/heart.png" height="20px" width="20px"> 
+            <figcaption class="text-posts">${post.data().likes}</figcaption>  
+          </figure>
         </button>
-        <button id="delete" class="icon-post">
-          <img src="../../img/recycle-bin.png" height="20px" width="20px"> 
+        <button class="icon-post">
+          <figure>
+            <img class="delete" src="../../img/recycle-bin.png" height="20px" width="20px">
+          </figure>  
         </button>
       </section>  
-    </ul>
+    </section>
   `  
 //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
+//----- TODO: Refatorar, por que dispara 5 eventos? ------\\
   document.querySelector("#feed").innerHTML += templatePost;
-  document.querySelector("#like").addEventListener("click", likePost);
-  document.querySelector("#delete").addEventListener("click", deletePost);
+  document.addEventListener("click", function(e){
+    let closest = e.target.closest(".like");
+    if (closest && document.contains(closest)){
+    likePost();
+    }
+  })
+  document.addEventListener("click", function(e){
+    let closest = e.target.closest(".delete");
+    const postID = post.id;
+    if (closest && document.contains(closest)){
+    deletePost(postID);
+    }
+  })
 }
 //------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\
 function loadPosts() {
@@ -123,25 +141,23 @@ function loadPosts() {
   });
 }
 //----------------- FUNÇÃO DE EXCLUIR -----------------\\
-//----- Só tá funcionando o botão do primeiro post -----\\ 
-// TODO: pegar a ID do post e confirmar que quer excluir \\
 function deletePost(postID){
-  console.log("o erro não é o botão")
   const postCollection = firebase.firestore().collection("posts");
-  postCollection.doc(postID).delete().then(doc => {
-   loadPosts(); 
-  });
-  deletePost();
+  if (confirm("Você quer realmente quer excluir essa publicação?")) {
+    postCollection.doc(postID).delete().then(doc => {
+      console.log("Document successfully deleted!");
+      loadPosts();
+    });
+  } else {
+    console.log("Tudo bom!");
+    // window.open("sair.html", "Obrigado pela visita!");  
+  }
 }
 //--------------------- FUNÇÃO DE LIKE -------------------\\
-//------- Só tá funcionando o botão do primeiro post ------\\
 function likePost(){
   console.log("deixou o joinha");
 }
 //------------------- FUNÇÃO DE EDITAR ------------------\\
-
-
-
 //-------------------- HACKER EDITION --------------------\\
 //------------------- FUNÇÃO DE COMENTAR ------------------\\
 //---------------------- POSTAR IMAGEM ---------------------\\
