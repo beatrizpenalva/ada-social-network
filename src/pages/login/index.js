@@ -56,7 +56,7 @@ export const Login = () => {
     } else {
       const promise = firebase.auth().signInWithEmailAndPassword(email, password);
       promise
-        .then(() => {
+        .then(() =>  {
           onNavigate('/');
         })
         .catch(err => {
@@ -102,7 +102,8 @@ export const Login = () => {
     firebase.auth().signInWithRedirect(provider)
       .then(() => {
         onNavigate('/');
-      }).catch(err => {
+      })
+      .catch(err => {
         const errorCode = err.code;
         const errorMessage = verifyErrorCode[errorCode];
         if (errorMessage === null) {
