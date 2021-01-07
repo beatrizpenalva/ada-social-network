@@ -50,6 +50,7 @@ export const Home = () => {
   //-------------- GUARDANDO TODOS OS INPUTS -------------\\
   const publish = rootElement.querySelector("#postForm");
   const logOut = rootElement.querySelector("#logout");
+  const feed = rootElement.querySelector("#feed");
   //------------------- FUNÇÃO DE LOGOUT -------------------\\
   logOut.addEventListener("click", () => {
     const promise = firebase.auth().signOut();
@@ -78,34 +79,50 @@ export const Home = () => {
     const postCollection = firebase.firestore().collection("posts");
     postCollection.add(post).then(res => {
       rootElement.querySelector("#postText").value = "";
-// <<<<<<<<<<<<<<<<<<<< MUDANÇA >>>>>>>>>>>>>>>>>>>> \\
-/*
-deleteButton.forEach(button => {
-            button.addEventListener('click', (event) => {
-                let deleteBtn = event.target.parentNode.querySelector('.delete-button');
-                ReviewPost(deleteBtn.dataset.id).get()
-                    .then(post => {
-                        if(post.data().userUid === UserInfoUid()){
-                            if(confirm("Are you sure you want to delete it?")){
-                                deleteReviews(deleteBtn.dataset.id);
-                            }
-                        }else {
-                            alert("You can't delete a post from another person!")
-                        }
-                    })
-            })
-        })
-
-      */
       loadPosts();
     })
   });
+  //------------------- FUNÇÃO DE DELETE -------------------\\
+  feed.addEventListener("click", getPostClick);
+
+//----------------- FUNÇÃO DE EXCLUIR -----------------\\
+function getPostClick(e) {
+  let closestDelete = e.target.closest(".delete");
+  console.log(closestDelete);
+  //if (closestDelete && feed.contains(closestDelete)){
+
+    //let closestIdPost = closestDelete.parentNode.querySelector('.postFeed');
+    let closestIdPost = closestDelete.parentNode.parentNode.id;
+    
+    console.log(closestIdPost);
+
+    deletePost(closestIdPost);
+  //}  
+}
+function deletePost(postID){
+  const postCollection = firebase.firestore().collection("posts");
+  if (confirm("Você quer realmente quer excluir essa publicação?")) {
+    postCollection.doc(postID).delete().then(doc => {
+      console.log("Document successfully deleted!");
+      loadPosts();
+    }); 
+  }
+}
+
+
+
+
+
+
   return rootElement;
 };
+
+
+
 //------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
 function printPosts(post) {
   const templatePost = `
-    <section class="postFeed" id="${post.data().id}">
+    <section class="postFeed" id="${post.id}">
       <section class="user-info"
         <figure class="avatar">
         <img src="${post.data().avatar}" height="50px" width="50px">
@@ -121,9 +138,9 @@ function printPosts(post) {
             <figcaption class="text-posts">${post.data().likes}</figcaption>  
           </figure>
         </button>
-        <button class="icon-post">
+        <button class="icon-post delete">
           <figure>
-            <img id="delete" class="delete" src="../../img/recycle-bin.png" height="20px" width="20px">
+            <img src="../../img/recycle-bin.png" height="20px" width="20px">
           </figure>  
         </button>
       </section>  
@@ -131,24 +148,10 @@ function printPosts(post) {
   `  
 //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
   document.querySelector("#feed").innerHTML += templatePost;
-  document.addEventListener("click", function(e){
-    let closest = e.target.closest(".like");
-    if (closest && document.contains(closest)){
-    likePost();
-    }
-  })
-  document.addEventListener("click", function(e){
-    let closest = e.target.closest(".delete");
-    const postID = post.id;
-    if (closest && document.contains(closest)){
-    deletePost(postID);
-    }
-  })
 }
 //------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\
 function loadPosts() {
   const postCollection = firebase.firestore().collection("posts");
-//-------- TODO: Animação de carregando a página ---------\\
   document.querySelector("#feed").innerHTML = "Carregando...";
   postCollection.orderBy("time", "desc").get().then(snapshot => {
     document.querySelector("#feed").innerHTML = "";
@@ -157,20 +160,67 @@ function loadPosts() {
     });
   });
 }
-//----------------- FUNÇÃO DE EXCLUIR -----------------\\
-function deletePost(postID){
-  const postCollection = firebase.firestore().collection("posts");
-  if (confirm("Você quer realmente quer excluir essa publicação?")) {
-    postCollection.doc(postID).delete().then(doc => {
-      console.log("Document successfully deleted!");
-      loadPosts();
-    }); 
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //--------------------- FUNÇÃO DE LIKE -------------------\\
-function likePost(){
+/*function likePost(){
   console.log("deixou o joinha");
 }
+*/
 //-------- FUNÇÃO DE CARREGAR NOVA PUBLICAÇÃO ---------\\
 /*function loadNewPost() {
 _set_ nesse momento eu já consigo pegar o ID do post
@@ -208,13 +258,24 @@ function teste(){
 }
 */
 
+/*
+deleteButton.forEach(button => {
+            button.addEventListener('click', (event) => {
+                let deleteBtn = event.target.parentNode.querySelector('.delete-button');
+                ReviewPost(deleteBtn.dataset.id).get()
+                    .then(post => {
+                        if(post.data().userUid === UserInfoUid()){
+                            if(confirm("Are you sure you want to delete it?")){
+                                deleteReviews(deleteBtn.dataset.id);
+                            }
+                        }else {
+                            alert("You can't delete a post from another person!")
+                        }
+                    })
+            })
+        })
 
-
-
-
-
-
-
+      */
 
 
 //------------------- FUNÇÃO DE EDITAR ------------------\\
@@ -226,16 +287,6 @@ function teste(){
 //----------------------- EDITAR PERFIL -----------------------\\
 //---------------- TIMELINE PERFIL PERSONALIZADA ---------------\\
 
-
-//usar a referência coleção para printar os posts?
-//var usersCollectionRef = db.collection('users');
-//referência à um documento dentro da coleção: var alovelaceDocumentRef = db.doc('users/alovelace');
-//público x privado: sub-coleção, coleção usuário, sub-coleção post público e sub-coleção post privado
-/*
-Estilo:
-Login, colocar pra aparecer aquela coisinha branca com o nome do que aquele ícone vai
- redirecionar. Post: outline e margin button.
-*/
 /*
 //-------------- Fazer a validação do registro ---------------\\
  const signUp = rootElement.querySelector('#signUp');
@@ -265,3 +316,20 @@ Login, colocar pra aparecer aquela coisinha branca com o nome do que aquele íco
  E inserir uma mensagem de erro, caso a mensagem não atenda aos requisitos.
  //"auth/weak-password": "A senha é muito fraca.",
  */
+/*document.addEventListener("click", function(e){
+    let closest = e.target.closest(".like");
+    if (closest && document.contains(closest)){
+    likePost();
+    }
+  })
+  */
+/*
+const closestExcluir = event.target.closest(btnExcluir);
+if (closestExcluir && feedArea.contains(closestExcluir)) {
+  const closestIdPost = closestExcluir.parentNode.querySelector('.id-escondido').innerText;
+if (confirm('Tem certeza que deseja excluir esse post?')) {
+firebase.firestore().collection('posts').doc(closestIdPost).delete()
+.then(() => {});
+renderPage();
+*/
+    //const postID = post.id;
