@@ -60,42 +60,60 @@ export const Home = () => {
     event.preventDefault();
     const text = rootElement.querySelector("#postText").value;
     const now = new Date;
-  //-------- TODO: pegar nome, avatar e ID do usuário --------\\
+    const user = firebase.auth().currentUser;
+    const userName = user.displayName;
+    const userID = user.uid;
+    const userAvatar = user.photoURL;
     const post = {
-      userID: "",
-      userName: "",
-      avatar: "",
+      name: userName,
+      avatar: userAvatar,
+      ID: userID,
       time: Date.now(),
       date: now.getDate(), 
       month: now.getMonth() + 1, 
       year: now.getFullYear(),
       text: text,
-      picture: "",
       likes: 0,
-      comments: []
     }
     const postCollection = firebase.firestore().collection("posts");
     postCollection.add(post).then(res => {
       rootElement.querySelector("#postText").value = "";
+// <<<<<<<<<<<<<<<<<<<< MUDANÇA >>>>>>>>>>>>>>>>>>>> \\
+/*
+deleteButton.forEach(button => {
+            button.addEventListener('click', (event) => {
+                let deleteBtn = event.target.parentNode.querySelector('.delete-button');
+                ReviewPost(deleteBtn.dataset.id).get()
+                    .then(post => {
+                        if(post.data().userUid === UserInfoUid()){
+                            if(confirm("Are you sure you want to delete it?")){
+                                deleteReviews(deleteBtn.dataset.id);
+                            }
+                        }else {
+                            alert("You can't delete a post from another person!")
+                        }
+                    })
+            })
+        })
+
+      */
       loadPosts();
     })
   });
   return rootElement;
 };
 //------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
-//------- TODO: Completar os dados e ajustar o HTML -------\\
 function printPosts(post) {
   const templatePost = `
-    <section class="postFeed" id="${post.id}">
+    <section class="postFeed" id="${post.data().id}">
       <section class="user-info"
         <figure class="avatar">
-          ${post.avatar}
-          <figcaption class="username">${post.userName}</figcaption>
+        <img src="${post.data().avatar}" height="50px" width="50px">
+          <figcaption class="username">${post.data().name}</figcaption>
         </figure>
         <article class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</article>
       </section>  
       <article class="text-posts">${post.data().text}</article>
-      <article class="text-posts">${(post.data().comments)}</article>
       <section class="buttons-posts"> 
         <button class="icon-post">
           <figure class="likes-counting">
@@ -105,14 +123,13 @@ function printPosts(post) {
         </button>
         <button class="icon-post">
           <figure>
-            <img class="delete" src="../../img/recycle-bin.png" height="20px" width="20px">
+            <img id="delete" class="delete" src="../../img/recycle-bin.png" height="20px" width="20px">
           </figure>  
         </button>
       </section>  
     </section>
   `  
 //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
-//----- TODO: Refatorar, por que dispara 5 eventos? ------\\
   document.querySelector("#feed").innerHTML += templatePost;
   document.addEventListener("click", function(e){
     let closest = e.target.closest(".like");
@@ -147,16 +164,59 @@ function deletePost(postID){
     postCollection.doc(postID).delete().then(doc => {
       console.log("Document successfully deleted!");
       loadPosts();
-    });
-  } else {
-    console.log("Tudo bom!");
-    // window.open("sair.html", "Obrigado pela visita!");  
+    }); 
   }
 }
 //--------------------- FUNÇÃO DE LIKE -------------------\\
 function likePost(){
   console.log("deixou o joinha");
 }
+//-------- FUNÇÃO DE CARREGAR NOVA PUBLICAÇÃO ---------\\
+/*function loadNewPost() {
+_set_ nesse momento eu já consigo pegar o ID do post
+  firebase.firestore().collection('users')
+  .doc(user).set({ role })
+  .then(() => setRoled())
+}
+function loadNewPost() {
+      const postCollection = firebase.firestore().collection("posts");
+      // Add a new document in collection "cities"
+      postCollection.doc("post").set({post})
+      .then(function() {
+        console.log("Document successfully written!");
+        //printPosts(post);
+        //document.querySelector("#feed").innerHTML = "";
+        //printPosts(post)
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+      }
+*/
+/*
+function teste(){
+  const postCollection = firebase.firestore().collection("posts");
+    postCollection.get().then(snapshot => {
+      snapshot.forEach(post => {
+        console.log(post.id)
+        const elemento = document.querySelector(`#${post.id}`);
+        elemento.addEventListener("click", () =>{
+          console.log("clicou")
+        })
+      })
+    })
+}
+*/
+
+
+
+
+
+
+
+
+
+
 //------------------- FUNÇÃO DE EDITAR ------------------\\
 //-------------------- HACKER EDITION --------------------\\
 //------------------- FUNÇÃO DE COMENTAR ------------------\\
@@ -165,8 +225,6 @@ function likePost(){
 //-------------------- PÚBLICO OU PRIVADO --------------------\\
 //----------------------- EDITAR PERFIL -----------------------\\
 //---------------- TIMELINE PERFIL PERSONALIZADA ---------------\\
-
-
 
 
 //usar a referência coleção para printar os posts?
