@@ -71,7 +71,11 @@ export const Login = () => {
   });
   signUpGoogle.addEventListener("click", () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider)
+    //firebase.auth().signInWithRedirect(provider)
+    firebase.auth().signInWithPopup(provider)
+
+    console.log('usuário')
+
       .then(() => {
         onNavigate('/');
       }).catch(err => {

@@ -86,7 +86,7 @@ export const Home = () => {
 //------- TODO: Completar os dados e ajustar o HTML -------\\
 function printPosts(post) {
   const templatePost = `
-    <ul class="postFeed" id="${post.id}">
+    <li class="postFeed" id="${post.id}">
       <figure class="avatar">
         ${post.avatar}
         <figcaption class="username">${post.userName}</figcaption>
@@ -96,18 +96,20 @@ function printPosts(post) {
       <p class="text-posts">${post.data().likes}</p>
       <p class="text-posts">${post.data().date}/${post.data().month}/${post.data().year}</p>
       <section class="buttons-posts"> 
-        <button id="like" class="icon-post">
+        <button id="like-${post.id}" class="icon-post">
           <img src="../../img/heart.png" height="20px" width="20px"> 
         </button>
         <button id="delete" class="icon-post">
           <img src="../../img/recycle-bin.png" height="20px" width="20px"> 
         </button>
       </section>  
-    </ul>
+    </li>
   `  
 //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
-  document.querySelector("#feed").innerHTML += templatePost;
-  document.querySelector("#like").addEventListener("click", likePost);
+  // document.querySelector("#feed").innerHTML += templatePost;
+  const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
+  document.querySelector("#feed").appendChild(newPostElement)
+  document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
   document.querySelector("#delete").addEventListener("click", deletePost);
 }
 //------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\
@@ -129,15 +131,17 @@ function deletePost(postID){
   console.log("o erro não é o botão")
   const postCollection = firebase.firestore().collection("posts");
   postCollection.doc(postID).delete().then(doc => {
-   loadPosts(); 
+  loadPosts(); 
   });
   deletePost();
 }
 //--------------------- FUNÇÃO DE LIKE -------------------\\
-//------- Só tá funcionando o botão do primeiro post ------\\
 function likePost(){
   console.log("deixou o joinha");
 }
+
+//Pra contabilizar like preciso: identificar o usuário que clicou no botão
+//
 //------------------- FUNÇÃO DE EDITAR ------------------\\
 
 
