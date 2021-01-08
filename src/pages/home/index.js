@@ -2,17 +2,7 @@ import { onNavigate } from '../../utils/history.js';
 export const Home = () => {
   //----------------- TODO: TRATAR ERROS ----------------\\
   //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\
-  window.addEventListener("load", event => {
-    event.preventDefault();
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        onNavigate('/')
-        loadPosts();
-      } else {
-        onNavigate('/login')
-      }
-    });
-  })
+  window.addEventListener("load", verifyUserLogged);
   //------------ CRIANDO O TEMPLATE DA PÁGINA -----------\\ 
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
@@ -23,9 +13,6 @@ export const Home = () => {
             <figcaption class="logo-name-desktop">[ Ada ]</figcaption>
           </figure>
           <section class="nav-feed">
-            <input type="search" id="search">
-            <button id="profile" class="button-icon-feed"><img src="../../img/google.svg" height="35px" width="35px"></button>
-            <button id="about" class="button-icon-feed"><img src="../../img/google.svg" height="35px" width="35px"></button>
             <button id="logout" class="button-icon-feed"><img src="../../img/logout.svg" height="25px" width="25px"></button>
           </section>
         </nav>
@@ -48,77 +35,59 @@ export const Home = () => {
       </section>
   `;
   //-------------- GUARDANDO TODOS OS INPUTS -------------\\
-  const publish = rootElement.querySelector("#postForm");
-  const logOut = rootElement.querySelector("#logout");
+  const publishButton = rootElement.querySelector("#postForm");
+  const logOutButton = rootElement.querySelector("#logout");
   const feed = rootElement.querySelector("#feed");
-  //------------------- FUNÇÃO DE LOGOUT -------------------\\
-  logOut.addEventListener("click", () => {
-    const promise = firebase.auth().signOut();
-    promise.then(() => { onNavigate('/login') });
+  //-------------- EVENTOS CHAMADA DAS FUNÇÕES --------------\\
+  publishButton.addEventListener("submit", e => {
+    e.preventDefault();
+    let text = rootElement.querySelector("#postText").value;
+    createPost(text)
+    rootElement.querySelector("#postText").value = "";
   });
-  //-------------- FUNÇÃO DE CRIAR PUBLICAÇÃO --------------\\
-  publish.addEventListener("submit", event => {
-    event.preventDefault();
-    const text = rootElement.querySelector("#postText").value;
-    const now = new Date;
-    const user = firebase.auth().currentUser;
-    const userName = user.displayName;
-    const userID = user.uid;
-    const userAvatar = user.photoURL;
-    const post = {
-      name: userName,
-      avatar: userAvatar,
-      ID: userID,
-      time: Date.now(),
-      date: now.getDate(), 
-      month: now.getMonth() + 1, 
-      year: now.getFullYear(),
-      text: text,
-      likes: 0,
-    }
-    const postCollection = firebase.firestore().collection("posts");
-    postCollection.add(post).then(res => {
-      rootElement.querySelector("#postText").value = "";
-      loadPosts();
-    })
-  });
-  //------------------- FUNÇÃO DE DELETE -------------------\\
+  logOutButton.addEventListener("click", logOut);
   feed.addEventListener("click", getPostClick);
-
-//----------------- FUNÇÃO DE EXCLUIR -----------------\\
-function getPostClick(e) {
-  let closestDelete = e.target.closest(".delete");
-  console.log(closestDelete);
-  //if (closestDelete && feed.contains(closestDelete)){
-
-    //let closestIdPost = closestDelete.parentNode.querySelector('.postFeed');
-    let closestIdPost = closestDelete.parentNode.parentNode.id;
-    
-    console.log(closestIdPost);
-
-    deletePost(closestIdPost);
-  //}  
-}
-function deletePost(postID){
-  const postCollection = firebase.firestore().collection("posts");
-  if (confirm("Você quer realmente quer excluir essa publicação?")) {
-    postCollection.doc(postID).delete().then(doc => {
-      console.log("Document successfully deleted!");
-      loadPosts();
-    }); 
-  }
-}
-
-
-
-
-
-
   return rootElement;
 };
-
-
-
+//------------------- FUNÇÃO DE LOGOUT -------------------\\ FIREBASE
+function logOut() {
+  const promise = firebase.auth().signOut();
+    promise.then(() => { onNavigate('/login') });
+}
+//----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\ FIREBASE
+function verifyUserLogged(){
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      onNavigate('/')
+      loadPosts();
+    } else {
+      onNavigate('/login')
+    }
+  });
+}
+//-------------- FUNÇÃO DE CRIAR PUBLICAÇÃO --------------\\ FIREBASE
+function createPost(text) {
+  const now = new Date;
+  const user = firebase.auth().currentUser;
+  const userName = user.displayName;
+  const userID = user.uid;
+  const userAvatar = user.photoURL;
+  const post = {
+    name: userName,
+    avatar: userAvatar,
+    ID: userID,
+    time: Date.now(),
+    date: now.getDate(), 
+    month: now.getMonth() + 1, 
+    year: now.getFullYear(),
+    text: text,
+    likes: 0,
+  }
+  const postCollection = firebase.firestore().collection("posts");
+  postCollection.add(post).then(res => {
+    loadPosts();
+  })
+}
 //------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
 function printPosts(post) {
   const templatePost = `
@@ -146,10 +115,9 @@ function printPosts(post) {
       </section>  
     </section>
   `  
-//-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
   document.querySelector("#feed").innerHTML += templatePost;
 }
-//------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\
+//------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\ FIREBASE
 function loadPosts() {
   const postCollection = firebase.firestore().collection("posts");
   document.querySelector("#feed").innerHTML = "Carregando...";
@@ -160,67 +128,40 @@ function loadPosts() {
     });
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//-------------- FUNÇÃO DE PEGAR ID DO POST --------------\\
+function getPostClick(e) {
+  let closestDelete = e.target.closest(".delete");
+  let closestIdPost = closestDelete.parentNode.parentNode.id;
+  deletePost(closestIdPost);
+}
+//------------------- FUNÇÃO DE DELETE -------------------\\ FIREBASE
+function deletePost(postID){
+  const postCollection = firebase.firestore().collection("posts");
+  if (confirm("Você quer realmente quer excluir essa publicação?")) {
+    postCollection.doc(postID).delete().then(doc => {
+      loadPosts();
+    }); 
+  }
+}
 //--------------------- FUNÇÃO DE LIKE -------------------\\
 /*function likePost(){
   console.log("deixou o joinha");
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //-------- FUNÇÃO DE CARREGAR NOVA PUBLICAÇÃO ---------\\
 /*function loadNewPost() {
 _set_ nesse momento eu já consigo pegar o ID do post
@@ -257,25 +198,6 @@ function teste(){
     })
 }
 */
-
-/*
-deleteButton.forEach(button => {
-            button.addEventListener('click', (event) => {
-                let deleteBtn = event.target.parentNode.querySelector('.delete-button');
-                ReviewPost(deleteBtn.dataset.id).get()
-                    .then(post => {
-                        if(post.data().userUid === UserInfoUid()){
-                            if(confirm("Are you sure you want to delete it?")){
-                                deleteReviews(deleteBtn.dataset.id);
-                            }
-                        }else {
-                            alert("You can't delete a post from another person!")
-                        }
-                    })
-            })
-        })
-
-      */
 
 
 //------------------- FUNÇÃO DE EDITAR ------------------\\
