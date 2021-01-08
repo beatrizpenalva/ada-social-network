@@ -101,7 +101,7 @@ function printPosts(post) {
       </section>  
       <article class="text-posts">${post.data().text}</article>
       <section class="buttons-posts"> 
-        <button class="icon-post">
+        <button id="like-${post.id}" class="icon-post">
           <figure class="likes-counting">
             <img id="like" class="like" src="../../img/heart.png" height="20px" width="20px"> 
             <figcaption class="text-posts">${post.data().likes}</figcaption>  
@@ -115,7 +115,12 @@ function printPosts(post) {
       </section>  
     </section>
   `  
-  document.querySelector("#feed").innerHTML += templatePost;
+//-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
+  // document.querySelector("#feed").innerHTML += templatePost;
+  const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
+  document.querySelector("#feed").appendChild(newPostElement)
+  document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
+  document.querySelector("#delete").addEventListener("click", deletePost);
 }
 //------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\ FIREBASE
 function loadPosts() {
