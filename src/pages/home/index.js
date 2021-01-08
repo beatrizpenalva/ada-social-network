@@ -1,9 +1,7 @@
+import { logOut } from '../../services/index.js'
 import { onNavigate } from '../../utils/history.js';
 export const Home = () => {
-  //----------------- TODO: TRATAR ERROS ----------------\\
-  //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\
   window.addEventListener("load", verifyUserLogged);
-  //------------ CRIANDO O TEMPLATE DA PÁGINA -----------\\ 
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
       <section class="timeline">
@@ -34,11 +32,9 @@ export const Home = () => {
         </section>
       </section>
   `;
-  //-------------- GUARDANDO TODOS OS INPUTS -------------\\
   const publishButton = rootElement.querySelector("#postForm");
   const logOutButton = rootElement.querySelector("#logout");
   const feed = rootElement.querySelector("#feed");
-  //-------------- EVENTOS CHAMADA DAS FUNÇÕES --------------\\
   publishButton.addEventListener("submit", e => {
     e.preventDefault();
     let text = rootElement.querySelector("#postText").value;
@@ -49,12 +45,6 @@ export const Home = () => {
   feed.addEventListener("click", getPostClick);
   return rootElement;
 };
-//------------------- FUNÇÃO DE LOGOUT -------------------\\ FIREBASE
-function logOut() {
-  const promise = firebase.auth().signOut();
-    promise.then(() => { onNavigate('/login') });
-}
-//----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\ FIREBASE
 function verifyUserLogged(){
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -65,7 +55,6 @@ function verifyUserLogged(){
     }
   });
 }
-//-------------- FUNÇÃO DE CRIAR PUBLICAÇÃO --------------\\ FIREBASE
 function createPost(text) {
   const now = new Date;
   const user = firebase.auth().currentUser;
@@ -88,7 +77,6 @@ function createPost(text) {
     loadPosts();
   })
 }
-//------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
 function printPosts(post) {
   const templatePost = `
     <section class="postFeed" id="${post.id}">
@@ -101,28 +89,30 @@ function printPosts(post) {
       </section>  
       <article class="text-posts">${post.data().text}</article>
       <section class="buttons-posts"> 
-        <button id="like-${post.id}" class="icon-post">
+        <button id="like" class="icon-post">
           <figure class="likes-counting">
             <img id="like" class="like" src="../../img/heart.png" height="20px" width="20px"> 
             <figcaption class="text-posts">${post.data().likes}</figcaption>  
           </figure>
         </button>
+        <button class="icon-post">
+        <figure>
+          <img id="edit-button" class="edit-button" src="../../img/recycle-bin.png" height="20px" width="20px">
+        </figure>  
+      </button>
         <button class="icon-post delete">
           <figure>
-            <img src="../../img/recycle-bin.png" height="20px" width="20px">
+            <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
           </figure>  
         </button>
       </section>  
     </section>
   `  
-//-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
-  // document.querySelector("#feed").innerHTML += templatePost;
-  const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
-  document.querySelector("#feed").appendChild(newPostElement)
-  document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
-  document.querySelector("#delete").addEventListener("click", deletePost);
+  document.querySelector("#feed").innerHTML += templatePost;
+  //const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
+  //document.querySelector("#feed").appendChild(newPostElement)
+  //document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
 }
-//------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\ FIREBASE
 function loadPosts() {
   const postCollection = firebase.firestore().collection("posts");
   document.querySelector("#feed").innerHTML = "Carregando...";
@@ -133,13 +123,17 @@ function loadPosts() {
     });
   });
 }
-//-------------- FUNÇÃO DE PEGAR ID DO POST --------------\\
 function getPostClick(e) {
-  let closestDelete = e.target.closest(".delete");
-  let closestIdPost = closestDelete.parentNode.parentNode.id;
-  deletePost(closestIdPost);
+  if (e.target.closest(".delete")) {
+    let closestDelete = e.target.closest(".delete");
+    let closestIdPost = closestDelete.parentNode.parentNode.id;
+    deletePost(closestIdPost);
+  } else {
+  let closestEdit = e.target.closest(".edit-button")
+  let closestIdPost = closestEdit.parentNode.parentNode.id;
+  editPost(closestIdPost);
+  }
 }
-//------------------- FUNÇÃO DE DELETE -------------------\\ FIREBASE
 function deletePost(postID){
   const postCollection = firebase.firestore().collection("posts");
   if (confirm("Você quer realmente quer excluir essa publicação?")) {
@@ -148,115 +142,44 @@ function deletePost(postID){
     }); 
   }
 }
-//--------------------- FUNÇÃO DE LIKE -------------------\\
-/*function likePost(){
-  console.log("deixou o joinha");
+function editPost(){
+  console.log("Pegou o click")
 }
-*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//-------- FUNÇÃO DE CARREGAR NOVA PUBLICAÇÃO ---------\\
-/*function loadNewPost() {
-_set_ nesse momento eu já consigo pegar o ID do post
-  firebase.firestore().collection('users')
-  .doc(user).set({ role })
-  .then(() => setRoled())
-}
-function loadNewPost() {
-      const postCollection = firebase.firestore().collection("posts");
-      // Add a new document in collection "cities"
-      postCollection.doc("post").set({post})
-      .then(function() {
-        console.log("Document successfully written!");
-        //printPosts(post);
-        //document.querySelector("#feed").innerHTML = "";
-        //printPosts(post)
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
-      }
-*/
 /*
-function teste(){
+function editPost(){
+  console.log("foi");
   const postCollection = firebase.firestore().collection("posts");
-    postCollection.get().then(snapshot => {
-      snapshot.forEach(post => {
-        console.log(post.id)
-        const elemento = document.querySelector(`#${post.id}`);
-        elemento.addEventListener("click", () =>{
-          console.log("clicou")
-        })
-      })
-    })
+  postCollection.doc(id).update((text: text)).then(() => {
+    count.innerText = countNumber
+  }
 }
+editPost()
 */
+//deixar a textarea editável, aparecer mais dois botões de salvar ou cancelar.
+//salvar: pegar o conteúdo do input.
+//método update do firebase
+//diferença nos posts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //------------------- FUNÇÃO DE EDITAR ------------------\\
-//-------------------- HACKER EDITION --------------------\\
-//------------------- FUNÇÃO DE COMENTAR ------------------\\
-//---------------------- POSTAR IMAGEM ---------------------\\
-//--------------- ADICIONAR OU EXCLUIR AMIGOS ---------------\\
-//-------------------- PÚBLICO OU PRIVADO --------------------\\
-//----------------------- EDITAR PERFIL -----------------------\\
-//---------------- TIMELINE PERFIL PERSONALIZADA ---------------\\
-
-/*
-//-------------- Fazer a validação do registro ---------------\\
- const signUp = rootElement.querySelector('#signUp');
- signUp.addEventListener("click", e => {
-   const email = rootElement.querySelector("#email").value;
-   const password = rootElement.querySelector("#password").value;
-   if (email === "" || password === "") {
-     printMessageError(errorMessageEmptyInput);
-   } else {
-     const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-     promise
-       .then(() => {
-         onNavigate('/');
-       }).catch(err => {
-         const errorCode = err.code;
-         const errorMessage = verifyErrorCode[errorCode];
-         if (errorMessage == null) {
-           errorMessage = err.Message;
-         }
-         printMessageError(errorMessage);
-       });
-   }
- });
- Dúvida:
- *Não haver usuários repetidos (só e-mail ou nome também?).
- Definir um formato de senha (número de caracteres, strings, number, etc.).
- E inserir uma mensagem de erro, caso a mensagem não atenda aos requisitos.
- //"auth/weak-password": "A senha é muito fraca.",
- */
-/*document.addEventListener("click", function(e){
-    let closest = e.target.closest(".like");
-    if (closest && document.contains(closest)){
-    likePost();
-    }
-  })
-  */
-/*
-const closestExcluir = event.target.closest(btnExcluir);
-if (closestExcluir && feedArea.contains(closestExcluir)) {
-  const closestIdPost = closestExcluir.parentNode.querySelector('.id-escondido').innerText;
-if (confirm('Tem certeza que deseja excluir esse post?')) {
-firebase.firestore().collection('posts').doc(closestIdPost).delete()
-.then(() => {});
-renderPage();
-*/
-    //const postID = post.id;
+//-------------------- FUNÇÃO DE COMENTAR ------------------\\ HE _ 1
+//---------------------- POSTAR IMAGEM ---------------------\\ HE _ 2
+//--------------- ADICIONAR OU EXCLUIR AMIGOS --------------\\ HE _ 3
+//-------------------- PÚBLICO OU PRIVADO ------------------\\ HE _ 4
+//---------------------- EDITAR PERFIL ---------------------\\ HE _ 5
+//-------------- TIMELINE PERFIL PERSONALIZADA -------------\\ HE _ 6
