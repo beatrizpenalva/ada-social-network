@@ -1,7 +1,9 @@
 import { logOut } from '../../services/index.js'
 import { onNavigate } from '../../utils/history.js';
+
 export const Home = () => {
   window.addEventListener("load", verifyUserLogged);
+
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
       <section class="timeline">
@@ -10,14 +12,18 @@ export const Home = () => {
             <button id="home" class="button-icon-feed"><img src="../../img/ada-cover.png"></button>
             <figcaption class="logo-name-desktop">[ Ada ]</figcaption>
           </figure>
+
           <section class="nav-feed">
-            <button id="logout" class="button-icon-feed"><img src="../../img/logout.svg" height="25px" width="25px"></button>
+            <button id="logout" class="button-icon-feed"><img src="../../img/logout.svg" height="35px" width="35px"></button>
+            <button id="profile" class="button-icon-feed"><img src="../../img/logout.svg" height="35px" width="35px"></button>
           </section>
         </nav>
+
         <section class="posts">
           <form id="postForm">
-            <textarea spellcheck="true" maxlength="1000" wrap="hard" class="text" id="postText" placeholder="O que você quer compartilhar?" required></textarea>
-            <fieldset class="publish-button"> 
+            <textarea spellcheck="true" maxlength="500" wrap="hard" class="text" id="postText" placeholder="O que você quer compartilhar?" required></textarea>
+
+            <section class="publish-button"> 
               <label for="file">
                 <figure>
                   <img src="../../img/icon-picture.svg" height="20px" width="20px">
@@ -25,16 +31,18 @@ export const Home = () => {
                 <input type="file" id="file" accept="image/png, image/jpeg">
                 </label>  
               <button type="submit" class="enter-button" id="publish">Publicar</button> 
-            </fieldset>  
-          </form  
+            </section>  
+          </form>  
         </section>
-        <section id="feed" class="posts">
-        </section>
+
+        <section id="feed" class="posts"></section>
       </section>
   `;
+
   const publishButton = rootElement.querySelector("#postForm");
   const logOutButton = rootElement.querySelector("#logout");
   const feed = rootElement.querySelector("#feed");
+
   publishButton.addEventListener("submit", e => {
     e.preventDefault();
     let text = rootElement.querySelector("#postText").value;
@@ -43,8 +51,10 @@ export const Home = () => {
   });
   logOutButton.addEventListener("click", logOut);
   feed.addEventListener("click", getPostClick);
+
   return rootElement;
 };
+
 function verifyUserLogged(){
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -55,12 +65,14 @@ function verifyUserLogged(){
     }
   });
 }
+//dividir em mais funções
 function createPost(text) {
   const now = new Date;
   const user = firebase.auth().currentUser;
   const userName = user.displayName;
   const userID = user.uid;
   const userAvatar = user.photoURL;
+ 
   const post = {
     name: userName,
     avatar: userAvatar,
@@ -72,47 +84,59 @@ function createPost(text) {
     text: text,
     likes: 0,
   }
+
   const postCollection = firebase.firestore().collection("posts");
   postCollection.add(post).then(res => {
     loadPosts();
   })
 }
+
 function printPosts(post) {
   const templatePost = `
-    <section class="postFeed" id="${post.id}">
-      <section class="user-info"
-        <figure class="avatar">
-        <img src="${post.data().avatar}" height="50px" width="50px">
-          <figcaption class="username">${post.data().name}</figcaption>
-        </figure>
-        <p class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</p>
-      </section>  
-      <p class="text-posts">${post.data().text}</p>
-      <section class="buttons-posts"> 
-        <button id="like" class="icon-post like">
-          <figure class="likes-counting">
-            <img id="like" src="../../img/heart.png" height="20px" width="20px"> 
-            <figcaption class="text-posts">${post.data().likes}</figcaption>  
-          </figure>
-        </button>
-        <button class="icon-post edit">
-        <figure>
-          <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
+    <section class="postFeed" id="${post.id}">  
+      <section class="left-post">
+        <figure>  
+          <img class="avatar" src="${post.data().avatar}" height="60px" width="60px">
         </figure>  
-      </button>
-        <button class="icon-post delete">
-          <figure>
-            <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
-          </figure>  
-        </button>
-      </section>  
-    </section>
+      </section>
+
+      <section class="right-post">
+        <article class="post-info"
+          <h4 class="username">${post.data().name}</p>
+          <p class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</p>
+        </article>   
+
+        <article class="text-posts">${post.data().text}</article>
+
+        <section class="buttons-posts"> 
+          <button id="like" class="icon-post like">
+            <figure class="likes-counting">
+              <img id="like" src="../../img/heart.png" height="20px" width="20px"> 
+              <figcaption class="text-posts">${post.data().likes}</figcaption>  
+            </figure>
+          </button>
+
+          <button class="icon-post edit">
+            <figure>
+              <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
+            </figure>  
+          </button>
+
+          <button class="icon-post delete">
+            <figure>
+              <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
+            </figure>  
+          </button>
+        </section>  
+      </section>
+    </section>  
   `  
   document.querySelector("#feed").innerHTML += templatePost;
   //const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
   //document.querySelector("#feed").appendChild(newPostElement)
   //document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
 }
+
 function loadPosts() {
   const postCollection = firebase.firestore().collection("posts");
   document.querySelector("#feed").innerHTML = "Carregando...";
@@ -123,21 +147,25 @@ function loadPosts() {
     });
   });
 }
+
 function getPostClick(e) {
   if (e.target.closest(".delete")) {
     let closestDelete = e.target.closest(".delete");
-    let closestIdPost = closestDelete.parentNode.parentNode.id;
+    let closestIdPost = closestDelete.parentNode.parentNode.parentNode.id;
     deletePost(closestIdPost);
-  } else if (e.target.closest(".edit")) {
-  let closestEdit = e.target.closest(".edit")
-  let closestIdPost = closestEdit.parentNode.parentNode.id;
-  editPost(closestIdPost);
-  } else {
-    let closestLike = e.target.closest(".like")
-    let closestIdPost = closestLike.parentNode.parentNode.id;
+  } 
+  else if (e.target.closest(".edit")) {
+    let closestEdit = e.target.closest(".edit");
+    let closestIdPost = closestEdit.parentNode.parentNode.parentNode.id;
+    editPost(closestIdPost);
+  } 
+  else {
+    let closestLike = e.target.closest(".like");
+    let closestIdPost = closestLike.parentNode.parentNode.parentNode.id;
     likePost(closestIdPost);
   }
 }
+
 function deletePost(postID){
   const postCollection = firebase.firestore().collection("posts");
   if (confirm("Você quer realmente quer excluir essa publicação?")) {
@@ -146,6 +174,7 @@ function deletePost(postID){
     }); 
   }
 }
+
 function editPost(postID){
   const newText = prompt("Edite seu texto")
   const postCollection = firebase.firestore().collection("posts");
@@ -153,6 +182,7 @@ function editPost(postID){
     loadPosts();
   })
 }
+
 function likePost(){
   console.log("biscoito")
 }
