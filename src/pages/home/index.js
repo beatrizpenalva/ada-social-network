@@ -85,19 +85,19 @@ function printPosts(post) {
         <img src="${post.data().avatar}" height="50px" width="50px">
           <figcaption class="username">${post.data().name}</figcaption>
         </figure>
-        <article class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</article>
+        <p class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</p>
       </section>  
-      <article class="text-posts">${post.data().text}</article>
+      <p class="text-posts">${post.data().text}</p>
       <section class="buttons-posts"> 
-        <button id="like" class="icon-post">
+        <button id="like" class="icon-post like">
           <figure class="likes-counting">
-            <img id="like" class="like" src="../../img/heart.png" height="20px" width="20px"> 
+            <img id="like" src="../../img/heart.png" height="20px" width="20px"> 
             <figcaption class="text-posts">${post.data().likes}</figcaption>  
           </figure>
         </button>
-        <button class="icon-post">
+        <button class="icon-post edit">
         <figure>
-          <img id="edit-button" class="edit-button" src="../../img/recycle-bin.png" height="20px" width="20px">
+          <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
         </figure>  
       </button>
         <button class="icon-post delete">
@@ -128,10 +128,14 @@ function getPostClick(e) {
     let closestDelete = e.target.closest(".delete");
     let closestIdPost = closestDelete.parentNode.parentNode.id;
     deletePost(closestIdPost);
-  } else {
-  let closestEdit = e.target.closest(".edit-button")
+  } else if (e.target.closest(".edit")) {
+  let closestEdit = e.target.closest(".edit")
   let closestIdPost = closestEdit.parentNode.parentNode.id;
   editPost(closestIdPost);
+  } else {
+    let closestLike = e.target.closest(".like")
+    let closestIdPost = closestLike.parentNode.parentNode.id;
+    likePost(closestIdPost);
   }
 }
 function deletePost(postID){
@@ -142,24 +146,16 @@ function deletePost(postID){
     }); 
   }
 }
-function editPost(){
-  console.log("Pegou o click")
-}
-
-/*
-function editPost(){
-  console.log("foi");
+function editPost(postID){
+  const newText = prompt("Edite seu texto")
   const postCollection = firebase.firestore().collection("posts");
-  postCollection.doc(id).update((text: text)).then(() => {
-    count.innerText = countNumber
-  }
+  postCollection.doc(postID).update({text: newText}).then(() => {
+    loadPosts();
+  })
 }
-editPost()
-*/
-//deixar a textarea editável, aparecer mais dois botões de salvar ou cancelar.
-//salvar: pegar o conteúdo do input.
-//método update do firebase
-//diferença nos posts
+function likePost(){
+  console.log("biscoito")
+}
 
 
 
@@ -172,11 +168,7 @@ editPost()
 
 
 
-
-
-
-
-//------------------- FUNÇÃO DE EDITAR ------------------\\
+//função like e função criar um novo usuário
 //-------------------- FUNÇÃO DE COMENTAR ------------------\\ HE _ 1
 //---------------------- POSTAR IMAGEM ---------------------\\ HE _ 2
 //--------------- ADICIONAR OU EXCLUIR AMIGOS --------------\\ HE _ 3
