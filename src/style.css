@@ -3,9 +3,26 @@
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif, normal, normal;
-}
+} 
 fieldset{
     border: none;
+}
+input[type="file"] {
+    display: none;
+}
+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: #FF780F;
+    border-radius: 50px;
+    border-style: none;
+    cursor: pointer;
+}
+figure{
+    margin-top: 4px;
 }
 .hidden{
     display: flex;
@@ -102,6 +119,7 @@ fieldset{
 }
 .input-in-line{
     width: 255px;
+    border: none;
     border-bottom: 1.5px solid #231911;
     padding: 8px;
     outline-color: #FF780F;
@@ -161,12 +179,12 @@ fieldset{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 612px;
+    width: 600px;
     height: 200px;
     background-color: #F2EEEA;
     border-radius: 10px;
     margin: 30px 0px;
+    padding: 15px;
 }
 .text{
     border: none;
@@ -184,11 +202,9 @@ fieldset{
 .publish-button{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     height: 70px;
-    width: 180px;
-    margin-left: 400px;
 }
 #publish{
     width: 120px;
@@ -198,43 +214,41 @@ fieldset{
     text-align: center;
     color: #FFFFFF;
     outline: transparent;
-}
-input[type="file"] {
-    display: none;
-}
-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    background-color: #FF780F;
-    border-radius: 50px;
-    border-style: none;
-    cursor: pointer;
-}
-figure{
-    margin-top: 4px;
+    margin-left: 10px;
 }
 .button-icon:hover, label:hover{
     opacity: .60;
 }
 /****************** FEED - PUBLICAÇÕES ***************/
 .postFeed{
+    display: flex;
+    flex-direction: row;
     width: 600px;
     background: #F2EEEA;
     border-radius: 10px;
-    margin: 30px 0px;
+    margin: 20px 0px;
     padding: 15px;
     overflow: auto;
 }
-.avatar{
-    width: 81px;
-    height: 81px;
-    background: #FEBB86;
-    border-radius: 52px;  
+.left-post{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-right: 15px;
 }
-.user-info{
+.avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    object-fit: cover; 
+    background-color: #FEBB86;
+}
+.right-post{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.post-info{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -246,11 +260,9 @@ figure{
 }
 .post-date{
     font-size: 12px;
-    line-height: 1.25em;
     color: #b6a89a;
 }
 .text-posts{
-    width: 500px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -263,9 +275,9 @@ figure{
     word-break: break-word;
 }
 .buttons-posts{
-    margin-top: 10px;
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
 }
 .icon-post{
     outline: none;
@@ -275,17 +287,13 @@ figure{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0px 10px;
-}
-.like{
-    margin-right: 10px;
 }
 /****************** FEED - MEDIA ***************/
 @media (max-width: 375px) {
     #postForm, .postFeed{
         width: 300px;
     }
-    .text, .text-posts{
+    .text{
         width: 250px;
     }
 }
