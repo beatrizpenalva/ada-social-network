@@ -1,4 +1,3 @@
-//------------------------- MENSAGENS DE ERRO ------------------------- \\
 const verifyErrorCode = {
     "auth/invalid-email": "O endereço de e-mail não é válido. Por favor, preencha novamente.",
     "auth/invalid-password": "Senha incorreta. Por favor, tente novamente.",
@@ -7,7 +6,6 @@ const verifyErrorCode = {
     "auth/account-exists-with-different-credential": "E-mail já associado a outra conta. Por favor, tente com um novo endereço.",
     "default": "Ocorreu algum erro. Por favor, tente novamente",
   }
-  //---------------------- PEGAR MENSAGENS DE ERRO --------------------- \\
   export const getError = (err) => {
     const errorCode = err.code;
     const errorMessage = verifyErrorCode[errorCode];
@@ -16,7 +14,6 @@ const verifyErrorCode = {
     }
     printMessageError(errorMessage);
   }
-  //---------------------- MANDAR MENSAGENS DE ERRO --------------------- \\
   function printMessageError(message) {
     const elementError = document.createElement("p");
     const errorMessage = document.createTextNode(message);
@@ -24,4 +21,3 @@ const verifyErrorCode = {
     document.getElementById("error-login").innerHTML = "";
     document.getElementById("error-login").appendChild(elementError);
   }
-  
