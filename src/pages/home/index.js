@@ -4,7 +4,7 @@ import { onNavigate } from '../../utils/history.js';
 export const Home = () => {
   window.addEventListener("load", verifyUserLogged);
 
-  const rootElement = document.createElement('div');
+  const rootElement = document.createElement("main");
   rootElement.innerHTML = `
       <section class="timeline">
         <nav class="cover">
@@ -46,7 +46,7 @@ export const Home = () => {
   publishButton.addEventListener("submit", e => {
     e.preventDefault();
     let text = rootElement.querySelector("#postText").value;
-    createPost(text)
+    getPostInfo(text);
     rootElement.querySelector("#postText").value = "";
   });
   logOutButton.addEventListener("click", logOut);
@@ -55,7 +55,7 @@ export const Home = () => {
   return rootElement;
 };
 
-function verifyUserLogged(){
+function verifyUserLogged() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       onNavigate('/')
@@ -65,14 +65,14 @@ function verifyUserLogged(){
     }
   });
 }
-//dividir em mais funções
-function createPost(text) {
-  const now = new Date;
+
+function getPostInfo(text) {
   const user = firebase.auth().currentUser;
   const userName = user.displayName;
   const userID = user.uid;
   const userAvatar = user.photoURL;
- 
+  const now = new Date;
+
   const post = {
     name: userName,
     avatar: userAvatar,
@@ -84,12 +84,30 @@ function createPost(text) {
     text: text,
     likes: 0,
   }
+  createPost(post);
+}
 
+function createPost(post) {
   const postCollection = firebase.firestore().collection("posts");
   postCollection.add(post).then(res => {
     loadPosts();
   })
 }
+
+
+function createCards(data) {
+  document.getElementById("results").innerHTML = "";
+  let printCards = "";
+  for (let item of data) {
+    let firstEpisode = (item.episode[0]).substr(40, 39);
+    const episodeIndex = firstEpisode - 1;
+    printCards += `template string`
+  }
+  document.getElementById("cardArea").innerHTML = printCards;
+}
+
+
+
 
 function printPosts(post) {
   const templatePost = `
@@ -108,33 +126,46 @@ function printPosts(post) {
 
         <article class="text-posts">${post.data().text}</article>
 
-        <section class="buttons-posts"> 
-          <button id="like" class="icon-post like">
-            <figure class="likes-counting">
-              <img id="like" src="../../img/heart.png" height="20px" width="20px"> 
-              <figcaption class="text-posts">${post.data().likes}</figcaption>  
-            </figure>
-          </button>
+        <section class="buttons-posts">
+          <section class="button-other-users">
+            <button id="like" class="icon-post like">
+              <figure class="likes-counting">
+                <img id="like" src="../../img/heart.png" height="20px" width="20px"> 
+                <figcaption class="text-posts">${post.data().likes}</figcaption>  
+              </figure>
+            </button>
+          </section>
 
-          <button class="icon-post edit">
-            <figure>
-              <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
-            </figure>  
-          </button>
+          <section class="button-user-logged">
+            <button class="icon-post edit">
+              <figure>
+                <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
+              </figure>  
+            </button>
 
-          <button class="icon-post delete">
-            <figure>
-              <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
-            </figure>  
-          </button>
+            <button class="icon-post delete">
+              <figure>
+                <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
+              </figure>  
+            </button>
+          </section>  
         </section>  
       </section>
     </section>  
   `  
-  document.querySelector("#feed").innerHTML += templatePost;
-  //const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
-  //document.querySelector("#feed").appendChild(newPostElement)
-  //document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
+document.querySelector("#feed").innerHTML += templatePost;
+  let currentUser = firebase.auth().currentUser;
+  if (post.data().ID !== currentUser.uid) {
+    const deleteAndEditButtons = document.querySelector(".button-user-logged");
+    deleteAndEditButtons.parentNode.removeChild(deleteAndEditButtons);
+  }  
+  else {
+    const likeButtons = document.querySelector(".button-other-users");
+    likeButtons.parentNode.removeChild(likeButtons);
+  }
+//const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
+//document.querySelector("#feed").appendChild(newPostElement)
+//document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
 }
 
 function loadPosts() {
@@ -151,22 +182,22 @@ function loadPosts() {
 function getPostClick(e) {
   if (e.target.closest(".delete")) {
     let closestDelete = e.target.closest(".delete");
-    let closestIdPost = closestDelete.parentNode.parentNode.parentNode.id;
+    let closestIdPost = closestDelete.parentNode.parentNode.parentNode.parentNode.id;
     deletePost(closestIdPost);
   } 
   else if (e.target.closest(".edit")) {
     let closestEdit = e.target.closest(".edit");
-    let closestIdPost = closestEdit.parentNode.parentNode.parentNode.id;
+    let closestIdPost = closestEdit.parentNode.parentNode.parentNode.parentNode.id;
     editPost(closestIdPost);
   } 
   else {
     let closestLike = e.target.closest(".like");
-    let closestIdPost = closestLike.parentNode.parentNode.parentNode.id;
+    let closestIdPost = closestLike.parentNode.parentNode.parentNode.parentNode.id;
     likePost(closestIdPost);
   }
 }
 
-function deletePost(postID){
+function deletePost(postID) {
   const postCollection = firebase.firestore().collection("posts");
   if (confirm("Você quer realmente quer excluir essa publicação?")) {
     postCollection.doc(postID).delete().then(doc => {
@@ -175,16 +206,18 @@ function deletePost(postID){
   }
 }
 
-function editPost(postID){
-  const newText = prompt("Edite seu texto")
-  const postCollection = firebase.firestore().collection("posts");
-  postCollection.doc(postID).update({text: newText}).then(() => {
-    loadPosts();
-  })
+function editPost(postID) {
+  const newText = prompt("Edite seu texto");
+  if (newText !== null) {
+    const postCollection = firebase.firestore().collection("posts");
+    postCollection.doc(postID).update({text: newText}).then(() => {
+      loadPosts();
+    })
+  }    
 }
 
-function likePost(){
-  console.log("biscoito")
+function likePost() {
+  console.log("biscoito");
 }
 
 
@@ -195,10 +228,7 @@ function likePost(){
 
 
 
-
-
-
-//função like e função criar um novo usuário
+//função criar um novo usuário
 //-------------------- FUNÇÃO DE COMENTAR ------------------\\ HE _ 1
 //---------------------- POSTAR IMAGEM ---------------------\\ HE _ 2
 //--------------- ADICIONAR OU EXCLUIR AMIGOS --------------\\ HE _ 3
