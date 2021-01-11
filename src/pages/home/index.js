@@ -25,11 +25,11 @@ export const Home = () => {
 
             <section class="publish-button"> 
               <label for="file">
-                <figure>
+                <figure class="input-file" >
                   <img src="../../img/icon-picture.svg" height="20px" width="20px">
                 </figure>  
                 <input type="file" id="file" accept="image/png, image/jpeg">
-                </label>  
+                </label>
               <button type="submit" class="enter-button" id="publish">Publicar</button> 
             </section>  
           </form>  
@@ -114,10 +114,11 @@ function printPosts(post, currentUserID) {
           <section class="buttons-posts">
             <input type="checkbox" id="heart-like-${post.id}" class="icon-post like" hidden>  
             <label for="heart-like-${post.id}">
-              <img id="like-button" src="../../img/heart.png" height="20px" width="20px">
+              ❤
             </label> 
             <p class="text-posts">${post.data().likes}</p>   
           </section>
+
         </section>
       </section>
     `  
@@ -138,21 +139,21 @@ function printPosts(post, currentUserID) {
           <p class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</p>
         </article>   
         <article class="text-posts">${post.data().text}</article>
-      </section>
-      <section class="buttons-posts">
-        <button class="icon-post edit">
-          <figure>
-            <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
-          </figure>  
-        </button>
+        <section class="buttons-posts">
+          <button class="icon-post edit">
+            <figure>
+              <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
+            </figure>  
+          </button>
 
-        <button class="icon-post delete">
-          <figure>
-            <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
-          </figure>  
-        </button>
+          <button class="icon-post delete">
+            <figure>
+              <img id="delete-button" src="../../img/delete.png" height="20px" width="20px">
+            </figure>  
+          </button>
+        </section>  
       </section>  
-      </section>
+    </section>
     `
     document.querySelector("#feed").innerHTML += templatePost;
   }  

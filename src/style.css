@@ -16,10 +16,10 @@ label {
     align-items: center;
     width: 35px;
     height: 35px;
-    background-color: #FF780F;
-    border-radius: 50px;
     border-style: none;
     cursor: pointer;
+    font-size: 1.8em;
+    color: #b6a89a;
 }
 figure {
     margin-top: 4px;
@@ -61,7 +61,7 @@ figure {
     border-radius: 2px;
 }
 
-/****************** LOGIN ***************/
+/* LOGIN */
 .login-page {
     display: flex;
     flex-direction: row;
@@ -145,7 +145,7 @@ figure {
     margin: 18px 0px;
     outline: transparent;
 }
-/****************** FEED - MENU SUPERIOR ***************/
+/* FEED - MENU SUPERIOR */
 .timeline {
     display: flex;
     flex-direction: column;
@@ -188,7 +188,7 @@ figure {
     outline: transparent;
     padding: 0px 15px;
 }
-/****************** FEED - INPUT PUBLICAÇÃO ***************/
+/* FEED - INPUT PUBLICAÇÃO */
 #postForm {
     display: flex;
     flex-direction: column;
@@ -211,7 +211,7 @@ figure {
     text-align: left;
     resize: none;
     color: #231911;
-    outline: #eb1580;
+    outline: none;
 }
 .publish-button {
     display: flex;
@@ -233,7 +233,17 @@ figure {
 .button-icon:hover, label:hover {
     opacity: .60;
 }
-/****************** FEED - PUBLICAÇÕES ***************/
+.input-file{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF780F;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border-style: none;
+}
+/* FEED - PUBLICAÇÕES */
 .postFeed {
     display: flex;
     flex-direction: row;
@@ -292,6 +302,7 @@ figure {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
 }
 .icon-post {
     outline: none;
@@ -302,23 +313,19 @@ figure {
     flex-direction: row;
     align-items: center;
 }    
+.edit:hover, .delete:hover{
+    opacity: .70;
+}
+.teste{
+    font-size: 2em;
+    color:  #b6a89a;
+    margin-right: 10px;
+}
+[type="checkbox"]:checked + label{
+    color: #FF780F;
+  }
 
-
-/* .like {
-    background: url("./img/heart-clicked.png") no-repeat 0 0;
-    background-size: 20px;
-} */
-
-
-
-
-
-
-
-
-
-
-/****************** FEED - MEDIA ***************/
+/* FEED - MEDIA */
 @media (max-width: 375px) {
     #postForm, .postFeed{
         width: 300px;
