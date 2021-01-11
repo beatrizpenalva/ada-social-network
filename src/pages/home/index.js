@@ -51,6 +51,7 @@ export const Home = () => {
   });
   logOutButton.addEventListener("click", logOut);
   feed.addEventListener("click", getPostClick);
+  feed.addEventListener("change", getPostChange);
 
   return rootElement;
 };
@@ -94,23 +95,36 @@ function createPost(post) {
   })
 }
 
+function printPosts(post, currentUserID) {
+  if (post.data().ID !== currentUserID) {
+    const templatePost = `
+      <section class="postFeed" id="${post.id}">  
+        <section class="left-post"> 
+          <img class="avatar" src="${post.data().avatar}" height="60px" width="60px">
+        </section>
 
-function createCards(data) {
-  document.getElementById("results").innerHTML = "";
-  let printCards = "";
-  for (let item of data) {
-    let firstEpisode = (item.episode[0]).substr(40, 39);
-    const episodeIndex = firstEpisode - 1;
-    printCards += `template string`
+        <section class="right-post">
+          <article class="post-info"
+            <h4 class="username">${post.data().name}</p>
+            <p class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</p>
+          </article>   
+
+          <article class="text-posts">${post.data().text}</article>
+
+          <section class="buttons-posts">
+            <input type="checkbox" id="heart-like-${post.id}" class="icon-post like" hidden>  
+            <label for="heart-like-${post.id}">
+              <img id="like-button" src="../../img/heart.png" height="20px" width="20px">
+            </label> 
+            <p class="text-posts">${post.data().likes}</p>   
+          </section>
+        </section>
+      </section>
+    `  
+    document.querySelector("#feed").innerHTML += templatePost;
   }
-  document.getElementById("cardArea").innerHTML = printCards;
-}
-
-
-
-
-function printPosts(post) {
-  const templatePost = `
+  else {
+    const templatePost = `
     <section class="postFeed" id="${post.id}">  
       <section class="left-post">
         <figure>  
@@ -123,49 +137,25 @@ function printPosts(post) {
           <h4 class="username">${post.data().name}</p>
           <p class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</p>
         </article>   
-
         <article class="text-posts">${post.data().text}</article>
-
-        <section class="buttons-posts">
-          <section class="button-other-users">
-            <button id="like" class="icon-post like">
-              <figure class="likes-counting">
-                <img id="like" src="../../img/heart.png" height="20px" width="20px"> 
-                <figcaption class="text-posts">${post.data().likes}</figcaption>  
-              </figure>
-            </button>
-          </section>
-
-          <section class="button-user-logged">
-            <button class="icon-post edit">
-              <figure>
-                <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
-              </figure>  
-            </button>
-
-            <button class="icon-post delete">
-              <figure>
-                <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
-              </figure>  
-            </button>
-          </section>  
-        </section>  
       </section>
-    </section>  
-  `  
-document.querySelector("#feed").innerHTML += templatePost;
-  let currentUser = firebase.auth().currentUser;
-  if (post.data().ID !== currentUser.uid) {
-    const deleteAndEditButtons = document.querySelector(".button-user-logged");
-    deleteAndEditButtons.parentNode.removeChild(deleteAndEditButtons);
+      <section class="buttons-posts">
+        <button class="icon-post edit">
+          <figure>
+            <img id="edit-button" src="../../img/edit.png" height="20px" width="20px">
+          </figure>  
+        </button>
+
+        <button class="icon-post delete">
+          <figure>
+            <img id="delete-button" src="../../img/recycle-bin.png" height="20px" width="20px">
+          </figure>  
+        </button>
+      </section>  
+      </section>
+    `
+    document.querySelector("#feed").innerHTML += templatePost;
   }  
-  else {
-    const likeButtons = document.querySelector(".button-other-users");
-    likeButtons.parentNode.removeChild(likeButtons);
-  }
-//const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
-//document.querySelector("#feed").appendChild(newPostElement)
-//document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
 }
 
 function loadPosts() {
@@ -174,35 +164,40 @@ function loadPosts() {
   postCollection.orderBy("time", "desc").get().then(snapshot => {
     document.querySelector("#feed").innerHTML = "";
     snapshot.forEach(post => {
-      printPosts(post);
-    });
+      const currentUser = firebase.auth().currentUser.uid;
+      printPosts(post, currentUser);
+    });  
   });
 }
 
 function getPostClick(e) {
   if (e.target.closest(".delete")) {
     let closestDelete = e.target.closest(".delete");
-    let closestIdPost = closestDelete.parentNode.parentNode.parentNode.parentNode.id;
+    let closestIdPost = closestDelete.parentNode.parentNode.parentNode.id;
     deletePost(closestIdPost);
   } 
   else if (e.target.closest(".edit")) {
     let closestEdit = e.target.closest(".edit");
-    let closestIdPost = closestEdit.parentNode.parentNode.parentNode.parentNode.id;
+    let closestIdPost = closestEdit.parentNode.parentNode.parentNode.id;
     editPost(closestIdPost);
   } 
-  else {
-    let closestLike = e.target.closest(".like");
-    let closestIdPost = closestLike.parentNode.parentNode.parentNode.parentNode.id;
-    likePost(closestIdPost);
-  }
+}
+
+function getPostChange(e) {
+  let closestLike = e.target.closest(".like");
+  let closestIdPost = closestLike.parentNode.parentNode.id;
+  likePost(closestIdPost);
 }
 
 function deletePost(postID) {
   const postCollection = firebase.firestore().collection("posts");
+  const userUID = firebase.auth().currentUser.uid;
   if (confirm("Você quer realmente quer excluir essa publicação?")) {
+    if(postID !== userUID) {
     postCollection.doc(postID).delete().then(doc => {
       loadPosts();
-    }); 
+    });
+    } 
   }
 }
 

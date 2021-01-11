@@ -1,10 +1,10 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif, normal, normal;
 } 
-fieldset{
+fieldset {
     border: none;
 }
 input[type="file"] {
@@ -21,34 +21,48 @@ label {
     border-style: none;
     cursor: pointer;
 }
-figure{
+figure {
     margin-top: 4px;
 }
-.hidden{
+[type="checkbox"] {
+    opacity: 0;
+}
+.hidden {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     display: none;
 }
-.error-message{
+.error-message {
     padding: 5px;
     font-weight: normal;
     font-size: 11px;
     text-align: center;
     color: #db0b0b;
 }
+
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 15px;
 }
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
-    border-radius: 10px;
+    border-radius: 5px;
     background: #FF780F;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
 }
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FF780F;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(105, 109, 109);
+    border-radius: 2px;
+}
+
 /****************** LOGIN ***************/
-.login-page{
+.login-page {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -57,12 +71,12 @@ figure{
     height: 100vh;
     margin: 15px 0px;
 }
-.left{
+.left {
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
-.logo-theme{
+.logo-theme {
     margin: 20px 0px 10px;
     font-weight: 550;
     font-size: 24px;
@@ -70,21 +84,21 @@ figure{
     line-height: 25px;
     width: 200px;
 }
-.logo-name{
+.logo-name {
     color: #FF780F;
 }
-.right, .form{
+.right, .form {
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
-.providers-buttons{
+.providers-buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.enter-button{
+.enter-button {
     width: 240px;
     height: 35px;
     border-radius: 50px;
@@ -97,16 +111,16 @@ figure{
     margin: 18px 0px;
     outline: transparent;
 }
-.enter-button:hover{
+.enter-button:hover {
     background-color:#FEBB86;
 }
-.subtitle{
+.subtitle {
     font-weight: normal;
     font-size: 14px;
     text-align: center;
     color: #231911;
 }
-.button-in-text{
+.button-in-text {
     color: #FF780F;
     font-size: 14px;
     font-weight: medium;
@@ -114,17 +128,17 @@ figure{
     background-color: #FFFFFF;
     outline: transparent;
 }
-.button-in-text:hover{
+.button-in-text:hover {
     text-decoration: underline;
 }
-.input-in-line{
+.input-in-line {
     width: 255px;
     border: none;
     border-bottom: 1.5px solid #231911;
     padding: 8px;
     outline-color: #FF780F;
 }
-.button-icon{
+.button-icon {
     border-style: none;
     background-color: #FFFFFF;
     padding: 10px;
@@ -132,33 +146,33 @@ figure{
     outline: transparent;
 }
 /****************** FEED - MENU SUPERIOR ***************/
-.timeline{
+.timeline {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.cover{
+.cover {
     width: 100%;
     height: 120px;
     background: linear-gradient(180deg, #FF780F 2.61%, #FF872B 54.69%, #FF923F 75.52%, #FEBB86 100%);
     display: flex;
     flex-direction: row;
 }
-.nav-feed{
+.nav-feed {
     display: flex;
     justify-content: space-around;
     justify-content: flex-end;
     align-items: flex-end;
     margin: 0px 25px 50px;
 }
-.logo-feed-desktop{
+.logo-feed-desktop {
     display: flex;
     justify-content: flex-end;
     margin: 0px 50px 38px;
     transform: scale(0.5);
 }
-.logo-name-desktop{
+.logo-name-desktop {
     display: flex;
     align-items: flex-end;
     text-align: center;
@@ -168,14 +182,14 @@ figure{
     font-size: 48px;
     color: #FFFFFF;
 }
-.button-icon-feed{
+.button-icon-feed {
     border-style: none;
     background-color: transparent;
     outline: transparent;
     padding: 0px 15px;
 }
 /****************** FEED - INPUT PUBLICAÇÃO ***************/
-#postForm{
+#postForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,7 +200,7 @@ figure{
     margin: 30px 0px;
     padding: 15px;
 }
-.text{
+.text {
     border: none;
     border-bottom: solid 2px #d3cbc3;
     background-color: #F2EEEA;
@@ -199,14 +213,14 @@ figure{
     color: #231911;
     outline: #eb1580;
 }
-.publish-button{
+.publish-button {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     height: 70px;
 }
-#publish{
+#publish {
     width: 120px;
     height: 35px;
     font-weight: 500;
@@ -216,11 +230,11 @@ figure{
     outline: transparent;
     margin-left: 10px;
 }
-.button-icon:hover, label:hover{
+.button-icon:hover, label:hover {
     opacity: .60;
 }
 /****************** FEED - PUBLICAÇÕES ***************/
-.postFeed{
+.postFeed {
     display: flex;
     flex-direction: row;
     width: 600px;
@@ -230,39 +244,39 @@ figure{
     padding: 15px;
     overflow: auto;
 }
-.left-post{
+.left-post {
     display: flex;
     flex-direction: column;
     align-items: center; 
     margin-right: 15px;
 }
-.avatar{
+.avatar {
     width: 60px;
     height: 60px;
     border-radius: 100%;
     object-fit: cover; 
     background-color: #FEBB86;
 }
-.right-post{
+.right-post {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
-.post-info{
+.post-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.username{
+.username {
     font-weight: 500;
     font-size: 16px;
     color: #231911;
 }
-.post-date{
+.post-date {
     font-size: 12px;
     color: #b6a89a;
 }
-.text-posts{
+.text-posts {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -274,20 +288,36 @@ figure{
     color: #231911;
     word-break: break-word;
 }
-.buttons-posts{
+.buttons-posts {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
-.icon-post{
+.icon-post {
     outline: none;
     border: none;
 }
-.likes-counting{
+.button-other-users {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
+}    
+
+
+/* .like {
+    background: url("./img/heart-clicked.png") no-repeat 0 0;
+    background-size: 20px;
+} */
+
+
+
+
+
+
+
+
+
+
 /****************** FEED - MEDIA ***************/
 @media (max-width: 375px) {
     #postForm, .postFeed{
