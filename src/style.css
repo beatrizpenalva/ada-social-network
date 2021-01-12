@@ -189,7 +189,7 @@ figure {
     padding: 0px 15px;
 }
 /* FEED - INPUT PUBLICAÇÃO */
-#postForm {
+#publish-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -244,7 +244,7 @@ figure {
     border-style: none;
 }
 /* FEED - PUBLICAÇÕES */
-.postFeed {
+.post-container {
     display: flex;
     flex-direction: row;
     width: 600px;
@@ -272,7 +272,7 @@ figure {
     flex: 1;
     flex-direction: column;
 }
-.post-info {
+.user-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -286,7 +286,7 @@ figure {
     font-size: 12px;
     color: #b6a89a;
 }
-.text-posts {
+.post-content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -298,13 +298,13 @@ figure {
     color: #231911;
     word-break: break-word;
 }
-.buttons-posts {
+.post-buttons {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
 }
-.icon-post {
+.post-function {
     outline: none;
     border: none;
 }
@@ -327,7 +327,7 @@ figure {
 
 /* FEED - MEDIA */
 @media (max-width: 375px) {
-    #postForm, .postFeed{
+    #publish-form, .post-container{
         width: 300px;
     }
     .text{

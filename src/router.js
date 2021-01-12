@@ -1,4 +1,4 @@
-import { Home } from './pages/home/index.js';
+import { Home, loadPosts } from './pages/home/index.js';
 import { Login } from './pages/login/index.js';
 import { onNavigate } from './utils/history.js';
 
@@ -18,8 +18,8 @@ window.addEventListener('load', (e) => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       onNavigate('/')
+      loadPosts();
     }
-    
     else {
       onNavigate('/login')
     }
