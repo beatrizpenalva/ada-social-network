@@ -1,9 +1,7 @@
 import { logOut } from '../../services/index.js'
-import { onNavigate } from '../../utils/history.js';
+//import { onNavigate } from '../../utils/history.js';
 
 export const Home = () => {
-  window.addEventListener("load", verifyUserLogged);
-
   const rootElement = document.createElement("main");
   rootElement.innerHTML = `
       <section class="timeline">
@@ -52,20 +50,8 @@ export const Home = () => {
   logOutButton.addEventListener("click", logOut);
   feed.addEventListener("click", getPostClick);
   feed.addEventListener("change", getPostChange);
-
   return rootElement;
 };
-
-function verifyUserLogged() {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      onNavigate('/')
-      loadPosts();
-    } else {
-      onNavigate('/login')
-    }
-  });
-}
 
 function getPostInfo(text) {
   const user = firebase.auth().currentUser;
@@ -227,6 +213,7 @@ function likePost() {
 //função criar um novo usuário
 //-------------------- FUNÇÃO DE COMENTAR ------------------\\ HE _ 1
 //---------------------- POSTAR IMAGEM ---------------------\\ HE _ 2
+
 //--------------- ADICIONAR OU EXCLUIR AMIGOS --------------\\ HE _ 3
 //-------------------- PÚBLICO OU PRIVADO ------------------\\ HE _ 4
 //---------------------- EDITAR PERFIL ---------------------\\ HE _ 5

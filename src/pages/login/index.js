@@ -1,5 +1,5 @@
 import { onNavigate } from '../../utils/history.js';
-import { signInEmail, signUpGoogle, signUpFacebook, signUpGitHub } from '../../services/index.js'
+import { signInEmail, getGoogleProvider, getFacebookProvider, getGitHubProvider } from '../../services/index.js'
 
 export const Login = () => {
   const rootElement = document.createElement("main");
@@ -50,9 +50,10 @@ export const Login = () => {
     const password = rootElement.querySelector("#password").value;
     signInEmail(email, password);
   });
-  signUpGoogleButton.addEventListener("click", signUpGoogle);
-  signUpFbButton.addEventListener("click", signUpFacebook);
-  signUpGhButton.addEventListener("click", signUpGitHub);
+  
+  signUpGoogleButton.addEventListener("click", getGoogleProvider);
+  signUpFbButton.addEventListener("click", getFacebookProvider);
+  signUpGhButton.addEventListener("click", getGitHubProvider);
   goRegisterButton.addEventListener("click", (event) => {
     event.preventDefault();
     onNavigate('/');

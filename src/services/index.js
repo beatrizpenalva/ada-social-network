@@ -1,5 +1,6 @@
 import { onNavigate } from '../../utils/history.js';
 import { getError } from '../../errors/index.js';
+
 export const signInEmail = (email, password) => {
   const getUser = firebase.auth().signInWithEmailAndPassword(email, password);
   getUser
@@ -10,74 +11,48 @@ export const signInEmail = (email, password) => {
       getError(err);
     });
 }
-export const signUpGoogle = () => {
+
+export const getGoogleProvider = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(googleProvider)
-    .then(() => {
-      onNavigate('/')
-    }).catch(err => {
-      getError(err);
-    });
+  singUpProvider(googleProvider);
 }
-export const signUpFacebook = () => {
+
+export const getFacebookProvider = () => {
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
-  firebase.auth().signInWithPopup(facebookProvider)
-    .then(() => {
-      onNavigate('/');
-    }).catch(err => {
-      getError(err);
-    });
+  singUpProvider(facebookProvider);
 }
-export const signUpGitHub = () => {
+
+export const getGitHubProvider = () => {
   const githubProvider = new firebase.auth.GithubAuthProvider();
-  firebase.auth().signInWithPopup(githubProvider)
-    .then(() => {
-      onNavigate('/');
-    })
-    .catch(err => {
-      getError(err);
-    });
+  singUpProvider(githubProvider);
 }
+
 export const logOut = () => {
-  const promise = firebase.auth().signOut();
-    promise.then(() => { onNavigate('/login') });
+  firebase.auth().signOut().then(() => { 
+    onNavigate('/login')
+  });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+function singUpProvider(provider) {
+  firebase.auth().signInWithPopup(provider)
+  .then(() => {
+    getUser();
+  }).catch(err => {
+    getError(err);
+  });
+}
 
 /*
-      firebase.auth().getRedirectResult().then(function(result) {
-        if (result.credential) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // ...
-        }
-        // The signed-in user info.
-        var user = result.user;
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
+firebase.auth().signInWithRedirect(provider)
+function getUser(){
+  firebase.auth().getRedirectResult().then((user) => {
+    if(user) {
+      onNavigate('/')
+    }
+  })  
+}
+*/
 
-      */
 /*
 //-------------- Fazer a validação do registro ---------------\\
  const signUp = rootElement.querySelector('#signUp');
@@ -186,3 +161,13 @@ export const getUsers = () => {
   return users;
 }
 */
+  //firebase.auth().signInWithRedirect(googleProvider)
+    //onNavigate('/')
+  //const user = firebase.auth().currentUser;
+  //console.log(user)
+  //onNavigate('/')
+ //.then(() => {
+ //}
+ //.catch(err => {
+   // getError(err);
+ //})
