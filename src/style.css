@@ -280,6 +280,9 @@ figure{
 .like{
     margin-right: 10px;
 }
+.postLiked {
+    background-color: #FF780F;
+}
 /****************** FEED - MEDIA ***************/
 @media (max-width: 375px) {
     #postForm, .postFeed{

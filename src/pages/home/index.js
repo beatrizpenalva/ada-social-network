@@ -1,10 +1,10 @@
-import { onNavigate } from '../../utils/history.js';
+import { onNavigate } from "../../utils/history.js";
 export const Home = () => {
   //----------------- TODO: TRATAR ERROS ----------------\\
   //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\
   window.addEventListener("load", verifyUserLogged);
-  //------------ CRIANDO O TEMPLATE DA PÁGINA -----------\\ 
-  const rootElement = document.createElement('div');
+  //------------ CRIANDO O TEMPLATE DA PÁGINA -----------\\
+  const rootElement = document.createElement("div");
   rootElement.innerHTML = `
       <section class="timeline">
         <nav class="cover">
@@ -25,7 +25,7 @@ export const Home = () => {
                   <img src="../../img/icon-picture.svg" height="20px" width="20px">
                 </figure>  
                 <input type="file" id="file" accept="image/png, image/jpeg">
-                </label>  
+              </label>  
               <button type="submit" class="enter-button" id="publish">Publicar</button> 
             </fieldset>  
           </form  
@@ -39,10 +39,10 @@ export const Home = () => {
   const logOutButton = rootElement.querySelector("#logout");
   const feed = rootElement.querySelector("#feed");
   //-------------- EVENTOS CHAMADA DAS FUNÇÕES --------------\\
-  publishButton.addEventListener("submit", e => {
+  publishButton.addEventListener("submit", (e) => {
     e.preventDefault();
     let text = rootElement.querySelector("#postText").value;
-    createPost(text)
+    createPost(text);
     rootElement.querySelector("#postText").value = "";
   });
   logOutButton.addEventListener("click", logOut);
@@ -52,22 +52,24 @@ export const Home = () => {
 //------------------- FUNÇÃO DE LOGOUT -------------------\\ FIREBASE
 function logOut() {
   const promise = firebase.auth().signOut();
-    promise.then(() => { onNavigate('/login') });
+  promise.then(() => {
+    onNavigate("/login");
+  });
 }
 //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\ FIREBASE
-function verifyUserLogged(){
-  firebase.auth().onAuthStateChanged(user => {
+function verifyUserLogged() {
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      onNavigate('/')
+      onNavigate("/");
       loadPosts();
     } else {
-      onNavigate('/login')
+      onNavigate("/login");
     }
   });
 }
 //-------------- FUNÇÃO DE CRIAR PUBLICAÇÃO --------------\\ FIREBASE
 function createPost(text) {
-  const now = new Date;
+  const now = new Date();
   const user = firebase.auth().currentUser;
   const userName = user.displayName;
   const userID = user.uid;
@@ -77,19 +79,24 @@ function createPost(text) {
     avatar: userAvatar,
     ID: userID,
     time: Date.now(),
-    date: now.getDate(), 
-    month: now.getMonth() + 1, 
+    date: now.getDate(),
+    month: now.getMonth() + 1,
     year: now.getFullYear(),
     text: text,
-    likes: 0,
-  }
+    likes: [],
+  };
   const postCollection = firebase.firestore().collection("posts");
-  postCollection.add(post).then(res => {
+  postCollection.add(post).then((res) => {
     loadPosts();
-  })
+  });
 }
 //------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
-function printPosts(post) {
+function printPosts(post, userId) {
+  const date = `${post.data().date}/${post.data().month}/${post.data().year}`;
+  const likes = post.data().likes || [];
+  const likesQuantity = likes.length 
+  const alreadyLikedThisPost = likes.includes(userId)
+
   const templatePost = `
     <section class="postFeed" id="${post.id}">
       <section class="user-info"
@@ -97,14 +104,19 @@ function printPosts(post) {
         <img src="${post.data().avatar}" height="50px" width="50px">
           <figcaption class="username">${post.data().name}</figcaption>
         </figure>
-        <article class="post-date">${post.data().date}/${post.data().month}/${post.data().year}</article>
+        <article class="post-date">${date}</article>
       </section>  
       <article class="text-posts">${post.data().text}</article>
       <section class="buttons-posts"> 
         <button id="like-${post.id}" class="icon-post">
           <figure class="likes-counting">
-            <img id="like" class="like" src="../../img/heart.png" height="20px" width="20px"> 
-            <figcaption class="text-posts">${post.data().likes}</figcaption>  
+            <img 
+              id="like" 
+              class="like ${alreadyLikedThisPost ? 'postLiked' : ''}" 
+              data-post-id="${post.id}" 
+              src="../../img/heart.png" height="20px" width="20px"
+            /> 
+            <figcaption class="text-posts">${likesQuantity}</figcaption>  
           </figure>
         </button>
         <button class="icon-post delete">
@@ -114,24 +126,33 @@ function printPosts(post) {
         </button>
       </section>  
     </section>
-  `  
-//-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
+  `;
+  //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
   // document.querySelector("#feed").innerHTML += templatePost;
-  const newPostElement = new DOMParser().parseFromString(templatePost, 'text/html').body.childNodes[0]
-  document.querySelector("#feed").appendChild(newPostElement)
-  document.querySelector(`#like-${post.id}`).addEventListener("click", likePost);
-  document.querySelector("#delete").addEventListener("click", deletePost);
+  const newPostElement = new DOMParser().parseFromString(
+    templatePost,
+    "text/html"
+  ).body.childNodes[0];
+  document.querySelector("#feed").appendChild(newPostElement);
+  document
+    .querySelector(`#like-${post.id} .like`)
+    .addEventListener("click", likePost);
+  //document.querySelector("#delete").addEventListener("click", deletePost);
 }
 //------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\ FIREBASE
 function loadPosts() {
+  const userId = firebase.auth().currentUser.uid;
   const postCollection = firebase.firestore().collection("posts");
   document.querySelector("#feed").innerHTML = "Carregando...";
-  postCollection.orderBy("time", "desc").get().then(snapshot => {
-    document.querySelector("#feed").innerHTML = "";
-    snapshot.forEach(post => {
-      printPosts(post);
+  postCollection
+    .orderBy("time", "desc")
+    .get()
+    .then((snapshot) => {
+      document.querySelector("#feed").innerHTML = "";
+      snapshot.forEach((post) => {
+        printPosts(post, userId);
+      });
     });
-  });
 }
 //-------------- FUNÇÃO DE PEGAR ID DO POST --------------\\
 function getPostClick(e) {
@@ -140,32 +161,52 @@ function getPostClick(e) {
   deletePost(closestIdPost);
 }
 //------------------- FUNÇÃO DE DELETE -------------------\\ FIREBASE
-function deletePost(postID){
-  const postCollection = firebase.firestore().collection("posts");
-  if (confirm("Você quer realmente quer excluir essa publicação?")) {
-    postCollection.doc(postID).delete().then(doc => {
-      loadPosts();
-    }); 
-  }
-}
+// function deletePost(postID){
+//   const postCollection = firebase.firestore().collection("posts");
+//   if (confirm("Você quer realmente quer excluir essa publicação?")) {
+//     postCollection.doc(postID).delete().then(doc => {
+//       loadPosts();
+//     });
+//   }
+// }
 //--------------------- FUNÇÃO DE LIKE -------------------\\
-/*function likePost(){
-  console.log("deixou o joinha");
+function likePost(e) {
+  const postId = e.target.dataset.postId;
+  const userId = firebase.auth().currentUser.uid;
+
+  const postRef = firebase.firestore().collection("posts").doc(postId);
+
+  postRef.get()
+    .then(post => {
+      const likes = post.data().likes || []
+      const alreadyLikedThisPost = likes.includes(userId)
+      
+      if(alreadyLikedThisPost) {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayRemove(userId)})
+          .finally(() => loadPosts())
+      } else {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayUnion(userId)})
+          .finally(() => loadPosts())
+      }
+    })
+    .catch(exception => 
+      console.error('Erro ao dar like no post. Erro:' + exception.message
+    ))
 }
-*/
+/*Todas as informações que preciso: 
 
+  ---Clicar no post- saber id do post + uid do usuário---
+  O Usuário clicou no post ?
+  qual método do fireBase uso para alterar o valor de um elemento
 
+  Para isso preciso com FireBase guardar(propriedade like) os UID de quem clicou no s2 (é armazenado em um array)
+  ----Dado que no array estão todos os usuários que clicaram no like
+      posso usar o length e assim saber a quantidade de uid do array (quantidade de usuários/likes).
 
+  ----Para garantir que em uid não curta duas x : fazer condições de que if clicou no like este uid 
+      é armazenado no array Like else tira este uid do array 
 
-
-
-
-
-
-
-
-
-
+  --- Dar o feedback visual pro usuário -pintar  o coração quando dar like */
 
 //-------- FUNÇÃO DE CARREGAR NOVA PUBLICAÇÃO ---------\\
 /*function loadNewPost() {
@@ -203,7 +244,6 @@ function teste(){
     })
 }
 */
-
 
 //------------------- FUNÇÃO DE EDITAR ------------------\\
 //-------------------- HACKER EDITION --------------------\\
@@ -259,4 +299,3 @@ firebase.firestore().collection('posts').doc(closestIdPost).delete()
 .then(() => {});
 renderPage();
 */
-    //const postID = post.id;
