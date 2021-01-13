@@ -27,13 +27,12 @@ export const Home = () => {
               </figure>  
               <input type="file" id="file" accept="image/png, image/jpeg">
             </label>
-            <button type="submit" id="publish" class="enter-button">Publicar</button> 
+            <button type="submit" id="publish" class="submit-button">Publicar</button> 
           </section>  
       </form>  
       <section id="feed"></section>
     </section>
   `;
-  //ao invés de enter-button chamar o botão de submit
 
   const publishButton = rootElement.querySelector("#publish-form");
   const logOutButton = rootElement.querySelector("#logout");

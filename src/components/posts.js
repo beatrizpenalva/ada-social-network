@@ -34,37 +34,37 @@ export const printPosts = (doc, id) => {
                     <img class="avatar" src="${post.avatar}" height="60px" width="60px">
                 </section>
 
-        <section class="right-post">
-          <article class="user-info">
-            <h4 class="username">${post.name}</p>
-            <p class="post-date">${post.date}</p>
-          </article>   
+                <section class="right-post">
+                    <article class="user-info">
+                        <h4 class="username">${post.name}</p>
+                        <p class="post-date">${post.date}</p>
+                    </article>   
 
-          <article class="post-content">${post.text}</article>
+                    <article class="post-content">${post.text}</article>
 
-          <section class="post-buttons">
-            <button class="post-function edit" id="edit-${id}">
-              <figure>
-                <img src="../../img/edit.png" height="20px" width="20px">
-              </figure>  
-            </button>
+                    <section class="post-buttons">
+                        <button class="post-function edit" id="edit-${id}">
+                            <figure>
+                                <img src="../../img/edit.png" height="20px" width="20px">
+                            </figure>  
+                        </button>
 
-            <button class="post-function delete" id="delete-${id}">
-              <figure>
-                <img src="../../img/delete.png" height="20px" width="20px">
-              </figure>  
-            </button>
-
-          <section class="on-edition">
-            <textarea class="edition-content" id="edition-content-${id}"></textarea>
-            <button class="post-function send-edition" id="send-edition-${id}">
-                <figure>
-                    <img src="../../img/right-arrow.png" height="20px" width="20px">
-                </figure>  
-            </button>
-          </section>
-        </section>
-      </section>
+                        <button class="post-function delete" id="delete-${id}">
+                            <figure>
+                                <img src="../../img/delete.png" height="20px" width="20px">
+                            </figure>  
+                        </button>   
+                    </section>
+                    <section class="on-edition">
+                        <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500" wrap="hard" placeholder="Como pegar o texto que tava?" required></textarea>
+                        <button class="post-function send-edition" id="send-edition-${id}">
+                            <figure>
+                                <img src="../../img/right-arrow.png" height="20px" width="20px">
+                            </figure>  
+                        </button>
+                    </section>     
+                </section>
+            </section>
        `  
     }
 
@@ -89,62 +89,6 @@ export const printPosts = (doc, id) => {
           });
         });
 
-        const showEditContainer = (e) => {
-            const postID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-            const postCard = document.getElementById(postID);
-            console.log(postCard)
-            toggleEditContainer(postCard, true);
-            const sendEditionButton = postCard.querySelector(".send-editon");
-            
-            ///console.log(sendEditionButton)
-
-            sendEditionButton.addEventListener("click", () => {
-              sendEdition(postID, postCard);
-            });
-          }
-        
-          const sendEdition = (postID, post) => {
-            const postCard = post;
-            const editionBox = postCard.querySelector(".edition-content");
-            const newPostText = editionBox.value;
-            const postCollection = firebase.firestore().collection("posts"); 
-            postCollection.doc(postID).update({ text: newPostText }).then(() => {
-                toggleEditContainer(postCard, true);
-              })
-              .catch(() => {
-                console.log("deu ruim")
-              })
-          }
-        
-          const toggleEditContainer = (post, show) => {
-            const postCard = post;
-            const holderEditionContainer = postCard.querySelector(".on-edition");
-            if(show) {
-                holderEditionContainer.classList.add("display");
-            } else {
-                holderEditionContainer.classList.remove("display");
-            }
-          }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return postContainer;
   }
 
@@ -167,15 +111,55 @@ function deletePost(postID) {
         if (confirm("Você quer realmente quer excluir essa publicação?")) {
             if (postId !== userUID) {
               postCollection.doc(postId).delete().then(doc => { 
-                console.log("falta DOM");
+                const postCard = document.getElementById(postId)
+                const parentElement = postCard.parentElement;
+                parentElement.removeChild(postCard);
               })    
             }
         }
 }
 
+const showEditContainer = (e) => {
+    const postID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+    const postCard = document.getElementById(postID);
+    toggleEditContainer(postCard, true);
+    const sendEditionButton = postCard.querySelector(".send-edition");
+    sendEditionButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        sendEdition(postID, postCard); 
+    })
+  }
+
+  const sendEdition = (postId, post) => {
+    const postCard = post;
+    const postID = postId;
+    const editionBox = postCard.querySelector(".edition-content");
+    const newPostText = editionBox.value;
+    editPost(postID, newPostText).then(() => {
+        toggleEditContainer(postCard, false);
+        const text = postCard.querySelector(".post-content");
+        text.innerHTML = newPostText;
+      })
+      .catch(() => {
+        console.log("deu ruim")
+      })
+  }
+
+  const editPost = (postID, newPostText) => {
+    return firebase.firestore().collection("posts").doc(postID).update({ text: newPostText })
+  }
+
+  const toggleEditContainer = (post, show) => {
+    const postCard = post;
+    const holderEditionContainer = postCard.querySelector(".on-edition");
+    if(show) {
+        holderEditionContainer.classList.add("display");
+    } else {
+        holderEditionContainer.classList.remove("display");
+    }
+  }
+
 function likePost(postID) {
     const postId = postID;
     console.log(postId)
 }
-
-

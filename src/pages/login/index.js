@@ -19,7 +19,7 @@ export const Login = () => {
           </fieldset>
           
           <fieldset class="login-button">
-            <button type="submit" class="enter-button">Entrar</button> 
+            <button type="submit" class="submit-button>Entrar</button> 
           </fieldset>
         </form> 
 
