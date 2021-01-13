@@ -11,7 +11,7 @@ const verifyErrorCode = {
     "auth/invalid-password": "Senha inválida, precisa ter pelo menos 6 caracteres. Por favor, tente novamente.",
     "auth/cancelled-popup-request": "Somente uma solicitação de janela pop-up é permitida de uma só vez.",
     "auth/popup-blocked": "A janela pop-up foi bloqueado pelo navegador. Por favor, desabilite o bloqueio para continuar.",
-    "auth/popup-closed-by-user": "Ops! A janela pop-up foi fechada pelo usuário sem concluir o login no provedor.",
+    "auth/popup-closed-by-user": "Ops! A janela pop-up foi fechada pelo usuário sem concluir o login.",
   }
   export const getError = (err) => {
     const errorCode = err.code;

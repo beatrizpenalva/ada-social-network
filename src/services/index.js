@@ -36,12 +36,23 @@ export const logOut = () => {
 function singUpProvider(provider) {
   firebase.auth().signInWithPopup(provider)
   .then(() => {
-    getUser();
-  }).catch(err => {
+  })
+  .catch(err => {
     getError(err);
   });
 }
 
+export const createNewPost = (post) => {
+  return firebase.firestore().collection("posts").add(post)
+}
+
+export const editPost = (postID, newPostText) => {
+  return firebase.firestore().collection("posts").doc(postID).update({ text: newPostText })
+}
+
+export const deletePost = (postID) => {
+  return firebase.firestore().collection("posts").doc(postID).delete()
+}  
 
 
 

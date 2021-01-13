@@ -1,5 +1,5 @@
 import { printPosts } from '../../components/posts.js'
-import { logOut } from '../../services/index.js'
+import { logOut, createNewPost } from '../../services/index.js'
 
 export const Home = () => {
   const rootElement = document.createElement("main");
@@ -49,12 +49,15 @@ export const Home = () => {
 };
 
 export const loadPosts = () => { 
-  const postCollection = firebase.firestore().collection("posts");
-  postCollection.orderBy("time", "desc").get().then(snapshot => {
+  firebase.firestore().collection("posts").orderBy("time", "desc").get()
+  .then(snapshot => {
     snapshot.forEach(post => {
       feed.appendChild(printPosts(post.data(), post.id));
     });
-  });
+  })
+  .catch(() => {
+    alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
+  })
 }
 
 function getPostInfo(text) {
@@ -74,13 +77,13 @@ function getPostInfo(text) {
     likes: 0,
     comments: [],
   }
-  createNewPost(post);
-}
 
-function createNewPost(post) {
-  const postCollection = firebase.firestore().collection("posts");
-  postCollection.add(post).then(res => {
-      const postId = res.id;
-      feed.prepend(printPosts(post, postId));
-    })
+  createNewPost(post)
+  .then(res => {
+    const postId = res.id;
+    feed.prepend(printPosts(post, postId));
+  })
+  .catch(() => {
+    alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
+  })
 }
