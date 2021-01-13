@@ -325,6 +325,14 @@ figure {
     color: #FF780F;
   }
 
+.on-edition{
+    display: none;
+}
+
+.on-edition.display{
+    display: block;
+}  
+
 /* FEED - MEDIA */
 @media (max-width: 375px) {
     #publish-form, .post-container{

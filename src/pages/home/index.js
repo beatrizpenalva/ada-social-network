@@ -34,11 +34,9 @@ export const Home = () => {
     </section>
   `;
   //ao invés de enter-button chamar o botão de submit
-  //rever a nav também
 
   const publishButton = rootElement.querySelector("#publish-form");
   const logOutButton = rootElement.querySelector("#logout");
-  const feed = rootElement.querySelector("#feed");
 
   publishButton.addEventListener("submit", e => {
     e.preventDefault();
@@ -48,9 +46,6 @@ export const Home = () => {
   });
   logOutButton.addEventListener("click", logOut);
 
-  //isso aqui vai sumir
-  //feed.addEventListener("click", getPostClick);
-  //feed.addEventListener("change", getPostChange);
   return rootElement;
 };
 
@@ -58,7 +53,7 @@ export const loadPosts = () => {
   const postCollection = firebase.firestore().collection("posts");
   postCollection.orderBy("time", "desc").get().then(snapshot => {
     snapshot.forEach(post => {
-      feed.appendChild(printPosts(post.data()));
+      feed.appendChild(printPosts(post.data(), post.id));
     });
   });
 }
@@ -78,6 +73,7 @@ function getPostInfo(text) {
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
     text: text,
     likes: 0,
+    comments: [],
   }
   createNewPost(post);
 }
@@ -85,131 +81,7 @@ function getPostInfo(text) {
 function createNewPost(post) {
   const postCollection = firebase.firestore().collection("posts");
   postCollection.add(post).then(res => {
-      feed.prepend(printPosts(post));
+      const postId = res.id;
+      feed.prepend(printPosts(post, postId));
     })
 }
-
-/*
-const likeButtonArray = rootElement.querySelectorAll(".like");
-  likeButtonArray.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      sendLike(e);
-    });
-  });
-  
-  const sendLike = (e) => {
-    likePost()
-    .then((res) => {
-      console.log(res);
-      e.target.classList.add('liked');
-    })
-    .catch(() => {
-      alert('Deu rum ai meu kerido');
-    });
-  }
-  
-  function likePost() {
-    console.log("biscoito");
-  }
-  
-  const sendComment = (cardPost) => {
-    const textareaComment = cardPost.querySelector('.comentar-text');
-    const holderCommentBlock = cardPost.querySelector('.on-comment');
-  
-    commentPost(textareaComment.value)
-      .then(() => {
-        const textPValue = document.createElement("p");
-        textPValue.textContent = textareaComment.value;
-        cardPost.insertBefore(textPValue, holderCommentBlock);
-        toggleCommentBox(cardPost, false);
-        textareaComment.value = "";
-      })
-      .catch(() => {
-        alert('Deu ruim aí');
-      })
-  }
-
-  const toggleCommentBox = (cardPost, show) => {
-    const holderCommentBlock = cardPost.querySelector('.on-comment');
-
-    if(show) {
-      holderCommentBlock.classList.add('display');
-    } else {
-      holderCommentBlock.classList.remove('display');
-    }
-  }
-  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-/*
-//pegando os eventos
-function getPostClick(e) {
-  if (e.target.closest(".delete")) {
-    let closestDelete = e.target.closest(".delete");
-    let closestIdPost = closestDelete.parentNode.parentNode.parentNode.id;
-    deletePost(closestIdPost);
-  }
-  else if (e.target.closest(".edit")) {
-    let closestEdit = e.target.closest(".edit");
-    let closestIdPost = closestEdit.parentNode.parentNode.parentNode.id;
-    editPost(closestIdPost);
-  }
-}
-
-function getPostChange(e) {
-  let closestLike = e.target.closest(".like");
-  let closestIdPost = closestLike.parentNode.parentNode.id;
-  likePost(closestIdPost);
-}
-
-//fazendo as funções que vão pros eventos
-function deletePost(postID) {
-  const postCollection = firebase.firestore().collection("posts");
-  const userUID = firebase.auth().currentUser.uid;
-  if (confirm("Você quer realmente quer excluir essa publicação?")) {
-    if (postID !== userUID) {
-      postCollection.doc(postID).delete().then(doc => {
-        loadPosts();
-      });
-    }
-  }
-}
-
-function editPost(postID) {
-  const newText = prompt("Edite seu texto");
-  if (newText !== null) {
-    const postCollection = firebase.firestore().collection("posts");
-    postCollection.doc(postID).update({ text: newText }).then(() => {
-      loadPosts();
-    })
-  }
-}
-*/
-
-
-
-//-------------------- FUNÇÃO DE COMENTAR ------------------\\ HE _ 1
-//---------------------- POSTAR IMAGEM ---------------------\\ HE _ 2
-//--------------- ADICIONAR OU EXCLUIR AMIGOS --------------\\ HE _ 3
-//-------------------- PÚBLICO OU PRIVADO ------------------\\ HE _ 4
-//---------------------- EDITAR PERFIL ---------------------\\ HE _ 5
-//-------------- TIMELINE PERFIL PERSONALIZADA -------------\\ HE _ 6

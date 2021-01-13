@@ -42,6 +42,9 @@ function singUpProvider(provider) {
   });
 }
 
+
+
+
 /*
 firebase.auth().signInWithRedirect(provider)
 function getUser(){
@@ -83,91 +86,9 @@ function getUser(){
  E inserir uma mensagem de erro, caso a mensagem não atenda aos requisitos.
  "auth/weak-password": "A senha é muito fraca.",
  */
-/*
-const posts = [
-  { message: "Post 1" },
-  { message: "Post 2" }
-]
-export const getPosts = () => {
-  //depois alterar para o get do firebase
-  return posts;
-}
-export const createPost = (post) => {
-  //alterar para o add do firebase
-  posts.push(
-    { message: `${post} ${posts.length + 1} ` }
-  )
-}
-//alterar para o banco de dados do firebase
-const users = [
-  {
-    "name": "Beatriz Penalva",
-    "email": "biapenalva@gmail.com",
-    "password": "salvadormeuamor",
-    "bio": "Arquiteta de formação e futura deva",
-    "needs": [
-      "Firebase",
-      "Node.js",
-      "Vue.js",
-    ],
-    "abilities": [
-      "CSS",
-      "JavaScript",
-      "HTML",
-      "Figma",
-    ],
-    "github": "https://github.com/beatrizpenalva",
-    "linkedin": "https://www.linkedin.com/in/beatrizpenalva/",
-    "twitter": "@beatripenalva_",
-  },
-  {
-    "name": "Gabrielle Almeida",
-    "email": "gabriellealmeida.lab@gmail.com",
-    "password": "vitors2",
-    "bio": "Amo ler e sou muito comunicativa, gosto bastante de UX e estou em transição de carreira",
-    "needs": [
-      "Firebase",
-      "Node.js",
-    ],
-    "abilities": [
-      "JavaScript",
-      "React.JS",
-      "Bootstrap",
-    ],
-    "github": "@gabialmeida",
-    "linkedin": "Gabrielle Almeida",
-    "twitter": "não",
-  },
-  {
-    "name": "Julia Terin",
-    "email": "jujugatinha@gmail.com",
-    "password": "jujuba",
-    "bio": "Cientista social, produtora musical e futura deva",
-    "needs": [
-      "Firebase",
-      "PHP",
-    ],
-    "abilities": [
-      "CSS",
-      "JavaScript",
-      "HTML",
-    ],
-    "github": "@juterin",
-    "linkedin": "Julia Terin",
-    "twitter": "não",
-  }
-]
-export const getUsers = () => {
-  return users;
-}
-*/
-  //firebase.auth().signInWithRedirect(googleProvider)
-    //onNavigate('/')
-  //const user = firebase.auth().currentUser;
-  //console.log(user)
-  //onNavigate('/')
- //.then(() => {
- //}
- //.catch(err => {
-   // getError(err);
- //})
+
+//---------------------- POSTAR IMAGEM ---------------------\\ HE
+//--------------- ADICIONAR OU EXCLUIR AMIGOS --------------\\ HE
+//-------------------- PÚBLICO OU PRIVADO ------------------\\ HE
+//---------------------- EDITAR PERFIL ---------------------\\ HE
+//-------------- TIMELINE PERFIL PERSONALIZADA -------------\\ HE
