@@ -1,8 +1,10 @@
-import { onNavigate } from '../../utils/history.js';
+import { onNavigate } from "../../utils/history.js";
 export const Home = () => {
-
-  //------------ CRIANDO O TEMPLATE DA PÁGINA -------------\\ 
-  const rootElement = document.createElement('div');
+  //----------------- TODO: TRATAR ERROS ----------------\\
+  //----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\
+  window.addEventListener("load", verifyUserLogged);
+  //------------ CRIANDO O TEMPLATE DA PÁGINA -----------\\
+  const rootElement = document.createElement("div");
   rootElement.innerHTML = `
       <section class="timeline">
         <nav class="cover">
@@ -10,172 +12,185 @@ export const Home = () => {
             <button id="home" class="button-icon-feed"><img src="../../img/ada-cover.png"></button>
             <figcaption class="logo-name-desktop">[ Ada ]</figcaption>
           </figure>
-          <ul class="nav-feed">
-            <input type="search" id="search">
-            <button id="profile" class="button-icon-feed"><img src="../../img/google.svg" height="35px" width="35px"></button>
-            <button id="about" class="button-icon-feed"><img src="../../img/google.svg" height="35px" width="35px"></button>
+          <section class="nav-feed">
             <button id="logout" class="button-icon-feed"><img src="../../img/logout.svg" height="25px" width="25px"></button>
-          </ul>
+          </section>
         </nav>
         <section class="posts">
           <form id="postForm">
-            <textarea spellcheck="true" maxlength="1000" class="text" id="postText" placeholder="O que você quer compartilhar?" required></textarea>
-            <fieldset class="post-button"> 
+            <textarea spellcheck="true" maxlength="1000" wrap="hard" class="text" id="postText" placeholder="O que você quer compartilhar?" required></textarea>
+            <fieldset class="publish-button"> 
               <label for="file">
                 <figure>
                   <img src="../../img/icon-picture.svg" height="20px" width="20px">
                 </figure>  
                 <input type="file" id="file" accept="image/png, image/jpeg">
-                </label>  
+              </label>  
               <button type="submit" class="enter-button" id="publish">Publicar</button> 
             </fieldset>  
           </form  
         </section>
-        <ul id="feed" class="posts">
-        </ul>
+        <section id="feed" class="posts">
+        </section>
       </section>
   `;
   //-------------- GUARDANDO TODOS OS INPUTS -------------\\
-  const publish = rootElement.querySelector("#postForm");
-  const logOut = rootElement.querySelector("#logout");
-  //------------------- FUNÇÃO DE LOGOUT -------------------\\
-  logOut.addEventListener("click", () => {
-    const promise = firebase.auth().signOut();
-    promise.then(() => { onNavigate('/login') });
+  const publishButton = rootElement.querySelector("#postForm");
+  const logOutButton = rootElement.querySelector("#logout");
+  const feed = rootElement.querySelector("#feed");
+  //-------------- EVENTOS CHAMADA DAS FUNÇÕES --------------\\
+  publishButton.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let text = rootElement.querySelector("#postText").value;
+    createPost(text);
+    rootElement.querySelector("#postText").value = "";
   });
-  //-------------- FUNÇÃO DE CRIAR PUBLICAÇÃO --------------\\
-  publish.addEventListener("submit", event => {
-    event.preventDefault();
-    const text = rootElement.querySelector("#postText").value;
-    //-------- TODO: pegar nome, avatar e ID do usuário --------\\
-    const now = new Date;
-    const post = {
-      userID: "",
-      userName: "",
-      avatar: "",
-      time: Date.now(),
-      date: now.getDate(),
-      month: now.getMonth() + 1,
-      year: now.getFullYear(),
-      text: text,
-      picture: "",
-      likes: 0,
-      comments: []
-    }
-    const postCollection = firebase.firestore().collection("posts");
-    postCollection.add(post).then(res => {
-      rootElement.querySelector("#postText").value = "";
-      loadPosts();
-    })
-  });
+  logOutButton.addEventListener("click", logOut);
+  feed.addEventListener("click", getPostClick);
   return rootElement;
 };
-//------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
-//------- TODO: Completar os dados e ajustar o HTML -------\\
-function printPosts(post) {
-  const templatePost = `
-    <ul class="postFeed" id="${post.id}">
-      <figure class="avatar">
-        ${post.avatar}
-        <figcaption class="username">${post.userName}</figcaption>
-      </figure>  
-      <p class="text-posts">${post.data().text}</p>
-      <p class="text-posts">${(post.data().comments)}</p>
-      <p class="text-posts">${post.data().likes}</p>
-      <p class="text-posts">${post.data().date}/${post.data().month}/${post.data().year}</p>
-      <section class="buttons-posts"> 
-        <button id="like" class="icon-post">
-          <img src="../../img/heart.png" height="20px" width="20px"> 
-        </button>
-        <button id="delete" class="icon-post">
-          <img src="../../img/recycle-bin.png" height="20px" width="20px"> 
-        </button>
-      </section>  
-    </ul>
-  `
-  //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
-  document.querySelector("#feed").innerHTML += templatePost;
-  document.querySelector("#like").addEventListener("click", likePost);
-  document.querySelector("#delete").addEventListener("click", deletePost);
-}
-//------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\
-function loadPosts() {
-  const postCollection = firebase.firestore().collection("posts");
-  //-------- TODO: Animação de carregando a página ---------\\
-  document.querySelector("#feed").innerHTML = "Carregando...";
-  postCollection.orderBy("time", "desc").get().then(snapshot => {
-    document.querySelector("#feed").innerHTML = "";
-    snapshot.forEach(post => {
-      printPosts(post);
-    });
+//------------------- FUNÇÃO DE LOGOUT -------------------\\ FIREBASE
+function logOut() {
+  const promise = firebase.auth().signOut();
+  promise.then(() => {
+    onNavigate("/login");
   });
 }
-//----------------- FUNÇÃO DE EXCLUIR -----------------\\
-//----- Só tá funcionando o botão do primeiro post -----\\ 
-// TODO: pegar a ID do post e confirmar que quer excluir \\
-function deletePost(postID) {
-  console.log("o erro não é o botão")
+//----- FUNÇÃO DE VERIFICAR SE O USUÁRIO TÁ LOGADO ----\\ FIREBASE
+function verifyUserLogged() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      onNavigate("/");
+      loadPosts();
+    } else {
+      onNavigate("/login");
+    }
+  });
+}
+//-------------- FUNÇÃO DE CRIAR PUBLICAÇÃO --------------\\ FIREBASE
+function createPost(text) {
+  const now = new Date();
+  const user = firebase.auth().currentUser;
+  const userName = user.displayName;
+  const userID = user.uid;
+  const userAvatar = user.photoURL;
+  const post = {
+    name: userName,
+    avatar: userAvatar,
+    ID: userID,
+    time: Date.now(),
+    date: now.getDate(),
+    month: now.getMonth() + 1,
+    year: now.getFullYear(),
+    text: text,
+    likes: [],
+  };
   const postCollection = firebase.firestore().collection("posts");
-  postCollection.doc(postID).delete().then(doc => {
+  postCollection.add(post).then((res) => {
     loadPosts();
   });
-  deletePost();
 }
+//------------- FUNÇÃO DE PRINTAR PUBLICAÇÃO -------------\\
+function printPosts(post, userId) {
+  const date = `${post.data().date}/${post.data().month}/${post.data().year}`;
+  const likes = post.data().likes || [];
+  const likesQuantity = likes.length
+  const alreadyLikedThisPost = likes.includes(userId)
+
+  const templatePost = `
+    <section class="postFeed" id="${post.id}">
+      <section class="user-info"
+        <figure class="avatar">
+        <img src="${post.data().avatar}" height="50px" width="50px">
+          <figcaption class="username">${post.data().name}</figcaption>
+        </figure>
+        <article class="post-date">${date}</article>
+      </section>  
+      <article class="text-posts">${post.data().text}</article>
+      <section class="buttons-posts"> 
+        <button id="like-${post.id}" class="icon-post">
+          <figure class="likes-counting">
+            <img 
+              id="like" 
+              class="like ${alreadyLikedThisPost ? 'postLiked' : ''}" 
+              data-post-id="${post.id}" 
+              src="../../img/heart.png" height="20px" width="20px"
+            /> 
+            <figcaption class="text-posts">${likesQuantity}</figcaption>  
+          </figure>
+        </button>
+        <button class="icon-post delete">
+          <figure>
+            <img src="../../img/recycle-bin.png" height="20px" width="20px">
+          </figure>  
+        </button>
+      </section>  
+    </section>
+  `;
+  //-------- EVENTOS QUE CHAMAM AS FUNÇÕES DO FEED ---------\\
+  // document.querySelector("#feed").innerHTML += templatePost;
+  const newPostElement = new DOMParser().parseFromString(
+    templatePost,
+    "text/html"
+  ).body.childNodes[0];
+  document.querySelector("#feed").appendChild(newPostElement);
+  document
+    .querySelector(`#like-${post.id} .like`)
+    .addEventListener("click", likePost);
+  //document.querySelector("#delete").addEventListener("click", deletePost);
+}
+//------------ FUNÇÃO DE CARREGAR PUBLICAÇÕES ------------\\ FIREBASE
+function loadPosts() {
+  const userId = firebase.auth().currentUser.uid;
+  const postCollection = firebase.firestore().collection("posts");
+  document.querySelector("#feed").innerHTML = "Carregando...";
+  postCollection
+    .orderBy("time", "desc")
+    .get()
+    .then((snapshot) => {
+      document.querySelector("#feed").innerHTML = "";
+      snapshot.forEach((post) => {
+        printPosts(post, userId);
+      });
+    });
+}
+//-------------- FUNÇÃO DE PEGAR ID DO POST --------------\\
+function getPostClick(e) {
+  let closestDelete = e.target.closest(".delete");
+  let closestIdPost = closestDelete.parentNode.parentNode.id;
+  deletePost(closestIdPost);
+}
+//------------------- FUNÇÃO DE DELETE -------------------\\ FIREBASE
+// function deletePost(postID){
+//   const postCollection = firebase.firestore().collection("posts");
+//   if (confirm("Você quer realmente quer excluir essa publicação?")) {
+//     postCollection.doc(postID).delete().then(doc => {
+//       loadPosts();
+//     });
+//   }
+// }
 //--------------------- FUNÇÃO DE LIKE -------------------\\
-//------- Só tá funcionando o botão do primeiro post ------\\
-function likePost() {
-  console.log("deixou o joinha");
+function likePost(e) {
+  const postId = e.target.dataset.postId;
+  const userId = firebase.auth().currentUser.uid;
+
+  const postRef = firebase.firestore().collection("posts").doc(postId);
+
+  postRef.get()
+    .then(post => {
+      const likes = post.data().likes || []
+      const alreadyLikedThisPost = likes.includes(userId)
+
+      if (alreadyLikedThisPost) {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayRemove(userId) })
+          .finally(() => loadPosts())
+      } else {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayUnion(userId) })
+          .finally(() => loadPosts())
+      }
+    })
+    .catch(exception =>
+      console.error('Erro ao dar like no post. Erro:' + exception.message
+      ))
 }
-//------------------- FUNÇÃO DE EDITAR ------------------\\
 
-
-
-//-------------------- HACKER EDITION --------------------\\
-//------------------- FUNÇÃO DE COMENTAR ------------------\\
-//---------------------- POSTAR IMAGEM ---------------------\\
-//--------------- ADICIONAR OU EXCLUIR AMIGOS ---------------\\
-//-------------------- PÚBLICO OU PRIVADO --------------------\\
-//----------------------- EDITAR PERFIL -----------------------\\
-//---------------- TIMELINE PERFIL PERSONALIZADA ---------------\\
-
-
-
-
-//usar a referência coleção para printar os posts?
-//var usersCollectionRef = db.collection('users');
-//referência à um documento dentro da coleção: var alovelaceDocumentRef = db.doc('users/alovelace');
-//público x privado: sub-coleção, coleção usuário, sub-coleção post público e sub-coleção post privado
-/*
-Estilo:
-Login, colocar pra aparecer aquela coisinha branca com o nome do que aquele ícone vai
- redirecionar. Post: outline e margin button.
-*/
-/*
-//-------------- Fazer a validação do registro ---------------\\
- const signUp = rootElement.querySelector('#signUp');
- signUp.addEventListener("click", e => {
-   const email = rootElement.querySelector("#email").value;
-   const password = rootElement.querySelector("#password").value;
-   if (email === "" || password === "") {
-     printMessageError(errorMessageEmptyInput);
-   } else {
-     const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-     promise
-       .then(() => {
-         onNavigate('/');
-       }).catch(err => {
-         const errorCode = err.code;
-         const errorMessage = verifyErrorCode[errorCode];
-         if (errorMessage == null) {
-           errorMessage = err.Message;
-         }
-         printMessageError(errorMessage);
-       });
-   }
- });
- Dúvida:
- *Não haver usuários repetidos (só e-mail ou nome também?).
- Definir um formato de senha (número de caracteres, strings, number, etc.).
- E inserir uma mensagem de erro, caso a mensagem não atenda aos requisitos.
- //"auth/weak-password": "A senha é muito fraca.",
- */
