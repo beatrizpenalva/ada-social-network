@@ -56,18 +56,18 @@ fieldset{
 .logoname{
     color: #FF780F;
 }
-.right, .form{
+.right{
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
-.login-button{
+.login-button, .register-button{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.enter-button{
+.enter-button, .reg-button{
     width: 240px;
     height: 35px;
     border-radius: 50px;
@@ -80,9 +80,10 @@ fieldset{
     margin: 18px 0px;
     outline: transparent;
 }
-.enter-button:hover{
+.enter-button, .reg-button:hover{
     background-color:#FEBB86;
 }
+
 .subtitle{
     font-weight: normal;
     font-size: 14px;

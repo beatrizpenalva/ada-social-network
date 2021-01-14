@@ -1,6 +1,7 @@
 import { onNavigate } from '../../utils/history.js';
+
 export const Login = () => {
-  const rootElement = document.createElement("div");
+  const rootElement = document.createElement('div');
   rootElement.innerHTML = `
     <section class="login">  
       <section class="left">  
@@ -30,38 +31,48 @@ export const Login = () => {
       </section>
     </section>    
   `;
-  //---------------------- GUARDANDO TODOS OS INPUTS ---------------------\\
-  const signIn = rootElement.querySelector("#signIn");
-  const register = rootElement.querySelector("#register");
-  const signUpGoogle = rootElement.querySelector("#google");
-  const signUpFb = rootElement.querySelector("#facebook");
-  const signUpGh = rootElement.querySelector("#github");
-  //------------------------- MENSAGENS DE ERRO ------------------------- \\
+  // /*GUARDANDO TODOS OS INPUTS ---------------------*/
+  const signIn = rootElement.querySelector('#signIn');
+  const register = rootElement.querySelector('#register');
+  const signUpGoogle = rootElement.querySelector('#google');
+  const signUpFb = rootElement.querySelector('#facebook');
+  const signUpGh = rootElement.querySelector('#github');
+  // ------------------------- MENSAGENS DE ERRO ------------------------- \\
   const verifyErrorCode = {
-    "auth/invalid-email": "O endereço de e-mail não é válido. Por favor, preencha novamente.",
-    "auth/invalid-password": "Senha incorreta. Por favor, tente novamente.",
-    "auth/email-already-in-use": "O e-mail fornecido já está cadastrado. Por favor, forneça um novo endereço.",
-    "auth/user-not-found": "Não há registro desse usuário. Por favor, registre-se para ter acesso à nossa rede.",
-    "auth/account-exists-with-different-credential": "E-mail já associado a outra conta. Por favor, tente com um novo endereço.",
-    "default": "Ocorreu algum erro. Por favor, tente novamente",
+    'auth/invalid-email': 'O endereço de e-mail não é válido. Por favor, preencha novamente.',
+    'auth/invalid-password': 'Senha incorreta. Por favor, tente novamente.',
+    'auth/email-already-in-use': 'O e-mail fornecido já está cadastrado. Por favor, forneça um novo endereço.',
+    'auth/user-not-found': 'Não há registro desse usuário. Por favor, registre-se para ter acesso à nossa rede.',
+    'auth/account-exists-with-different-credential':
+      'E-mail já associado a outra conta. Por favor, tente com um novo endereço.',
+    default: 'Ocorreu algum erro. Por favor, tente novamente',
+  };
+  const errorMessageEmptyInput = 'O preenchimento dos campos de e-mail e senha é obrigatório.';
+
+  function printMessageError(message) {
+    const elementError = document.createElement('p');
+    const errorMessage = document.createTextNode(message);
+    elementError.appendChild(errorMessage);
+    document.getElementById('errorLogin').innerHTML = '';
+    document.getElementById('errorLogin').appendChild(elementError);
   }
-  const errorMessageEmptyInput = "O preenchimento dos campos de e-mail e senha é obrigatório.";
-  //---------------------- FUNÇÕES DE AUTENTIFICAÇÃO ----------------------\\
-  signIn.addEventListener("submit", event => {
+
+  // ---------------------- FUNÇÕES DE AUTENTIFICAÇÃO ----------------------\\
+  signIn.addEventListener('submit', (event) => {
     event.preventDefault();
-    const email = rootElement.querySelector("#email").value;
-    const password = rootElement.querySelector("#password").value;
-    if (email === "" || password === "") {
+    const email = rootElement.querySelector('#email').value;
+    const password = rootElement.querySelector('#password').value;
+    if (email === '' || password === '') {
       printMessageError(errorMessageEmptyInput);
     } else {
       const promise = firebase.auth().signInWithEmailAndPassword(email, password);
       promise
-        .then(() =>  {
+        .then(() => {
           onNavigate('/');
         })
-        .catch(err => {
+        .catch((err) => {
           const errorCode = err.code;
-          const errorMessage = verifyErrorCode[errorCode];
+          let errorMessage = verifyErrorCode[errorCode];
           if (errorMessage === null) {
             errorMessage = err.Message;
           }
@@ -69,86 +80,84 @@ export const Login = () => {
         });
     }
   });
-  signUpGoogle.addEventListener("click", () => {
+
+  signUpGoogle.addEventListener('click', () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     //firebase.auth().signInWithRedirect(provider)
     firebase.auth().signInWithPopup(provider)
       .then(() => {
-      //  firebase.auth().getRedirectResult().then(user => {
+        //  firebase.auth().getRedirectResult().then(user => {
         //  if (user) {
-            onNavigate('/')
-          //}
+        onNavigate('/')
+        //}
         //})
       }).catch(err => {
         const errorCode = err.code;
-        const errorMessage = verifyErrorCode[errorCode];
+        let errorMessage = verifyErrorCode[errorCode];
         if (errorMessage === null) {
           errorMessage = err.Message;
         }
         printMessageError(errorMessage);
       });
-/*
-      firebase.auth().getRedirectResult().then(function(result) {
-        if (result.credential) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // ...
-        }
-        // The signed-in user info.
-        var user = result.user;
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-
-      */
+    /*
+          firebase.auth().getRedirectResult().then(function(result) {
+            if (result.credential) {
+              // This gives you a Google Access Token. You can use it to access the Google API.
+              var token = result.credential.accessToken;
+              // ...
+            }
+            // The signed-in user info.
+            var user = result.user;
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+          });
+    
+          */
   });
-  signUpFb.addEventListener("click", () => {
+
+  signUpFb.addEventListener('click', () => {
     const provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithRedirect(provider)
       .then(() => {
         onNavigate('/');
-      }).catch(err => {
+      })
+      .catch((err) => {
         const errorCode = err.code;
-        const errorMessage = verifyErrorCode[errorCode];
+        let errorMessage = verifyErrorCode[errorCode];
         if (errorMessage === null) {
           errorMessage = err.Message;
         }
         printMessageError(errorMessage);
       });
   });
-  signUpGh.addEventListener("click", () => {
+
+  signUpGh.addEventListener('click', () => {
     const provider = new firebase.auth.GithubAuthProvider();
     firebase.auth().signInWithRedirect(provider)
       .then(() => {
         onNavigate('/');
       })
-      .catch(err => {
+      .catch((err) => {
         const errorCode = err.code;
-        const errorMessage = verifyErrorCode[errorCode];
+        let errorMessage = verifyErrorCode[errorCode];
         if (errorMessage === null) {
           errorMessage = err.Message;
         }
         printMessageError(errorMessage);
       });
   });
-  //---------- ENCAMINHAR PARA O FORMULÁRIO DE CRIAÇÃO DE PERFIL ----------\\
-  //---------------- TODO: Mudar para a página de registro ----------------\\
-  register.addEventListener("click", () => {
-    onNavigate('/');
+
+  register.addEventListener('click', (event) => {
+    event.preventDefault();
+    onNavigate('/register');
   });
+
   return rootElement;
 };
-function printMessageError(message) {
-  const elementError = document.createElement("p");
-  const errorMessage = document.createTextNode(message);
-  elementError.appendChild(errorMessage);
-  document.getElementById("errorLogin").innerHTML = "";
-  document.getElementById("errorLogin").appendChild(elementError);
-}

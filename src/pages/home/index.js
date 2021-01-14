@@ -94,7 +94,7 @@ function createPost(text) {
 function printPosts(post, userId) {
   const date = `${post.data().date}/${post.data().month}/${post.data().year}`;
   const likes = post.data().likes || [];
-  const likesQuantity = likes.length 
+  const likesQuantity = likes.length
   const alreadyLikedThisPost = likes.includes(userId)
 
   const templatePost = `
@@ -180,122 +180,17 @@ function likePost(e) {
     .then(post => {
       const likes = post.data().likes || []
       const alreadyLikedThisPost = likes.includes(userId)
-      
-      if(alreadyLikedThisPost) {
-        postRef.update({ likes: firebase.firestore.FieldValue.arrayRemove(userId)})
+
+      if (alreadyLikedThisPost) {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayRemove(userId) })
           .finally(() => loadPosts())
       } else {
-        postRef.update({ likes: firebase.firestore.FieldValue.arrayUnion(userId)})
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayUnion(userId) })
           .finally(() => loadPosts())
       }
     })
-    .catch(exception => 
+    .catch(exception =>
       console.error('Erro ao dar like no post. Erro:' + exception.message
-    ))
+      ))
 }
-/*Todas as informações que preciso: 
 
-  ---Clicar no post- saber id do post + uid do usuário---
-  O Usuário clicou no post ?
-  qual método do fireBase uso para alterar o valor de um elemento
-
-  Para isso preciso com FireBase guardar(propriedade like) os UID de quem clicou no s2 (é armazenado em um array)
-  ----Dado que no array estão todos os usuários que clicaram no like
-      posso usar o length e assim saber a quantidade de uid do array (quantidade de usuários/likes).
-
-  ----Para garantir que em uid não curta duas x : fazer condições de que if clicou no like este uid 
-      é armazenado no array Like else tira este uid do array 
-
-  --- Dar o feedback visual pro usuário -pintar  o coração quando dar like */
-
-//-------- FUNÇÃO DE CARREGAR NOVA PUBLICAÇÃO ---------\\
-/*function loadNewPost() {
-_set_ nesse momento eu já consigo pegar o ID do post
-  firebase.firestore().collection('users')
-  .doc(user).set({ role })
-  .then(() => setRoled())
-}
-function loadNewPost() {
-      const postCollection = firebase.firestore().collection("posts");
-      // Add a new document in collection "cities"
-      postCollection.doc("post").set({post})
-      .then(function() {
-        console.log("Document successfully written!");
-        //printPosts(post);
-        //document.querySelector("#feed").innerHTML = "";
-        //printPosts(post)
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
-      }
-*/
-/*
-function teste(){
-  const postCollection = firebase.firestore().collection("posts");
-    postCollection.get().then(snapshot => {
-      snapshot.forEach(post => {
-        console.log(post.id)
-        const elemento = document.querySelector(`#${post.id}`);
-        elemento.addEventListener("click", () =>{
-          console.log("clicou")
-        })
-      })
-    })
-}
-*/
-
-//------------------- FUNÇÃO DE EDITAR ------------------\\
-//-------------------- HACKER EDITION --------------------\\
-//------------------- FUNÇÃO DE COMENTAR ------------------\\
-//---------------------- POSTAR IMAGEM ---------------------\\
-//--------------- ADICIONAR OU EXCLUIR AMIGOS ---------------\\
-//-------------------- PÚBLICO OU PRIVADO --------------------\\
-//----------------------- EDITAR PERFIL -----------------------\\
-//---------------- TIMELINE PERFIL PERSONALIZADA ---------------\\
-
-/*
-//-------------- Fazer a validação do registro ---------------\\
- const signUp = rootElement.querySelector('#signUp');
- signUp.addEventListener("click", e => {
-   const email = rootElement.querySelector("#email").value;
-   const password = rootElement.querySelector("#password").value;
-   if (email === "" || password === "") {
-     printMessageError(errorMessageEmptyInput);
-   } else {
-     const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-     promise
-       .then(() => {
-         onNavigate('/');
-       }).catch(err => {
-         const errorCode = err.code;
-         const errorMessage = verifyErrorCode[errorCode];
-         if (errorMessage == null) {
-           errorMessage = err.Message;
-         }
-         printMessageError(errorMessage);
-       });
-   }
- });
- Dúvida:
- *Não haver usuários repetidos (só e-mail ou nome também?).
- Definir um formato de senha (número de caracteres, strings, number, etc.).
- E inserir uma mensagem de erro, caso a mensagem não atenda aos requisitos.
- //"auth/weak-password": "A senha é muito fraca.",
- */
-/*document.addEventListener("click", function(e){
-    let closest = e.target.closest(".like");
-    if (closest && document.contains(closest)){
-    likePost();
-    }
-  })
-  */
-/*
-const closestExcluir = event.target.closest(btnExcluir);
-if (closestExcluir && feedArea.contains(closestExcluir)) {
-  const closestIdPost = closestExcluir.parentNode.querySelector('.id-escondido').innerText;
-if (confirm('Tem certeza que deseja excluir esse post?')) {
-firebase.firestore().collection('posts').doc(closestIdPost).delete()
-.then(() => {});
-renderPage();
-*/
