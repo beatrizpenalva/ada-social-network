@@ -1,10 +1,9 @@
-import { editPost, deletePost } from '../../services/index.js'
+import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js'
 
-export const printPosts = (doc, id) => {
+export const printPosts = (doc, id, currentUser) => {
   const post = doc;
-  const currentUserID = firebase.auth().currentUser.uid;
   const postContainer = document.createElement("section");
-  if (post.ID !== currentUserID) {
+  if (post.ID !== currentUser) {
     postContainer.innerHTML = `
             <section class="post-container" id="${id}">  
                 <section class="left-post"> 
@@ -59,11 +58,12 @@ export const printPosts = (doc, id) => {
                     </section>
                     <section class="on-edition">
                         <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500" wrap="hard" placeholder="Como pegar o texto que tava?" required></textarea>
-                        <button class="post-function send-edition" id="send-edition-${id}">
+                        <section class="edition-buttons">
+                          <button class="post-function cancel-edition" id="cancel-edition-${id}">
                             <figure>
-                                <img src="../../img/right-arrow.png" height="20px" width="20px">
+                              <img src="../../img/cancel.png" height="20px" width="20px">
                             </figure>  
-                        </button>
+                          <button class="send-button" id="send-edition-${id}">Salvar</button>
                     </section>     
                 </section>
             </section>
@@ -92,68 +92,4 @@ export const printPosts = (doc, id) => {
   });
 
   return postContainer;
-}
-
-function sendDelete(e) {
-  const getEvent = e.target;
-  const getPostId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-  deletePost(getPostId)
-  .then(doc => {
-    if (confirm("Você quer realmente quer excluir essa publicação?")) {
-      const postCard = document.getElementById(postID)
-      const parentElement = postCard.parentElement;
-      parentElement.removeChild(postCard);
-    }
-  })
-  .catch(() => {
-    alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
-  })
-}
-
-const showEditContainer = (e) => {
-  const postID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-  const postCard = document.getElementById(postID);
-  toggleEditContainer(postCard, true);
-  const sendEditionButton = postCard.querySelector(".send-edition");
-  sendEditionButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    sendEdition(postID, postCard);
-  })
-}
-
-const sendEdition = (postId, post) => {
-  const postCard = post;
-  const postID = postId;
-  const editionBox = postCard.querySelector(".edition-content");
-  const newPostText = editionBox.value;
-  editPost(postID, newPostText)
-  .then(() => {
-    toggleEditContainer(postCard, false);
-    const text = postCard.querySelector(".post-content");
-    text.innerHTML = newPostText;
-  })
-  .catch(() => {
-    alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
-  })
-}
-
-const toggleEditContainer = (post, show) => {
-  const postCard = post;
-  const holderEditionContainer = postCard.querySelector(".on-edition");
-  if (show) {
-    holderEditionContainer.classList.add("display");
-  } else {
-    holderEditionContainer.classList.remove("display");
-  }
-}
-
-function sendLike(e) {
-  const getEvent = e.target;
-  const getPostId = getEvent.parentNode.parentNode.parentNode.id;
-  likePost(getPostId);
-}
-
-function likePost(postID) {
-  const postId = postID;
-  console.log(postId)
 }

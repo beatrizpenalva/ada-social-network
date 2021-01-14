@@ -1,11 +1,13 @@
 import { Home, loadPosts } from './pages/home/index.js';
 import { Login } from './pages/login/index.js';
 import { onNavigate } from './utils/history.js';
+import { verifyUserLogged } from './services/index'
+import { getError } from '../../errors/index.js';
 
 const routeRender = () => {
   const rootDiv = document.getElementById("root");
   const routes = {
-    '/' : Home,
+    '/': Home,
     '/login': Login,
   };
   rootDiv.innerHTML = '';
@@ -15,14 +17,18 @@ const routeRender = () => {
 window.addEventListener("popstate", routeRender);
 window.addEventListener('load', (e) => {
   e.preventDefault();
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      onNavigate('/')
-      loadPosts();
-    }
-    else {
-      onNavigate('/login')
-    }
-  })
+  verifyUserLogged()
+    .then(user => {
+      if (user) {
+        onNavigate('/')
+        loadPosts();
+      }
+      else {
+        onNavigate('/login')
+      }
+    })
+    .catch(err => {
+      getError(err);
+    })
 });
 routeRender();

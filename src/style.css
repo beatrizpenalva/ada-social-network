@@ -107,7 +107,7 @@ figure {
     margin: 18px 0px;
     outline: transparent;
 }
-.enter-button:hover {
+.submit-button:hover {
     background-color:#FEBB86;
 }
 .subtitle {
@@ -240,6 +240,7 @@ figure {
 .post-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap; /* paliativo */
     width: 600px;
     background: #F2EEEA;
     border-radius: 10px;
@@ -309,11 +310,6 @@ figure {
 .edit:hover, .delete:hover{
     opacity: .70;
 }
-.teste{
-    font-size: 2em;
-    color:  #b6a89a;
-    margin-right: 10px;
-}
 [type="checkbox"]:checked + label{
     color: #FF780F;
   }
@@ -332,6 +328,25 @@ figure {
     font-size: 14px;
     margin-top: 10px;
     padding: 10px;
+}
+.edition-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 10px;
+}
+.send-button{
+    width: 75px;
+    height: 25px;
+    border-radius: 25px;
+    border-style: none;
+    background: #B6A89A;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    outline: transparent;
 }
 @media (max-width: 375px) {
     #publish-form, .post-container{

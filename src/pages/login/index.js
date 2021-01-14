@@ -1,5 +1,7 @@
 import { onNavigate } from '../../utils/history.js';
-import { signInEmail, getGoogleProvider, getFacebookProvider, getGitHubProvider } from '../../services/index.js'
+import { getError } from '../../errors/index.js';
+import { getGoogleProvider, getFacebookProvider, getGitHubProvider } from '../../services/index.js'
+
 
 export const Login = () => {
   const rootElement = document.createElement("main");
@@ -19,7 +21,7 @@ export const Login = () => {
           </fieldset>
           
           <fieldset class="login-button">
-            <button type="submit" class="submit-button>Entrar</button> 
+            <button type="submit" class="submit-button">Entrar</button> 
           </fieldset>
         </form> 
 
@@ -43,17 +45,18 @@ export const Login = () => {
   const signUpGoogleButton = rootElement.querySelector("#google-button");
   const signUpFbButton = rootElement.querySelector("#facebook-button");
   const signUpGhButton = rootElement.querySelector("#github-button");
-  
+
   signInButton.addEventListener("submit", (event) => {
     event.preventDefault();
     const email = rootElement.querySelector("#email").value;
     const password = rootElement.querySelector("#password").value;
-    signInEmail(email, password);
+    sendLogin(email, password);
   });
-  
+
   signUpGoogleButton.addEventListener("click", getGoogleProvider);
   signUpFbButton.addEventListener("click", getFacebookProvider);
   signUpGhButton.addEventListener("click", getGitHubProvider);
+  
   goRegisterButton.addEventListener("click", (event) => {
     event.preventDefault();
     onNavigate('/');
@@ -61,3 +64,13 @@ export const Login = () => {
 
   return rootElement;
 };
+
+const sendLogin = (email, password) => {
+  signInEmail(email, password)
+    .then(() => {
+      onNavigate('/');
+    })
+    .catch(err => {
+      getError(err);
+    });
+}

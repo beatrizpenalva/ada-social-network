@@ -5,14 +5,15 @@ const verifyErrorCode = {
     "auth/email-already-exists": "O e-mail fornecido já está cadastrado. Por favor, forneça um novo endereço.",
     "auth/invalid-email-verified": "O e-mail é inválido.",
     "auth/user-not-found": "Não há registro desse usuário. Por favor, registre-se para ter acesso à nossa rede.",
-    "auth/account-exists-with-different-credential": "E-mail já associado a outra conta. Por favor, tente com um novo endereço.",
-    "auth/network-request-failed": "Ops! Falha de conexão com a rede.",
+    "auth/account-exists-with-different-credential": "E-mail já associado a outra conta. Por favor, tente com um novo endereço.",  
     "auth/weak-password": "A senha é muito fraca.",
     "auth/invalid-password": "Senha inválida, precisa ter pelo menos 6 caracteres. Por favor, tente novamente.",
     "auth/cancelled-popup-request": "Somente uma solicitação de janela pop-up é permitida de uma só vez.",
     "auth/popup-blocked": "A janela pop-up foi bloqueado pelo navegador. Por favor, desabilite o bloqueio para continuar.",
-    "auth/popup-closed-by-user": "Ops! A janela pop-up foi fechada pelo usuário sem concluir o login.",
+    "auth/popup-closed-by-user": "A janela pop-up foi fechada antes de concluir o login. Por favor, tente novamente.",
+    "auth/network-request-failed": "Ocorreu uma falha de conexão com a rede. Por favor, tente novamente.",
   }
+
   export const getError = (err) => {
     const errorCode = err.code;
     const errorMessage = verifyErrorCode[errorCode];
@@ -21,6 +22,7 @@ const verifyErrorCode = {
     }
     printMessageError(errorMessage);
   }
+
   function printMessageError(message) {
     const elementError = document.createElement("p");
     const errorMessage = document.createTextNode(message);
