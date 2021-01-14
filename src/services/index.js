@@ -1,3 +1,12 @@
+/* eslint-disable arrow-body-style */
+export const record = (userEmail, userPassword) => {
+  return firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);
+};
+
+export const emailVerify = () => {
+  return firebase.auth().currentUser.sendEmailVerification();
+};
+
 const posts = [
   { message: "Post 1" },
   { message: "Post 2" }

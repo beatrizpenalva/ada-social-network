@@ -2,7 +2,9 @@
 /* eslint-disable no-alert */
 /* eslint-disable semi */
 /* eslint-disable arrow-body-style */
+import { record, emailVerify } from "../../services/index.js";
 import { onNavigate } from '../../utils/history.js';
+
 
 export const Register = () => {
   const rootElement = document.createElement('div');
@@ -35,15 +37,6 @@ export const Register = () => {
   // const name = rootElement.querySelector('#name');
   // const lastName = rootElement.querySelector('#lastName');
 
-  //   // ---------------------- para exportar do services ----------------------//
-  const record = (userEmail, userPassword) => {
-    return firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword)
-  };
-
-  const emailVerify = () => {
-    return firebase.auth().currentUser.sendEmailVerification()
-  };
-
   // ---------------------- FUNÇÕES ----------------------//
 
   rootElement.querySelector('#registerSingIn').addEventListener('submit', (event) => {
@@ -52,9 +45,11 @@ export const Register = () => {
     const passwordValeu = password.value;
     const confirmSamePassword = passwordConfirmed.value;
     if (passwordValeu !== confirmSamePassword) {
+      // eslint-disable-next-line quotes
       alert("As senhas não são iguais");
     }
     else if (passwordValeu.length < 6) {
+      // eslint-disable-next-line quotes
       alert("Sua senha tem que conter no minimo 6 caracteres");
     }
     else {
