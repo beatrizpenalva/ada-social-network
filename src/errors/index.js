@@ -18,15 +18,20 @@ export const getError = (err) => {
   const errorCode = err.code;
   const errorMessage = verifyErrorCode[errorCode];
   if (errorMessage === null) {
-    errorMessage = err.Message;
+    errorMessage = "Ops! Ocorreu algum erro, por favor, tente novamente."
   }
   printMessageError(errorMessage);
 }
 
-function printMessageError(message) {
+export const printMessageError = (message) => {
   const elementError = document.createElement("p");
   const errorMessage = document.createTextNode(message);
   elementError.appendChild(errorMessage);
   document.getElementById("error-login").innerHTML = "";
   document.getElementById("error-login").appendChild(elementError);
+}
+
+export const timelineMessageError = (err) => {
+  window.alert("Ops! Ocorreu algum erro, por favor, tente novamente.")
+  console.log(err)
 }

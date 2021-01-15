@@ -64,20 +64,14 @@ export const deletePost = (postID) => {
   return firebase.firestore().collection("posts").doc(postID).delete()
 }
 
-export const likePost = (postID) => {
-  const userId = firebase.auth().currentUser.uid;
-  const postRef = firebase.firestore().collection("posts").doc(postID);
-  postRef.get()
-    .then(post => {
-      const likes = post.data().likes || []
-      const alreadyLikedThisPost = likes.includes(userId)
+export const alreadyLikedThisPost = (postID) => {
+  return firebase.firestore().collection("posts").doc(postID).get()
+}
 
-      if (alreadyLikedThisPost) {
-        postRef.update({ likes: firebase.firestore.FieldValue.arrayRemove(userId) })
-          .finally(() => loadPosts())
-      } else {
-        postRef.update({ likes: firebase.firestore.FieldValue.arrayUnion(userId) })
-          .finally(() => loadPosts())
-      }
-    })
+export const removePost = (postID, userID) => {
+  return firebase.firestore().collection("posts").doc(postID).update({ likes: firebase.firestore.FieldValue.arrayRemove(userID) })
+}
+
+export const likePost = (postID, userID) => {
+  return firebase.firestore().collection("posts").doc(postID).update({ likes: firebase.firestore.FieldValue.arrayUnion(userID) })
 }

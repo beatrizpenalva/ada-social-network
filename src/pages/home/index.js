@@ -1,6 +1,7 @@
 import { printPosts } from '../../components/posts.js'
 import { navBar } from '../../components/navbar.js'
 import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js'
+import { timelineMessageError } from '../../errors/index.js'
 
 export const Home = () => {
   const rootElement = document.createElement("main");
@@ -11,8 +12,8 @@ export const Home = () => {
         <textarea id="postText" class="text" spellcheck="true" maxlength="500" wrap="hard" placeholder="O que você quer compartilhar?" required></textarea>
 
           <section class="publish-button"> 
-            <label for="file">
-              <figure class="input-file" >
+            <label for="file" class="hidden">
+              <figure class="input-file">
                 <img src="../../img/icon-picture.svg" height="20px" width="20px">
               </figure>  
               <input type="file" id="file" accept="image/png, image/jpeg">
@@ -55,9 +56,7 @@ const getPostInfo = (text) => {
       const postId = res.id;
       feed.prepend(printPosts(post, postId, post.userID));
     })
-    .catch(() => {
-      alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
-    })
+    .catch(timelineMessageError)
 }
 
 const createPostObject = (text) => {

@@ -1,73 +1,69 @@
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
-/* eslint-disable semi */
-/* eslint-disable arrow-body-style */
-import { record, emailVerify } from "../../services/index.js";
+import { record, emailVerify } from '../../services/index.js';
 import { onNavigate } from '../../utils/history.js';
-
+import { getError, printMessageError } from '../../errors/index.js'
 
 export const Register = () => {
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
-  <section class="register"> 
+  <section class="register-page"> 
     <section class="left">  
       <img src="../../img/ada-lovelace.svg" width="175px" height="175px" alt="Desenho do rosto de Ada Lovelace em preto com um fundo redondo alaranjado">
-      <p class="theme"><span class="logoname">[Ada]</span> Programe como uma mulher.</p>
+      <p class="logo-theme"><span class="logo-name">[Ada]</span> Programe como uma mulher.</p>
     </section>
+
     <section class="right">
       <form id="registerSingIn"> 
           <fieldset class="right">
-            <input type="email" class="input-in-line" id="email" placeholder="Email" required />
-            <input type="password" class="input-in-line" id="password" placeholder="Senha" required />
-            <input type="password" class="input-in-line" id="passwordConfirmation" placeholder="Confirme sua senha" required />
-            <input type="text" class="input-in-line" id="name" placeholder="Nome" />
+            <input type="text" class="input-in-line" id="name" placeholder="Nome"/>
             <input type="text" class="input-in-line" id="lastName" placeholder="Sobrenome" required />
+            <input type="email" class="input-in-line" id="email" placeholder="Email" required/>
+            <input type="password" class="input-in-line" id="password" placeholder="Senha" required/>
+            <input type="password" class="input-in-line" id="passwordConfirmation" placeholder="Confirme sua senha" required/>
+            <section id="error-login" class="error-message"></section>
           </fieldset> 
+
           <fieldset class="register-button">
-            <button type="submit" class="reg-button" id="newRegister"> Registrar</button>
+            <button type="submit" class="submit-button" id="newRegister"> Registrar</button>
           </fieldset>
       </form>
     </section>
   </section>  
   `;
-  // --------------------- INPUTS ---------------------
-  const email = rootElement.querySelector('#email');
-  const password = rootElement.querySelector('#password');
-  const passwordConfirmed = rootElement.querySelector('#passwordConfirmation');
-  // const name = rootElement.querySelector('#name');
-  // const lastName = rootElement.querySelector('#lastName');
 
-  // ---------------------- FUNÇÕES ----------------------//
-
-  rootElement.querySelector('#registerSingIn').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const emailValeu = email.value;
-    const passwordValeu = password.value;
-    const confirmSamePassword = passwordConfirmed.value;
-    if (passwordValeu !== confirmSamePassword) {
-      // eslint-disable-next-line quotes
-      alert("As senhas não são iguais");
-    }
-    else if (passwordValeu.length < 6) {
-      // eslint-disable-next-line quotes
-      alert("Sua senha tem que conter no minimo 6 caracteres");
-    }
-    else {
-      record(emailValeu, passwordValeu)
-        .then(() => {
-          emailVerify()
-            .then(() => {
-              onNavigate('/');
-            })
-            .catch((err) => {
-              console.log(err)
-            });
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-    }
+  rootElement.querySelector("#registerSingIn").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = rootElement.querySelector("#email").value;
+    const password = rootElement.querySelector("#password").value;
+    const passwordConfirmed = rootElement.querySelector("#passwordConfirmation").value;
+    checkData(email, password, passwordConfirmed)
   });
 
   return rootElement;
 };
+
+const passwordMismatch = "As senhas não são iguais. Por favor, escreva novamente.";
+const weakPassowrd = "Sua senha tem que conter no minimo 6 caracteres. Por favor, escreva uma senha maior.";
+
+const checkData = (emailValue, passwordValue, passwordConfirmed) => {
+  if ( passwordValue !== passwordConfirmed) {
+    printMessageError(passwordMismatch);
+  }
+  else if (passwordValue.length < 6) {
+    printMessageError(weakPassowrd);
+  }
+  else {
+    record(emailValue,  passwordValue)
+      .then(() => {
+        emailVerify()
+          .then(() => {
+            onNavigate('/login');
+          })
+          .catch((err) => {
+            getError(err);
+          });
+      })
+      .catch((err) => {
+        getError(err);
+      });
+  }
+}
