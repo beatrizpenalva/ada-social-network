@@ -56,7 +56,7 @@ export const Login = () => {
   signUpGoogleButton.addEventListener("click", getGoogleProvider);
   signUpFbButton.addEventListener("click", getFacebookProvider);
   signUpGhButton.addEventListener("click", getGitHubProvider);
-  
+
   goRegisterButton.addEventListener("click", (event) => {
     event.preventDefault();
     onNavigate('/');

@@ -58,7 +58,7 @@ const getPostInfo = () => {
     })
 }
 
-createPostObject = (text) => {
+const createPostObject = (text) => {
   const user = getCurrentUser();
   const userName = user.displayName;
   const userID = user.uid;

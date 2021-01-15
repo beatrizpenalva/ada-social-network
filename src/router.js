@@ -1,7 +1,7 @@
 import { Home, loadPosts } from './pages/home/index.js';
 import { Login } from './pages/login/index.js';
 import { onNavigate } from './utils/history.js';
-import { verifyUserLogged } from './services/index'
+import { verifyUserLogged } from './services/index.js'
 import { getError } from '../../errors/index.js';
 
 const routeRender = () => {
@@ -17,18 +17,14 @@ const routeRender = () => {
 window.addEventListener("popstate", routeRender);
 window.addEventListener('load', (e) => {
   e.preventDefault();
-  verifyUserLogged()
-    .then(user => {
-      if (user) {
-        onNavigate('/')
-        loadPosts();
-      }
-      else {
-        onNavigate('/login')
-      }
-    })
-    .catch(err => {
-      getError(err);
-    })
+  verifyUserLogged(user => {
+    if (user) {
+      onNavigate('/')
+      loadPosts();
+    }
+    else {
+      onNavigate('/login')
+    }
+  })
 });
 routeRender();

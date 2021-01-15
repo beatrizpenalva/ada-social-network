@@ -1,7 +1,7 @@
-import { getError } from '../../errors/index.js';
+import { getError } from '../errors/index.js';
 
-export const verifyUserLogged = () => {
-  return firebase.auth().onAuthStateChanged();
+export const verifyUserLogged = (callback) => {
+  return firebase.auth().onAuthStateChanged(callback);
 }
 
 export const getCurrentUser = () => {
@@ -27,7 +27,7 @@ export const getGitHubProvider = () => {
   singUpProvider(githubProvider);
 }
 
-function singUpProvider(provider) {
+const singUpProvider = (provider) => {
   firebase.auth().signInWithPopup(provider)
     .then(() => {
     })
