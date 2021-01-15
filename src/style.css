@@ -1,37 +1,64 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif, normal, normal;
-}
-fieldset{
+} 
+fieldset {
     border: none;
 }
-.hidden{
+input[type="file"] {
+    display: none;
+}
+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 1.8em;
+    color: #b6a89a;
+}
+figure {
+    margin-top: 4px;
+}
+[type="checkbox"] {
+    opacity: 0;
+}
+.hidden {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     display: none;
 }
-.errorMessage{
+.error-message {
     padding: 5px;
     font-weight: normal;
     font-size: 11px;
     text-align: center;
     color: #db0b0b;
 }
+
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 15px;
 }
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
-    border-radius: 10px;
+    border-radius: 5px;
     background: #FF780F;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
 }
-/****************** LOGIN ***************/
-.login{
+::-webkit-scrollbar-thumb:hover {
+    background: #FF780F;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(105, 109, 109);
+    border-radius: 2px;
+}
+.login-page {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -40,12 +67,12 @@ fieldset{
     height: 100vh;
     margin: 15px 0px;
 }
-.left{
+.left {
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
-.theme{
+.logo-theme {
     margin: 20px 0px 10px;
     font-weight: 550;
     font-size: 24px;
@@ -53,21 +80,21 @@ fieldset{
     line-height: 25px;
     width: 200px;
 }
-.logoname{
+.logo-name {
     color: #FF780F;
 }
-.right{
+.right, .form {
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
-.login-button, .register-button{
+.providers-buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.enter-button, .reg-button{
+.submit-button {
     width: 240px;
     height: 35px;
     border-radius: 50px;
@@ -80,17 +107,16 @@ fieldset{
     margin: 18px 0px;
     outline: transparent;
 }
-.enter-button, .reg-button:hover{
+.submit-button:hover {
     background-color:#FEBB86;
 }
-
-.subtitle{
+.subtitle {
     font-weight: normal;
     font-size: 14px;
     text-align: center;
     color: #231911;
 }
-.button-text{
+.button-in-text {
     color: #FF780F;
     font-size: 14px;
     font-weight: medium;
@@ -98,50 +124,50 @@ fieldset{
     background-color: #FFFFFF;
     outline: transparent;
 }
-.button-text:hover{
+.button-in-text:hover {
     text-decoration: underline;
 }
-.input-in-line{
+.input-in-line {
     width: 255px;
+    border: none;
     border-bottom: 1.5px solid #231911;
     padding: 8px;
     outline-color: #FF780F;
 }
-.button-icon{
+.button-icon {
     border-style: none;
     background-color: #FFFFFF;
     padding: 10px;
     margin: 18px 0px;
     outline: transparent;
 }
-/****************** FEED - MENU SUPERIOR ***************/
-.timeline{
+.timeline {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.cover{
+.cover {
     width: 100%;
     height: 120px;
     background: linear-gradient(180deg, #FF780F 2.61%, #FF872B 54.69%, #FF923F 75.52%, #FEBB86 100%);
     display: flex;
     flex-direction: row;
 }
-.nav-feed{
+.nav-feed {
     display: flex;
     justify-content: space-around;
     justify-content: flex-end;
     align-items: flex-end;
     margin: 0px 25px 50px;
 }
-.logo-feed-desktop{
+.logo-feed-desktop {
     display: flex;
     justify-content: flex-end;
     margin: 0px 50px 38px;
     transform: scale(0.5);
 }
-.logo-name-desktop{
+.logo-name-desktop {
     display: flex;
     align-items: flex-end;
     text-align: center;
@@ -151,25 +177,24 @@ fieldset{
     font-size: 48px;
     color: #FFFFFF;
 }
-.button-icon-feed{
+.button-icon-feed {
     border-style: none;
     background-color: transparent;
     outline: transparent;
     padding: 0px 15px;
 }
-/****************** FEED - INPUT PUBLICAÇÃO ***************/
-#postForm{
+#publish-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 612px;
+    width: 600px;
     height: 200px;
     background-color: #F2EEEA;
     border-radius: 10px;
     margin: 30px 0px;
+    padding: 15px;
 }
-.text{
+.text {
     border: none;
     border-bottom: solid 2px #d3cbc3;
     background-color: #F2EEEA;
@@ -180,18 +205,16 @@ fieldset{
     text-align: left;
     resize: none;
     color: #231911;
-    outline: #eb1580;
+    outline: none;
 }
-.publish-button{
+.publish-button {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     height: 70px;
-    width: 180px;
-    margin-left: 400px;
 }
-#publish{
+#publish {
     width: 120px;
     height: 35px;
     font-weight: 500;
@@ -199,59 +222,65 @@ fieldset{
     text-align: center;
     color: #FFFFFF;
     outline: transparent;
+    margin-left: 10px;
 }
-input[type="file"] {
-    display: none;
+.button-icon:hover, label:hover {
+    opacity: .60;
 }
-label {
+.input-file{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #FF780F;
     width: 35px;
     height: 35px;
-    background-color: #FF780F;
     border-radius: 50px;
     border-style: none;
-    cursor: pointer;
 }
-figure{
-    margin-top: 4px;
-}
-.button-icon:hover, label:hover{
-    opacity: .60;
-}
-/****************** FEED - PUBLICAÇÕES ***************/
-.postFeed{
+.post-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* paliativo */
     width: 600px;
     background: #F2EEEA;
     border-radius: 10px;
-    margin: 30px 0px;
+    margin: 20px 0px;
     padding: 15px;
     overflow: auto;
 }
-.avatar{
-    width: 81px;
-    height: 81px;
-    background: #FEBB86;
-    border-radius: 52px;  
+.left-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-right: 15px;
 }
-.user-info{
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    object-fit: cover; 
+    background-color: #FEBB86;
+}
+.right-post {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.user-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.username{
+.username {
     font-weight: 500;
     font-size: 16px;
     color: #231911;
 }
-.post-date{
+.post-date {
     font-size: 12px;
-    line-height: 1.25em;
     color: #b6a89a;
 }
-.text-posts{
-    width: 500px;
+.post-content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -263,33 +292,67 @@ figure{
     color: #231911;
     word-break: break-word;
 }
-.buttons-posts{
-    margin-top: 10px;
+.post-buttons {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
-.icon-post{
+.post-function {
     outline: none;
     border: none;
 }
-.likes-counting{
+.button-other-users {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0px 10px;
+}    
+.edit:hover, .delete:hover{
+    opacity: .70;
 }
-.like{
-    margin-right: 10px;
+[type="checkbox"]:checked + label{
+    color: #FF780F;
+  }
+.on-edition{
+    display: none;
 }
-.postLiked {
-    background-color: #FF780F;
+.on-edition.display{
+    display: block;
+}  
+.edition-content{
+    resize: none;
+    border: none;
+    outline: solid 2px #d3cbc3;
+    background-color: #f7f3ef;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px;
 }
-/****************** FEED - MEDIA ***************/
+.edition-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 10px;
+}
+.send-button{
+    width: 75px;
+    height: 25px;
+    border-radius: 25px;
+    border-style: none;
+    background: #B6A89A;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    outline: transparent;
+}
 @media (max-width: 375px) {
-    #postForm, .postFeed{
+    #publish-form, .post-container{
         width: 300px;
     }
-    .text, .text-posts{
+    .text{
         width: 250px;
     }
 }
