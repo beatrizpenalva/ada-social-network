@@ -1,19 +1,18 @@
-import { editPost, deletePost, likePost, getCurrentUser } from '../../services/index.js'
+import { editPost, deletePost, getCurrentUser, alreadyLikedThisPost, removePost, likePost } from '../../services/index.js'
+import { timelineMessageError } from '../errors/index.js'
 
 export const sendDelete = (e) => {
     const getEvent = e.target;
-    const getPostId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-    deletePost(getPostId)
-        .then(doc => {
+    const postId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+    deletePost(postId)
+        .then(() => {
             if (confirm("Você quer realmente quer excluir essa publicação?")) {
-                const postCard = document.getElementById(postID)
+                const postCard = document.getElementById(postId)
                 const parentElement = postCard.parentElement;
                 parentElement.removeChild(postCard);
             }
         })
-        .catch(() => {
-            alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
-        })
+        .catch(timelineMessageError)
 }
 
 export const showEditContainer = (e) => {
@@ -21,14 +20,15 @@ export const showEditContainer = (e) => {
     const postCard = document.getElementById(postID);
     toggleEditContainer(postCard, true);
 
-    const cancelEditionButton = postCard.querySelector(".cancel-edition");
-    const sendEditionButton = postCard.querySelector(".send-button");
+    const cancelEditionForm = postCard.querySelector(".cancel-edition");
+    const formEditId = `#edit-post-form-${postID}`
+    const sendEditionForm = postCard.querySelector(formEditId);
 
-    cancelEditionButton.addEventListener("click", (e) => {
+    cancelEditionForm.addEventListener("click", (e) => {
         e.preventDefault();
         toggleEditContainer(postCard, false);
     })
-    sendEditionButton.addEventListener("click", (e) => {
+    sendEditionForm.addEventListener("submit", (e) => {
         e.preventDefault();
         sendEdition(postID, postCard);
     })
@@ -39,16 +39,14 @@ function sendEdition(postId, post) {
     const postID = postId;
     const editionBox = postCard.querySelector(".edition-content");
     const newPostText = editionBox.value;
-    if (newPostText !== null) {
+    if (newPostText !== "") {
         editPost(postID, newPostText)
             .then(() => {
                 toggleEditContainer(postCard, false);
                 const text = postCard.querySelector(".post-content");
                 text.innerHTML = newPostText;
             })
-            .catch(() => {
-                alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
-            })
+            .catch(timelineMessageError)
     }
 }
 
@@ -64,6 +62,36 @@ function toggleEditContainer(post, show) {
 
 export const sendLike = (e) => {
     const getEvent = e.target;
-    const getPostId = getEvent.parentNode.parentNode.parentNode.id;
-    likePost(getPostId);
+    const postId = getEvent.parentNode.parentNode.parentNode.id;
+    const user = getCurrentUser();
+    const likeValue = document.querySelector(`#likeValue-${postId}`)
+    alreadyLikedThisPost(postId)
+        .then(doc => {
+            const checkLike = doc.data().likes.includes(user.uid)
+            if (!checkLike) {
+                likePost(postId, user.uid)
+                    .then(() => {
+                        const getNewValue = addNewLikeValue(likeValue.innerText);
+                        likeValue.innerHTML = getNewValue
+                    })
+                    .catch(timelineMessageError)
+            }
+            else {
+                removePost(postId, user.uid)
+                    .then(() => {
+                        const getNewValue = removeNewLikeValue(likeValue.innerText);
+                        likeValue.innerHTML = getNewValue
+                    })
+                    .catch(timelineMessageError)
+            }
+        })
+        .catch(timelineMessageError)
+}
+
+function addNewLikeValue(num) {
+    return Number(num) + 1
+}
+
+function removeNewLikeValue(num) {
+    return Number(num) - 1
 }

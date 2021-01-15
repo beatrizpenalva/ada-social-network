@@ -1,6 +1,7 @@
 import { printPosts } from '../../components/posts.js'
 import { navBar } from '../../components/navbar.js'
 import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js'
+import { timelineMessageError } from '../../errors/index.js'
 
 export const Home = () => {
   const rootElement = document.createElement("main");
@@ -55,9 +56,7 @@ const getPostInfo = (text) => {
       const postId = res.id;
       feed.prepend(printPosts(post, postId, post.userID));
     })
-    .catch(() => {
-      alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
-    })
+    .catch(timelineMessageError)
 }
 
 const createPostObject = (text) => {

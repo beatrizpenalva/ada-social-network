@@ -34,14 +34,6 @@ figure {
     justify-content: space-around;
     display: none;
 }
-.error-message {
-    padding: 5px;
-    font-weight: normal;
-    font-size: 11px;
-    text-align: center;
-    color: #db0b0b;
-}
-
 ::-webkit-scrollbar {
     width: 15px;
 }
@@ -64,8 +56,8 @@ figure {
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    height: 100vh;
-    margin: 15px 0px;
+    min-height: 100vh;
+    padding: 15px 0px;
 }
 .left {
     display: flex;
@@ -87,6 +79,7 @@ figure {
     display: flex;
     flex-direction: column;
     align-items: center; 
+    justify-content: center;
 }
 .providers-buttons {
     display: flex;
@@ -140,6 +133,16 @@ figure {
     padding: 10px;
     margin: 18px 0px;
     outline: transparent;
+}
+.error-message {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 5px;
+    font-weight: normal;
+    font-size: 11px;
+    text-align: center;
+    color: #db0b0b;
 }
 .timeline {
     display: flex;
