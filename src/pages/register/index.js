@@ -1,6 +1,6 @@
 import { record, emailVerify } from '../../services/index.js';
 import { onNavigate } from '../../utils/history.js';
-import { getError, printMessageError } from '../../errors/index.js'
+import { getError, printMessageError } from '../../errors/index.js';
 
 export const Register = () => {
   const rootElement = document.createElement('div');
@@ -30,29 +30,27 @@ export const Register = () => {
   </section>  
   `;
 
-  rootElement.querySelector("#registerSingIn").addEventListener("submit", (e) => {
+  rootElement.querySelector('#registerSingIn').addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = rootElement.querySelector("#email").value;
-    const password = rootElement.querySelector("#password").value;
-    const passwordConfirmed = rootElement.querySelector("#passwordConfirmation").value;
-    checkData(email, password, passwordConfirmed)
+    const email = rootElement.querySelector('#email').value;
+    const password = rootElement.querySelector('#password').value;
+    const passwordConfirmed = rootElement.querySelector('#passwordConfirmation').value;
+    checkData(email, password, passwordConfirmed);
   });
 
   return rootElement;
 };
 
-const passwordMismatch = "As senhas não são iguais. Por favor, escreva novamente.";
-const weakPassowrd = "Sua senha tem que conter no minimo 6 caracteres. Por favor, escreva uma senha maior.";
+const passwordMismatch = 'As senhas não são iguais. Por favor, escreva novamente.';
+const weakPassowrd = 'Sua senha tem que conter no minimo 6 caracteres. Por favor, escreva uma senha maior.';
 
 const checkData = (emailValue, passwordValue, passwordConfirmed) => {
-  if ( passwordValue !== passwordConfirmed) {
+  if (passwordValue !== passwordConfirmed) {
     printMessageError(passwordMismatch);
-  }
-  else if (passwordValue.length < 6) {
+  } else if (passwordValue.length < 6) {
     printMessageError(weakPassowrd);
-  }
-  else {
-    record(emailValue,  passwordValue)
+  } else {
+    record(emailValue, passwordValue)
       .then(() => {
         emailVerify()
           .then(() => {
@@ -66,4 +64,4 @@ const checkData = (emailValue, passwordValue, passwordConfirmed) => {
         getError(err);
       });
   }
-}
+};

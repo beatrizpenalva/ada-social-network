@@ -1,9 +1,11 @@
 import { onNavigate } from '../../utils/history.js';
 import { getError } from '../../errors/index.js';
-import { getGoogleProvider, getFacebookProvider, getGitHubProvider, signInEmail } from '../../services/index.js'
+import {
+  getGoogleProvider, getFacebookProvider, getGitHubProvider, signInEmail,
+} from '../../services/index.js';
 
 export const Login = () => {
-  const rootElement = document.createElement("main");
+  const rootElement = document.createElement('main');
   rootElement.innerHTML = `
     <section class="login-page">  
       <section class="left">  
@@ -39,24 +41,24 @@ export const Login = () => {
     </section>    
   `;
 
-  const signInButton = rootElement.querySelector("#signin-form");
-  const goRegisterButton = rootElement.querySelector("#button-register");
-  const signUpGoogleButton = rootElement.querySelector("#google-button");
-  const signUpFbButton = rootElement.querySelector("#facebook-button");
-  const signUpGhButton = rootElement.querySelector("#github-button");
+  const signInButton = rootElement.querySelector('#signin-form');
+  const goRegisterButton = rootElement.querySelector('#button-register');
+  const signUpGoogleButton = rootElement.querySelector('#google-button');
+  const signUpFbButton = rootElement.querySelector('#facebook-button');
+  const signUpGhButton = rootElement.querySelector('#github-button');
 
-  signInButton.addEventListener("submit", (event) => {
+  signInButton.addEventListener('submit', (event) => {
     event.preventDefault();
-    const email = rootElement.querySelector("#email").value;
-    const password = rootElement.querySelector("#password").value;
+    const email = rootElement.querySelector('#email').value;
+    const password = rootElement.querySelector('#password').value;
     sendLogin(email, password);
   });
 
-  signUpGoogleButton.addEventListener("click", getGoogleProvider);
-  signUpFbButton.addEventListener("click", getFacebookProvider);
-  signUpGhButton.addEventListener("click", getGitHubProvider);
+  signUpGoogleButton.addEventListener('click', getGoogleProvider);
+  signUpFbButton.addEventListener('click', getFacebookProvider);
+  signUpGhButton.addEventListener('click', getGitHubProvider);
 
-  goRegisterButton.addEventListener("click", (event) => {
+  goRegisterButton.addEventListener('click', (event) => {
     event.preventDefault();
     onNavigate('/register');
   });
@@ -69,7 +71,7 @@ const sendLogin = (email, password) => {
     .then(() => {
       onNavigate('/');
     })
-    .catch(err => {
+    .catch((err) => {
       getError(err);
     });
-}
+};

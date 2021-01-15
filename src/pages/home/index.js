@@ -1,10 +1,10 @@
-import { printPosts } from '../../components/posts.js'
-import { navBar } from '../../components/navbar.js'
-import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js'
-import { timelineMessageError } from '../../errors/index.js'
+import { printPosts } from '../../components/posts.js';
+import { navBar } from '../../components/navbar.js';
+import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js';
+import { timelineMessageError } from '../../errors/index.js';
 
 export const Home = () => {
-  const rootElement = document.createElement("main");
+  const rootElement = document.createElement('main');
   rootElement.innerHTML = `
     <section class="timeline">
       <section id="header"></section>
@@ -25,57 +25,57 @@ export const Home = () => {
     </section>
   `;
 
-  const publishButton = rootElement.querySelector("#publish-form");
-  publishButton.addEventListener("submit", e => {
+  const publishButton = rootElement.querySelector('#publish-form');
+  publishButton.addEventListener('submit', (e) => {
     e.preventDefault();
-    let text = rootElement.querySelector("#postText").value;
+    const text = rootElement.querySelector('#postText').value;
     getPostInfo(text);
-    rootElement.querySelector("#postText").value = "";
+    rootElement.querySelector('#postText').value = '';
   });
 
   return rootElement;
 };
 
 export const loadPosts = () => {
-  const currentUser = getCurrentUser()
+  const currentUser = getCurrentUser();
 
   getPosts()
-    .then(snapshot => {
-      snapshot.forEach(post => {
+    .then((snapshot) => {
+      snapshot.forEach((post) => {
         feed.appendChild(printPosts(post.data(), post.id, currentUser.uid));
-      })
+      });
       header.appendChild(navBar());
-    })
-}
+    });
+};
 
 const getPostInfo = (text) => {
   const post = createPostObject(text);
-  
+
   createNewPost(post)
-    .then(res => {
+    .then((res) => {
       const postId = res.id;
       feed.prepend(printPosts(post, postId, post.userID));
     })
-    .catch(timelineMessageError)
-}
+    .catch(timelineMessageError);
+};
 
 const createPostObject = (text) => {
   const user = getCurrentUser();
   const userName = user.displayName;
   const userID = user.uid;
   const userAvatar = user.photoURL;
-  const now = new Date;
+  const now = new Date();
 
   const post = {
     name: userName,
     avatar: userAvatar,
-    userID: userID,
+    userID,
     time: Date.now(),
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
-    text: text,
+    text,
     likes: [],
     comments: [],
-  }
+  };
 
   return post;
-}
+};
