@@ -1,4 +1,4 @@
-import { editPost, deletePost, likePost } from '../../services/index.js'
+import { editPost, deletePost, likePost, getCurrentUser } from '../../services/index.js'
 
 export const sendDelete = (e) => {
     const getEvent = e.target;

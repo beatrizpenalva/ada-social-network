@@ -1,7 +1,6 @@
 import { onNavigate } from '../../utils/history.js';
 import { getError } from '../../errors/index.js';
-import { getGoogleProvider, getFacebookProvider, getGitHubProvider } from '../../services/index.js'
-
+import { getGoogleProvider, getFacebookProvider, getGitHubProvider, signInEmail } from '../../services/index.js'
 
 export const Login = () => {
   const rootElement = document.createElement("main");
@@ -59,7 +58,7 @@ export const Login = () => {
 
   goRegisterButton.addEventListener("click", (event) => {
     event.preventDefault();
-    onNavigate('/');
+    onNavigate('/register');
   });
 
   return rootElement;

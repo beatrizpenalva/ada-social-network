@@ -40,6 +40,14 @@ export const logOut = () => {
   return firebase.auth().signOut()
 }
 
+export const record = (userEmail, userPassword) => {
+  return firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);
+};
+
+export const emailVerify = () => {
+  return firebase.auth().currentUser.sendEmailVerification();
+};
+
 export const getPosts = () => {
   return firebase.firestore().collection("posts").orderBy("time", "desc").get()
 }
@@ -57,6 +65,19 @@ export const deletePost = (postID) => {
 }
 
 export const likePost = (postID) => {
-  const postId = postID;
-  console.log(postId)
+  const userId = firebase.auth().currentUser.uid;
+  const postRef = firebase.firestore().collection("posts").doc(postID);
+  postRef.get()
+    .then(post => {
+      const likes = post.data().likes || []
+      const alreadyLikedThisPost = likes.includes(userId)
+
+      if (alreadyLikedThisPost) {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayRemove(userId) })
+          .finally(() => loadPosts())
+      } else {
+        postRef.update({ likes: firebase.firestore.FieldValue.arrayUnion(userId) })
+          .finally(() => loadPosts())
+      }
+    })
 }

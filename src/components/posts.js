@@ -1,9 +1,10 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js'
 
 export const printPosts = (doc, id, currentUser) => {
+  console.log(doc, currentUser)
   const post = doc;
   const postContainer = document.createElement("section");
-  if (post.ID !== currentUser) {
+  if (post.userID !== currentUser) {
     postContainer.innerHTML = `
             <section class="post-container" id="${id}">  
                 <section class="left-post"> 
@@ -23,7 +24,7 @@ export const printPosts = (doc, id, currentUser) => {
             <label for="like-${id}">
               ❤
             </label
-            <p class="post-content">${post.likes}</p>   
+            <p class="post-content">${post.likes.length}</p>   
         </section>
       </section>
        `

@@ -36,22 +36,24 @@ export const Home = () => {
 };
 
 export const loadPosts = () => {
-  const currentUser = getCurrentUser();
+  const currentUser = getCurrentUser()
+
   getPosts()
     .then(snapshot => {
-      header.appendChild(navBar()); 
       snapshot.forEach(post => {
         feed.appendChild(printPosts(post.data(), post.id, currentUser.uid));
-      })  
+      })
+      header.appendChild(navBar());
     })
 }
 
-const getPostInfo = () => {
-  const post = createPostObject();
+const getPostInfo = (text) => {
+  const post = createPostObject(text);
+  
   createNewPost(post)
     .then(res => {
       const postId = res.id;
-      feed.prepend(printPosts(post, postId, post.userUID));
+      feed.prepend(printPosts(post, postId, post.userID));
     })
     .catch(() => {
       alert("Ops! Ocorreu algum erro, por favor, tente novamente!")
@@ -68,13 +70,13 @@ const createPostObject = (text) => {
   const post = {
     name: userName,
     avatar: userAvatar,
-    userUID: userID,
+    userID: userID,
     time: Date.now(),
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
     text: text,
-    likes: 0,
+    likes: [],
     comments: [],
   }
 
-  return post
+  return post;
 }
