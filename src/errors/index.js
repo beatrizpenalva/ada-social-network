@@ -23,7 +23,7 @@ export const getError = (err) => {
   printMessageError(errorMessage);
 }
 
-function printMessageError(message) {
+export const printMessageError = (message) => {
   const elementError = document.createElement("p");
   const errorMessage = document.createTextNode(message);
   elementError.appendChild(errorMessage);
