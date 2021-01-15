@@ -79,7 +79,7 @@ O processo criativo se deu inicialmente com o desenvolvimento do protótipo cria
 ---
 ## 4. Desenvolvimento
 
-O desenvolvimento do projeto foi executado em quatro sprints. A primeira foi voltada para o trabalho de UX e UI, onde o tema da rede, o layout, as decisões conceituais e as pesquisas de usuários foram realizados. As demais sprints tiveram como foco o desenvolvimento do código, começando com o login que possibilitasse ao usuário o acesso a rede com sua conta no [Google](https://www.google.com/intl/pt-BR/account/about/), [Facebook](www.facebook.com), [GitHub](GitHubgithub.com) ou um novo registro com validação de email e criação de senha de acesso. Após o acesso a timeline foi desenvolvida contendo áreas de criação de posts, com possibilidade de edição, exclusão e curtida. 
+O desenvolvimento do projeto foi executado em quatro sprints. A primeira foi voltada para o trabalho de UX e UI, onde o tema da rede, o layout, as decisões conceituais e as pesquisas de usuários foram realizados. As demais sprints tiveram como foco o desenvolvimento do código, começando com o login que possibilitasse ao usuário o acesso a rede com sua conta do [Google](https://www.google.com/intl/pt-BR/account/about/), [Facebook](www.facebook.com), [GitHub](GitHubgithub.com) ou um novo registro com validação de email e criação de senha de acesso. Após o acesso a timeline foi desenvolvida contendo áreas de criação de posts, com possibilidade de edição, exclusão e curtida. 
 A aplicação foi desenvolvida como um [Single Page Application (SPA)](https://pt.wikipedia.org/wiki/Aplicativo_de_p%C3%A1gina_%C3%BAnica), se utilizando do [Firebase](https://firebase.google.com/) e suas ferramentas. A responsividade foi feita em conjunto com a execução do layout da página, e a interface hospedada usando o [Firebase Hosting](https://firebase.google.com/docs/hosting).
 
 
@@ -91,8 +91,8 @@ Neste projeto foram usados:
 <li>CSS3</li>
 <li>HTML5</li>
 <li>Vanilla JavaScript</li>
-<li>[Firebase Authentication](https://firebase.google.com/docs/auth)</li>
-<li>[Cloud Firestore](https://firebase.google.com/docs/firestore)</li>
+<li>Firebase Authentication</li>
+<li>Cloud Firestore</li>
 <li>Visual Studio Code com extenção Node-js</li>
 </ul>
 
@@ -100,14 +100,15 @@ Neste projeto foram usados:
 ## 5. Funcionamento 
 
 A rede social possibilita que mediante o acesso a usuária seja direcionada a sua timeline, onde possa postar, visualizar os posts das demais usuárias e curti-los.
+
 O fluxograma a seguir exemplifica o funcionamento de acesso à aplicação:
 
   ![Imagem!](./src/img/fluxograma.jpeg)
 
-Após a usuária acessar a timeline ela pode criar posts, editar e deletar o mesmo, ver o post das demais usuárias e os curtir, assim como também visualizar o número de curtidas que recebeu em seus posts.
+Após, a usuária acessa sua timeline onde pode criar posts, editar e deletar o mesmo, ver o post das demais usuárias e os curtir, assim como também visualizar o número de curtidas que recebeu em seus posts.
 
 
 
-## Acesse aqui a rede social [[Ada]]()
+## Acesse aqui a rede social [[Ada]](social-networl-4387c.web.app)
 
 ### Desenvolvido por [Beatriz Penalva](https://github.com/beatrizpenalva), [Gabrielle Almeida](https://github.com/GabrielleAlmeida) e [Julia Terin](https://github.com/JuliaTerin) através do Projeto da [Laboratoria](https://www.laboratoria.la/).
