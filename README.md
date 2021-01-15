@@ -1,3 +1,60 @@
+# [Ada]
+
+-----colocar logo da ada 
+Uma rede social que visa conectar mulheres que atuam, ou desejam atuar na área de tecnologia, num um ambiente seguro que promove troca de experiências e expanda conhecimento.
+
+---
+## Índice
+
+- [1. Introdução](#1-introdução)
+- [2. Experiência de usuário](#2-experiecia-do-usuario)
+- [3. Processo criativo](#3-processo-criativo)
+- [4. Desenvolvimento](#4-desenvolvimento)
+- [5. Funcionamento](#5-funcionamento)
+---
+## 1. Introdução
+
+Rede social desenvolvida em conjunto, pelas alunas/futuras Desenvolvedoras Front-end [Beatriz Penalva](https://github.com/beatrizpenalva), [Gabrielle Almeida](https://github.com/GabrielleAlmeida), [Julia Terin](https://github.com/JuliaTerin) durante o Bootcamp Laboratória - Turma SAP005.
+
+### Sobre 
+
+[Ada] é uma rede social para mulheres que atuam, ou querem atuar, como desenvolvedoras. É um espaço seguro e de compartilhamento de saberes , histórias e aprendizados.
+
+Quem nos inspirou para o desenvolvimento deste projeto foi a  [Augusta Ada King](https://pt.wikipedia.org/wiki/Ada_Lovelace), mais conhecida como Ada Lovelace, considerada a primeira Programadora da História,que foi responsável pelo desenvolvimento de um algoritmo que permitiu à máquina analítica de Charles Babbage computar os valores de funções matemáticas.
+
+O propósito desta Rede é auxiliar mulheres na formação umas das outras, conectadas podemos fortalecer e florescer essa área que  historicamente é tão nossa.
+
+## 2. Planejamento e Organização
+
+
+
+#### Experiência de usuário
+Para desenvolver este aplicativo, alguns métodos de UX foram incorporados ao processo:
+- Protopersonas criados;
+- Protopersonas validadas com entrevistas;
+- Histórias de usuários criadas.
+
+--- colocar fotas ....
+### Personas
+-----  colocar as imagens personas
+
+### Histórias de usuários
+
+Com base nas personas validadas partimos para as histórias de usuários. Geramos quatro histórias, cada uma contemplando necessidades identificadas através das entrevistas, assim, gerando etapas de trabalho com definições de pronto.
+
+
+## 3. Processo criativo
+## 4. Desenvolvimento
+## 5. Funcionamento
+
+
+
+
+
+
+
+----------------------------------------
+
 # Criando uma Rede Social
 
 ## Índice
