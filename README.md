@@ -109,6 +109,6 @@ Após, a usuária acessa sua timeline onde pode criar posts, editar e deletar o 
 
 
 
-## Acesse aqui a rede social [[Ada]](social-networl-4387c.web.app)
+## Acesse aqui a rede social [[Ada]](https://social-networl-4387c.web.app/login)
 
 ### Desenvolvido por [Beatriz Penalva](https://github.com/beatrizpenalva), [Gabrielle Almeida](https://github.com/GabrielleAlmeida) e [Julia Terin](https://github.com/JuliaTerin) através do Projeto da [Laboratoria](https://www.laboratoria.la/).
