@@ -60,10 +60,10 @@ export const printPosts = (doc, id, currentUser) => {
 
             <form id="edit-post-form-${id}" class="on-edition">
                 <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500"
-                    wrap="hard" placeholder="Como pegar o texto que tava?" required></textarea>
+                    wrap="hard" required>${post.text}</textarea>
 
                 <section class="edition-buttons">
-                    <button class="post-function cancel-edition" id="cancel-edition-${id}"></button>
+                    <button class="post-function cancel-edition" id="cancel-edition-${id}" hidden></button>
                         <figure>
                             <img src="../../img/cancel.png" height="20px" width="20px">
                         </figure>

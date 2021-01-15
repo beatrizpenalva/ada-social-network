@@ -20,14 +20,14 @@ export const showEditContainer = (e) => {
     const postCard = document.getElementById(postID);
     toggleEditContainer(postCard, true);
 
-    const cancelEditionForm = postCard.querySelector(".cancel-edition");
-    const formEditId = `#edit-post-form-${postID}`
-    const sendEditionForm = postCard.querySelector(formEditId);
-
-    cancelEditionForm.addEventListener("click", (e) => {
-        e.preventDefault();
+    const cancelEditButtonId = `#cancel-edition-${postID}`
+    const cancelEditionForm = postCard.querySelector(cancelEditButtonId);
+    cancelEditionForm.addEventListener("click", () => {
         toggleEditContainer(postCard, false);
     })
+
+    const formEditId = `#edit-post-form-${postID}`
+    const sendEditionForm = postCard.querySelector(formEditId);
     sendEditionForm.addEventListener("submit", (e) => {
         e.preventDefault();
         sendEdition(postID, postCard);

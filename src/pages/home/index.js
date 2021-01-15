@@ -12,8 +12,8 @@ export const Home = () => {
         <textarea id="postText" class="text" spellcheck="true" maxlength="500" wrap="hard" placeholder="O que você quer compartilhar?" required></textarea>
 
           <section class="publish-button"> 
-            <label for="file">
-              <figure class="input-file" >
+            <label for="file" class="hidden">
+              <figure class="input-file">
                 <img src="../../img/icon-picture.svg" height="20px" width="20px">
               </figure>  
               <input type="file" id="file" accept="image/png, image/jpeg">
