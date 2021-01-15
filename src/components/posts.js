@@ -1,8 +1,8 @@
-import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js'
+import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
-  const postContainer = document.createElement("section");
+  const postContainer = document.createElement('section');
   if (post.userID !== currentUser) {
     postContainer.innerHTML = `
       <section class="post-container" id="${id}">
@@ -27,9 +27,8 @@ export const printPosts = (doc, id, currentUser) => {
             </section>
         </section>
       </section>
-    `
-  }
-  else {
+    `;
+  } else {
     postContainer.innerHTML = `
       <section class="post-container" id="${id}">
         <section class="left-post">
@@ -63,39 +62,40 @@ export const printPosts = (doc, id, currentUser) => {
                     wrap="hard" required>${post.text}</textarea>
 
                 <section class="edition-buttons">
-                    <button class="post-function cancel-edition" id="cancel-edition-${id}" hidden></button>
+                    <button class="post-function cancel-edition" id="cancel-edition-${id}">
                         <figure>
                             <img src="../../img/cancel.png" height="20px" width="20px">
                         </figure>
+                      </button>    
 
                     <button type="submit" class="send-button">Salvar</button>
                 </section>
             </form>
         </section>
       </section>
-       `
+       `;
   }
 
-  const deleteButtons = postContainer.querySelectorAll(".delete");
+  const deleteButtons = postContainer.querySelectorAll('.delete');
   deleteButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener('click', (e) => {
       sendDelete(e);
     });
   });
 
-  const editButtons = postContainer.querySelectorAll(".edit");
+  const editButtons = postContainer.querySelectorAll('.edit');
   editButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener('click', (e) => {
       showEditContainer(e);
     });
   });
 
-  const likeButtons = postContainer.querySelectorAll(".like");
+  const likeButtons = postContainer.querySelectorAll('.like');
   likeButtons.forEach((checkbox) => {
-    checkbox.addEventListener("change", (e) => {
+    checkbox.addEventListener('change', (e) => {
       sendLike(e);
     });
   });
 
   return postContainer;
-}
+};
