@@ -6,25 +6,34 @@ export const printPosts = (doc, id, currentUser) => {
   if (post.userID !== currentUser) {
     postContainer.innerHTML = `
       <section class="post-container" id="${id}">
-        <section class="left-post">
+        <section class="top-post">
+          <section class="left-post">
             <img class="avatar" src="${post.avatar}" height="60px" width="60px">
-        </section>
+          </section>
 
-        <section class="right-post">
+          <section class="right-post">
             <article class="user-info">
-                <h4 class="username">${post.name}</h4>
-                <p class="post-date">${post.date}</p>
+              <h4 class="username">${post.name}</h4>
+              <p class="post-date">${post.date}</p>
             </article>
 
             <article class="post-content">${post.text}</article>
 
             <section class="post-buttons">
-                <input type="checkbox" id="like-${id}" class="post-function like" hidden ${post.likes.includes(currentUser) ? 'checked' : ''}>
-                <label for="like-${id}">
-                    ❤
-                </label>
-                <p class="post-content" id="likeValue-${id}">${post.likes.length}</p>
+              <input type="checkbox" id="like-${id}" class="post-function like" hidden ${post.likes.includes(currentUser) ? 'checked' : ''}>
+              <label for="like-${id}">
+                ❤
+              </label>
+              <p class="post-content" id="likeValue-${id}">${post.likes.length}</p>
             </section>
+          </section>
+        </section>  
+
+        <section class="bottom-post">
+          <form id="comment">
+            <textarea id="commentText" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
+            <button type="submit" class="send-button">Publicar</button> 
+          </form>
         </section>
       </section>
     `;
@@ -61,7 +70,7 @@ export const printPosts = (doc, id, currentUser) => {
                 <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500"
                     wrap="hard" required>${post.text}</textarea>
 
-                <section class="edition-buttons">
+                <fieldset class="edition-buttons">
                     <button class="post-function cancel-edition" id="cancel-edition-${id}">
                         <figure>
                             <img src="../../img/cancel.png" height="20px" width="20px">
@@ -69,7 +78,7 @@ export const printPosts = (doc, id, currentUser) => {
                       </button>    
 
                     <button type="submit" class="send-button">Salvar</button>
-                </section>
+                </fieldset>
             </form>
         </section>
       </section>
@@ -96,6 +105,15 @@ export const printPosts = (doc, id, currentUser) => {
       sendLike(e);
     });
   });
+
+  /*
+  const commentButtons = postContainer.querySelectorAll('.comment');
+  commentButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      sendComment(e);
+    })
+  })
+*/
 
   return postContainer;
 };

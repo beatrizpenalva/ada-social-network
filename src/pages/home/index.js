@@ -10,7 +10,6 @@ export const Home = () => {
       <section id="header"></section>
       <form id="publish-form">
         <textarea id="postText" class="text" spellcheck="true" maxlength="500" wrap="hard" placeholder="O que você quer compartilhar?" required></textarea>
-
           <section class="publish-button"> 
             <label for="file" class="hidden">
               <figure class="input-file">

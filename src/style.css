@@ -236,14 +236,26 @@ figure {
 }
 .post-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 600px;
     background: #F2EEEA;
     border-radius: 10px;
     margin: 20px 0px;
-    padding: 15px;
     overflow: auto;
+}
+.top-post{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 15px;
+}
+.bottom-post{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: none;
+    border-top: solid 2px #d3cbc3;
 }
 .left-post {
     display: flex;
@@ -345,8 +357,28 @@ figure {
     color: #FFFFFF;
     outline: transparent;
 }
+#comment{
+    display: flex;
+    align-items: center;
+}
+.comment-text{
+    background-color: #F2EEEA;
+    width: 515px;
+    min-height: 16px;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: left;
+    resize: none;
+    color: #231911;
+    border: none;
+    outline-color: #d3cbc3;
+    padding: 8px 15px 0px;
+}
 @media (max-width: 375px) {
     #publish-form, .post-container, .header{
         width: 300px;
+    }
+    .comment-text{
+        width: 210px
     }
 }
