@@ -357,9 +357,10 @@ figure {
     color: #FFFFFF;
     outline: transparent;
 }
-#comment{
+.comment-container{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .comment-text{
     background-color: #F2EEEA;
@@ -373,6 +374,14 @@ figure {
     border: none;
     outline-color: #d3cbc3;
     padding: 8px 15px 0px;
+}
+.comment-button{
+    color: #9b928a;
+    font-size: 14px;
+    font-weight: 500;
+    border-style: none;
+    outline: transparent;
+    padding: 0px 8px;
 }
 @media (max-width: 375px) {
     #publish-form, .post-container, .header{

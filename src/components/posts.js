@@ -30,9 +30,9 @@ export const printPosts = (doc, id, currentUser) => {
         </section>  
 
         <section class="bottom-post">
-          <form id="comment">
-            <textarea id="commentText" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
-            <button type="submit" class="send-button">Publicar</button> 
+          <form id="comment-${id}" class="comment-container">
+            <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
+            <button type="submit" class="comment-button">Publicar</button> 
           </form>
         </section>
       </section>
@@ -106,14 +106,64 @@ export const printPosts = (doc, id, currentUser) => {
     });
   });
 
-  /*
   const commentButtons = postContainer.querySelectorAll('.comment');
   commentButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      sendComment(e);
+    button.addEventListener('submit', (e) => {
+      const commentText = postContainer.querySelector('').value;
+      getCommentInfo(commentText);
+
+      //postContainer.querySelector('').value = '';
+      //sendComment(e);
     })
   })
-*/
+
+  /*export const sendComment = (e) => {
+    const getEvent = e.target;
+    const postId = getEvent.parentNode.parentNode.parentNode.id;
+    console.log(postId)
+    const user = getCurrentUser();
+  };
+  */
+  
+  const getCommentInfo = (text) => {
+    const comment = createCommentObject(text);
+  
+    createNewComment(comment) //FIREBASE
+      .then((res) => {
+        const postId = res.id;
+        feed.prepend(printPosts(post, postId, post.userID)); //mandar aparecer no post, ver parâmetros pra printar
+      })
+      .catch(timelineMessageError);
+  };
+  
+  const createCommentObject = (text) => {
+    const user = getCurrentUser();
+    const userName = user.displayName;
+    const userID = user.uid;
+    const userAvatar = user.photoURL;
+    const now = new Date();
+  
+    const comment = {
+      name: userName,
+      avatar: userAvatar,
+      userID,
+      time: Date.now(),
+      date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
+      text,
+    }
+  
+    return comment;
+  }
+  
+
+
+
+
+
+
+
+
+
 
   return postContainer;
 };
