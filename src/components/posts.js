@@ -114,13 +114,21 @@ export const printPosts = (doc, id, currentUser) => {
       const postId = getEvent.parentNode.parentNode.parentNode.id;
       const commentText = postContainer.querySelector(`#commentText-${postId}`).value;
       const newComment = createCommentObject(commentText);
-      //console.log(newComment) // mandar para o firebase
-      const createBoxComment = document.createElement("p");
-      createBoxComment.textContent = newComment
-      getEvent.insertBefore(createBoxComment, );
+      addComment(postId, newComment)
+      .then(() => {
+        console.log("foi pro firebase")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      //const createBoxComment = document.createElement("p");
+      //createBoxComment.textContent = newComment
+      //getEvent.insertBefore(createBoxComment, );
       //      textareaComment.value = "";
     })
   })
+
+  const addComment = (postID, commentObject) => firebase.firestore().collection('posts').doc(postID).update({ comments: firebase.firestore.FieldValue.arrayUnion(commentObject) })
 
   const createCommentObject = (text) => {
     const user = getCurrentUser();
