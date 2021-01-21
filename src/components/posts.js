@@ -1,4 +1,5 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
+import { getCurrentUser } from '../../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
@@ -30,10 +31,10 @@ export const printPosts = (doc, id, currentUser) => {
         </section>  
 
         <section class="bottom-post">
-          <form id="comment-${id}" class="comment-container">
+          <section id="comment-${id}" class="comment-container">
             <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
-            <button type="submit" class="comment-button">Publicar</button> 
-          </form>
+            <button class="comment-button">Publicar</button> 
+          </section>
         </section>
       </section>
     `;
@@ -106,43 +107,28 @@ export const printPosts = (doc, id, currentUser) => {
     });
   });
 
-  const commentButtons = postContainer.querySelectorAll('.comment');
+  const commentButtons = postContainer.querySelectorAll('.comment-button');
   commentButtons.forEach((button) => {
-    button.addEventListener('submit', (e) => {
-      const commentText = postContainer.querySelector('').value;
-      getCommentInfo(commentText);
-
-      //postContainer.querySelector('').value = '';
-      //sendComment(e);
+    button.addEventListener('click', (e) => {
+      const getEvent = e.target;
+      const postId = getEvent.parentNode.parentNode.parentNode.id;
+      const commentText = postContainer.querySelector(`#commentText-${postId}`).value;
+      const newComment = createCommentObject(commentText);
+      //console.log(newComment) // mandar para o firebase
+      const createBoxComment = document.createElement("p");
+      createBoxComment.textContent = newComment
+      getEvent.insertBefore(createBoxComment, );
+      //      textareaComment.value = "";
     })
   })
 
-  /*export const sendComment = (e) => {
-    const getEvent = e.target;
-    const postId = getEvent.parentNode.parentNode.parentNode.id;
-    console.log(postId)
-    const user = getCurrentUser();
-  };
-  */
-  
-  const getCommentInfo = (text) => {
-    const comment = createCommentObject(text);
-  
-    createNewComment(comment) //FIREBASE
-      .then((res) => {
-        const postId = res.id;
-        feed.prepend(printPosts(post, postId, post.userID)); //mandar aparecer no post, ver parâmetros pra printar
-      })
-      .catch(timelineMessageError);
-  };
-  
   const createCommentObject = (text) => {
     const user = getCurrentUser();
     const userName = user.displayName;
     const userID = user.uid;
     const userAvatar = user.photoURL;
     const now = new Date();
-  
+
     const comment = {
       name: userName,
       avatar: userAvatar,
@@ -151,19 +137,9 @@ export const printPosts = (doc, id, currentUser) => {
       date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
       text,
     }
-  
+
     return comment;
   }
-  
 
-
-
-
-
-
-
-
-
-
-  return postContainer;
+return postContainer;
 };
