@@ -1,5 +1,5 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
-import { getCurrentUser } from '../../services/index.js';
+import { getCurrentUser, addComment } from '../../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
@@ -110,44 +110,64 @@ export const printPosts = (doc, id, currentUser) => {
   const commentButtons = postContainer.querySelectorAll('.comment-button');
   commentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
-      const getEvent = e.target;
-      const postId = getEvent.parentNode.parentNode.parentNode.id;
-      const commentText = postContainer.querySelector(`#commentText-${postId}`).value;
-      const newComment = createCommentObject(commentText);
-      addComment(postId, newComment)
-      .then(() => {
-        console.log("foi pro firebase")
-      })
-      .catch(err => {
-        console.log(err)
-      })
-      //const createBoxComment = document.createElement("p");
-      //createBoxComment.textContent = newComment
-      //getEvent.insertBefore(createBoxComment, );
-      //      textareaComment.value = "";
+      sendComment(e);
     })
   })
 
-  const addComment = (postID, commentObject) => firebase.firestore().collection('posts').doc(postID).update({ comments: firebase.firestore.FieldValue.arrayUnion(commentObject) })
-
-  const createCommentObject = (text) => {
-    const user = getCurrentUser();
-    const userName = user.displayName;
-    const userID = user.uid;
-    const userAvatar = user.photoURL;
-    const now = new Date();
-
-    const comment = {
-      name: userName,
-      avatar: userAvatar,
-      userID,
-      time: Date.now(),
-      date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
-      text,
-    }
-
-    return comment;
-  }
-
 return postContainer;
 };
+
+const sendComment = (e) => {
+  const getEvent = e.target;
+  const postId = getEvent.parentNode.parentNode.parentNode.id;
+  const commentText = document.querySelector(`#commentText-${postId}`).value;
+  const newComment = createCommentObject(commentText);
+  addComment(postId, newComment)
+  .then(() => {
+    createCommentBox(newComment)
+  // mandar inserir antes da text area aberta
+  // limpar a textarea
+  // const createBoxComment = document.createElement("p");
+  // createBoxComment.textContent = newComment
+  // getEvent.insertBefore(createBoxComment, );
+  // textareaComment.value = "";
+    console.log("foi pro firebase")
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
+const createCommentObject = (text) => {
+  const user = getCurrentUser();
+  const userName = user.displayName;
+  const userID = user.uid;
+  const userAvatar = user.photoURL;
+  const now = new Date();
+
+  const comment = {
+    name: userName,
+    avatar: userAvatar,
+    userID,
+    time: Date.now(),
+    date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
+    text,
+  }
+
+  return comment;
+}
+
+const createCommentBox = (commentObject) => {
+  const comment = commentObject;
+  const commentBox = `
+    <section class="commentbox">
+      <figure>
+        <img class="avatar" src="${comment.avatar}" height="60px" width="60px">
+      </figure>
+      <h4>${comment.name}</h4>
+      <p>${comment.date}</p>
+      <p>${comment.text}</p>
+    </section>
+  `
+  return commentBox;
+}

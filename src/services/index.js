@@ -49,3 +49,5 @@ export const alreadyLikedThisPost = (postID) => firebase.firestore().collection(
 export const removePost = (postID, userID) => firebase.firestore().collection('posts').doc(postID).update({ likes: firebase.firestore.FieldValue.arrayRemove(userID) });
 
 export const likePost = (postID, userID) => firebase.firestore().collection('posts').doc(postID).update({ likes: firebase.firestore.FieldValue.arrayUnion(userID) });
+
+export const addComment = (postID, commentObject) => firebase.firestore().collection('posts').doc(postID).update({ comments: firebase.firestore.FieldValue.arrayUnion(commentObject) });
