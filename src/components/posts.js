@@ -114,28 +114,32 @@ export const printPosts = (doc, id, currentUser) => {
     })
   })
 
-return postContainer;
+  return postContainer;
 };
 
 const sendComment = (e) => {
   const getEvent = e.target;
   const postId = getEvent.parentNode.parentNode.parentNode.id;
   const commentText = document.querySelector(`#commentText-${postId}`).value;
+  const commentBox = document.querySelector(`#comment-${postId}`);
   const newComment = createCommentObject(commentText);
   addComment(postId, newComment)
-  .then(() => {
-    createCommentBox(newComment)
-  // mandar inserir antes da text area aberta
-  // limpar a textarea
-  // const createBoxComment = document.createElement("p");
-  // createBoxComment.textContent = newComment
-  // getEvent.insertBefore(createBoxComment, );
-  // textareaComment.value = "";
-    console.log("foi pro firebase")
-  })
-  .catch(err => {
-    console.log(err)
-  })
+    .then(() => {
+      const teste = createCommentBox(newComment)
+      //console.log(teste)
+      commentBox.prepend(teste)
+
+      // limpar a textarea      
+      // const createBoxComment = document.createElement("p");
+      // createBoxComment.textContent = newComment
+      // getEvent.insertBefore(createBoxComment, );
+      // textareaComment.value = "";
+      console.log("foi pro firebase")
+    })
+    .catch(err => {
+      console.log(err)
+      //.catch(timelineMessageError);
+    })
 }
 
 const createCommentObject = (text) => {
@@ -159,15 +163,14 @@ const createCommentObject = (text) => {
 
 const createCommentBox = (commentObject) => {
   const comment = commentObject;
-  const commentBox = `
-    <section class="commentbox">
+  const commentContainer = document.createElement('section');
+  commentContainer.innerHTML = `
       <figure>
         <img class="avatar" src="${comment.avatar}" height="60px" width="60px">
       </figure>
       <h4>${comment.name}</h4>
       <p>${comment.date}</p>
       <p>${comment.text}</p>
-    </section>
   `
-  return commentBox;
+  return commentContainer;
 }
