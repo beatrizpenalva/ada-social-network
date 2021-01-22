@@ -120,21 +120,15 @@ export const printPosts = (doc, id, currentUser) => {
 const sendComment = (e) => {
   const getEvent = e.target;
   const postId = getEvent.parentNode.parentNode.parentNode.id;
-  const commentText = document.querySelector(`#commentText-${postId}`).value;
+  const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
-  const newComment = createCommentObject(commentText);
+  const newComment = createCommentObject(commentText.value);
   addComment(postId, newComment)
     .then(() => {
-      const teste = createCommentBox(newComment)
-      //console.log(teste)
-      commentBox.prepend(teste)
-
-      // limpar a textarea      
-      // const createBoxComment = document.createElement("p");
-      // createBoxComment.textContent = newComment
-      // getEvent.insertBefore(createBoxComment, );
-      // textareaComment.value = "";
-      console.log("foi pro firebase")
+      commentBox.prepend(createCommentBox(newComment))
+      commentText.value = ""
+      //organizar o CSS
+      //esconder os comentários
     })
     .catch(err => {
       console.log(err)
@@ -161,16 +155,22 @@ const createCommentObject = (text) => {
   return comment;
 }
 
-const createCommentBox = (commentObject) => {
+export const createCommentBox = (commentObject) => {
   const comment = commentObject;
   const commentContainer = document.createElement('section');
   commentContainer.innerHTML = `
+    <section class="left-post">
       <figure>
         <img class="avatar" src="${comment.avatar}" height="60px" width="60px">
       </figure>
-      <h4>${comment.name}</h4>
-      <p>${comment.date}</p>
-      <p>${comment.text}</p>
+    </section>
+    <section class="right-post">
+      <article class="user-info">  
+        <h4 class="username">${comment.name}</h4>
+        <p class="post-date">${comment.date}</p>
+      </article>  
+      <article class="post-content">${comment.text}</article>
+    </section>  
   `
   return commentContainer;
 }

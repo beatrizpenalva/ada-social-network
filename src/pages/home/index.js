@@ -1,4 +1,4 @@
-import { printPosts } from '../../components/posts.js';
+import { printPosts, createCommentBox } from '../../components/posts.js';
 import { navBar } from '../../components/navbar.js';
 import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js';
 import { timelineMessageError } from '../../errors/index.js';
@@ -42,6 +42,10 @@ export const loadPosts = () => {
     .then((snapshot) => {
       snapshot.forEach((post) => {
         feed.appendChild(printPosts(post.data(), post.id, currentUser.uid));
+        post.data().comments.forEach((comment) => {
+          const commentBox = document.querySelector(`#comment-${post.id}`);
+          commentBox.prepend(createCommentBox(comment))
+        })
       });
       header.appendChild(navBar());
     });
