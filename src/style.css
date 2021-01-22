@@ -359,6 +359,7 @@ figure {
 }
 .comment-container{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
@@ -383,8 +384,21 @@ figure {
     outline: transparent;
     padding: 0px 8px;
 }
+.post-comment{
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    padding: 15px;
+    border-bottom: solid 0.5px #d3cbc3;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+.form-comment{
+    display: flex;
+    flex-direction: row;
+}
 @media (max-width: 375px) {
-    #publish-form, .post-container, .header{
+    #publish-form, .post-container, .header, .post-comment{
         width: 300px;
     }
     .comment-text{

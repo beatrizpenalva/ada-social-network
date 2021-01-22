@@ -32,8 +32,10 @@ export const printPosts = (doc, id, currentUser) => {
 
         <section class="bottom-post">
           <section id="comment-${id}" class="comment-container">
-            <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
-            <button class="comment-button">Publicar</button> 
+            <section id="new-comment-${id}" class="form-comment">
+              <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
+              <button class="comment-button">Publicar</button> 
+            </section>
           </section>
         </section>
       </section>
@@ -107,7 +109,7 @@ export const printPosts = (doc, id, currentUser) => {
     });
   });
 
-  const commentButtons = postContainer.querySelectorAll('.comment-button');
+  const commentButtons = postContainer.querySelectorAll('.form-comment');
   commentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
       sendComment(e);
@@ -119,7 +121,7 @@ export const printPosts = (doc, id, currentUser) => {
 
 const sendComment = (e) => {
   const getEvent = e.target;
-  const postId = getEvent.parentNode.parentNode.parentNode.id;
+  const postId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
   const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
   const newComment = createCommentObject(commentText.value);
@@ -127,8 +129,11 @@ const sendComment = (e) => {
     .then(() => {
       commentBox.prepend(createCommentBox(newComment))
       commentText.value = ""
-      //organizar o CSS
+      //não deixar postar sem nada
+      //rever ordem em que os comentários são printados, aqui é o inverso: os mais novos ficam embaixo
+      //botões de curtir, excluir e editar
       //esconder os comentários
+      //refatorar o código
     })
     .catch(err => {
       console.log(err)
@@ -159,6 +164,7 @@ export const createCommentBox = (commentObject) => {
   const comment = commentObject;
   const commentContainer = document.createElement('section');
   commentContainer.innerHTML = `
+  <section class="post-comment">
     <section class="left-post">
       <figure>
         <img class="avatar" src="${comment.avatar}" height="60px" width="60px">
@@ -170,7 +176,8 @@ export const createCommentBox = (commentObject) => {
         <p class="post-date">${comment.date}</p>
       </article>  
       <article class="post-content">${comment.text}</article>
-    </section>  
+    </section>
+    </section>
   `
   return commentContainer;
 }
