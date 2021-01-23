@@ -166,13 +166,13 @@ figure {
     outline: transparent;
     padding: 0px 15px;
 }
-.current-user{
+.current-user {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.greetings{
+.greetings {
     display: flex;
     flex-wrap: row;
     flex-wrap: wrap;
@@ -224,7 +224,7 @@ figure {
 .button-icon:hover, label:hover {
     opacity: .60;
 }
-.input-file{
+.input-file {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -244,52 +244,52 @@ figure {
     margin: 20px 0px;
     overflow: auto;
 }
-.top-post{
+.top-post {
     display: flex;
     flex-direction: row;
     width: 100%;
     padding: 15px;
 }
-.bottom-post{
+.bottom-post {
     display: flex;
     flex-direction: row;
     width: 100%;
     border: none;
     border-top: solid 2px #d3cbc3;
 }
-.left-post {
+.left-post, .left-comment {
     display: flex;
     flex-direction: column;
     align-items: center; 
     margin-right: 15px;
 }
-.avatar {
+.avatar, .avatar-comment {
     width: 60px;
     height: 60px;
     border-radius: 100%;
     object-fit: cover; 
     background-color: #FEBB86;
 }
-.right-post {
+.right-post, .right-comment {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
-.user-info {
+.user-info, .user-info-comment {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.username {
+.username, .username-comment {
     font-weight: 500;
     font-size: 16px;
     color: #231911;
 }
-.post-date {
+.post-date, .post-date-comment {
     font-size: 12px;
     color: #b6a89a;
 }
-.post-content {
+.post-content, .comment-content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -301,13 +301,13 @@ figure {
     color: #231911;
     word-break: break-word;
 }
-.post-buttons {
+.post-buttons, .comment-buttons {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
 }
-.post-function {
+.post-function, .comment-function {
     outline: none;
     border: none;
 }
@@ -316,19 +316,19 @@ figure {
     flex-direction: row;
     align-items: center;
 }    
-.edit:hover, .delete:hover{
+.edit:hover, .delete:hover {
     opacity: .70;
 }
-[type="checkbox"]:checked + label{
+[type="checkbox"]:checked + label {
     color: #FF780F;
   }
-.on-edition{
+.on-edition {
     display: none;
 }
-.on-edition.display{
+.on-edition.display {
     display: block;
 }  
-.edition-content{
+.edition-content {
     resize: none;
     border: none;
     outline: solid 2px #d3cbc3;
@@ -338,14 +338,14 @@ figure {
     margin-top: 10px;
     padding: 10px;
 }
-.edition-buttons{
+.edition-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 4px 10px;
 }
-.send-button{
+.send-button {
     width: 75px;
     height: 25px;
     border-radius: 25px;
@@ -357,13 +357,13 @@ figure {
     color: #FFFFFF;
     outline: transparent;
 }
-.comment-container{
+.comment-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
-.comment-text{
+.comment-text {
     background-color: #F2EEEA;
     width: 515px;
     min-height: 16px;
@@ -376,7 +376,7 @@ figure {
     outline-color: #d3cbc3;
     padding: 8px 15px 0px;
 }
-.comment-button{
+.comment-button {
     color: #9b928a;
     font-size: 14px;
     font-weight: 500;
@@ -384,7 +384,7 @@ figure {
     outline: transparent;
     padding: 0px 8px;
 }
-.post-comment{
+.post-comment {
     display: flex;
     flex-direction: row;
     width: 600px;
@@ -393,15 +393,15 @@ figure {
     flex-wrap: wrap;
     overflow: auto;
 }
-.form-comment{
+.form-comment {
     display: flex;
     flex-direction: row;
 }
 @media (max-width: 375px) {
-    #publish-form, .post-container, .header, .post-comment{
+    #publish-form, .post-container, .header, .post-comment {
         width: 300px;
     }
-    .comment-text{
+    .comment-text {
         width: 210px
     }
 }

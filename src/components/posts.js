@@ -1,5 +1,5 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
-import { getCurrentUser, addComment } from '../../services/index.js';
+import { getCurrentUser, addComment, removeComment } from '../../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
@@ -124,7 +124,7 @@ const sendComment = (e) => {
   const postId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
   const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
-  const newComment = createCommentObject(commentText.value);
+  const newComment = createCommentObject(commentText.value, postId);
   addComment(postId, newComment)
     .then(() => {
       commentBox.prepend(createCommentBox(newComment))
@@ -132,8 +132,12 @@ const sendComment = (e) => {
       //não deixar postar sem nada
       //rever ordem em que os comentários são printados, aqui é o inverso: os mais novos ficam embaixo
       //botões de curtir, excluir e editar
+      
       //esconder os comentários
       //refatorar o código
+
+      //const commentForm = document.querySelector(`new-comment-${postId}`)
+      //commentBox.insertBefore(createCommentBox(newComment), commentForm)
     })
     .catch(err => {
       console.log(err)
@@ -141,7 +145,7 @@ const sendComment = (e) => {
     })
 }
 
-const createCommentObject = (text) => {
+const createCommentObject = (text, postId) => {
   const user = getCurrentUser();
   const userName = user.displayName;
   const userID = user.uid;
@@ -155,6 +159,7 @@ const createCommentObject = (text) => {
     time: Date.now(),
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
     text,
+    postId,
   }
 
   return comment;
@@ -165,19 +170,49 @@ export const createCommentBox = (commentObject) => {
   const commentContainer = document.createElement('section');
   commentContainer.innerHTML = `
   <section class="post-comment">
-    <section class="left-post">
+    <section class="left-comment">
       <figure>
-        <img class="avatar" src="${comment.avatar}" height="60px" width="60px">
+        <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
       </figure>
     </section>
-    <section class="right-post">
-      <article class="user-info">  
-        <h4 class="username">${comment.name}</h4>
-        <p class="post-date">${comment.date}</p>
+
+    <section class="right-comment">
+      <article class="user-info-comment">  
+        <h4 class="username-comment">${comment.name}</h4>
+        <p class="post-date-comment">${comment.date}</p>
       </article>  
-      <article class="post-content">${comment.text}</article>
+
+      <article class="comment-content">${comment.text}</article>
+      
+      <section class="comment-buttons">
+        <button class="comment-function delete-comment" id="delete-${comment.postId}">
+          <figure>
+            <img src="../../img/delete.png" height="20px" width="20px">
+          </figure>
+        </button>
+      </section>
     </section>
-    </section>
+  </section>
   `
+
+  const deleteCommentButtons = commentContainer.querySelectorAll('.delete-comment');
+  deleteCommentButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const getEvent = e.target;
+      const postId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
+      //como pegar a posição do array? ou como dar o nome ao objeto?
+      removeComment(postId, commentId) //chamar lá no import a função
+      .then(() => {
+        console.log("deletou do firebase")
+        //fazer os rolê de DOM
+      })
+      //.catch(() => {
+        //console.log("erro")
+      //})
+    })
+  })
+
   return commentContainer;
 }
+
