@@ -132,8 +132,8 @@ const sendComment = (e) => {
       commentText.value = ""
       //não deixar postar sem nada
       //rever ordem em que os comentários são printados, aqui é o inverso: os mais novos ficam embaixo
-      //botões de curtir, excluir e editar
-      //esconder os comentários
+      //esconder os comentários - esconder os botões dos comentários de acordo com quem postou (like e editar)
+      //ajustar o CSS do post em si - tá com bug
       //refatorar o código
       //const commentForm = document.querySelector(`new-comment-${postId}`)
       //commentBox.insertBefore(createCommentBox(newComment), commentForm)
@@ -200,15 +200,19 @@ export const createCommentBox = (doc, id, currentUser) => {
     button.addEventListener('click', (e) => {
       const getEvent = e.target;
       const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id
-      deleteComment(commentId)
-        .then(() => {
-          console.log("deletou do firebase")
-          //fazer os rolê de DOM
-        })
-        .catch(err => {
-          console.log(err)
-          //.catch(timelineMessageError);
-        })
+      if (confirm('Você quer realmente quer excluir esse comentário?')) {
+        deleteComment(commentId)
+          .then(() => {
+              const commentContainer = document.getElementById(commentId);
+              const parentElement = commentContainer.parentElement;
+              parentElement.removeChild(commentContainer);
+              console.log("deletou do firebase")
+          })
+          .catch(err => {
+            console.log(err)
+            //.catch(timelineMessageError);
+          })
+      }  
     })
   })
 
