@@ -36,6 +36,7 @@ export const printPosts = (doc, id, currentUser) => {
               <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
               <button class="comment-button">Publicar</button> 
             </section>
+
           </section>
         </section>
       </section>
@@ -112,7 +113,7 @@ export const printPosts = (doc, id, currentUser) => {
     });
   });
 
-  const commentButtons = postContainer.querySelectorAll('.form-comment');
+  const commentButtons = postContainer.querySelectorAll('.comment-button');
   commentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
       sendComment(e);
@@ -125,26 +126,30 @@ export const printPosts = (doc, id, currentUser) => {
 const sendComment = (e) => {
   const getEvent = e.target;
   const postId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
+  const commentForm = document.querySelector(`#new-comment-${postId}`);
   const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
-  const newComment = createCommentObject(commentText.value, postId);
-  addComment(newComment)
-    .then((res) => {
-      const commentId = res.id;
-      commentBox.prepend(createCommentBox(newComment, commentId, newComment.userID))
-      commentText.value = ""
-      //não deixar postar sem nada 1
-      //rever ordem em que os comentários são printados, aqui é o inverso: os mais novos ficam embaixo 3
-      //ajustar o CSS do post em si - tá com bug 4
-      //refatorar o código 5
-      //esconder os comentários - esconder os botões dos comentários de acordo com quem postou (like e editar) 6
-      //const commentForm = document.querySelector(`new-comment-${postId}`)
-      //commentBox.insertBefore(createCommentBox(newComment), commentForm)
-    })
-    .catch(err => {
-      console.log(err)
-      //.catch(timelineMessageError);
-    })
+  if(commentText.Value !== null) {
+    const newComment = createCommentObject(commentText.value, postId);
+    addComment(newComment)
+      .then((res) => {
+        const commentId = res.id;
+        commentBox.insertBefore(createCommentBox(newComment, commentId, newComment.userID), commentForm);
+        commentText.value = ""
+        //não deixar postar sem nada 1
+        //esconder botões dos comentários de acordo com quem postou 2
+        //criar botões e funções de dar like e de editar 3
+        //esconder os comentários 4
+        //refatorar o código 5
+      })
+      .catch(err => {
+        console.log(err)
+        //.catch(timelineMessageError);
+      })
+  }
+  else {
+    alert("Você precisa escrever alguma coisa!")
+  }  
 }
 
 const createCommentObject = (text, postId) => {

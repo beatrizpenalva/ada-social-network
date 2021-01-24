@@ -42,11 +42,14 @@ export const loadPosts = () => {
     .then((snapshot) => {
       snapshot.forEach((post) => {
         feed.appendChild(printPosts(post.data(), post.id, currentUser.uid));
+       
         getCommentsById(post.id)
-          .then((snapshot) => {
-            snapshot.forEach((comment) => {
+          .then((commentSnapshot) => {
+            if(commentSnapshot.empty) return
+            const commentsCollection = commentSnapshot.docs;
+            orderComments(commentsCollection).forEach((comment) => {
               const commentBox = document.querySelector(`#comment-${post.id}`);
-             commentBox.prepend(createCommentBox(comment.data(), comment.id, currentUser.uid))
+              commentBox.prepend(createCommentBox(comment.data(), comment.id, currentUser.uid))
             })
           })
       });
@@ -84,3 +87,12 @@ const createPostObject = (text) => {
 
   return post;
 };
+
+const orderComments = (data) => {
+  const orderByTime = data.sort(function (a, b) {
+    if (a.data().time < b.data().time) return 1;
+    if (a.data().time > b.data().time) return -1;
+    return 0;
+  })
+  return orderByTime
+}
