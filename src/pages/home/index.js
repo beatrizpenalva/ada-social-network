@@ -1,5 +1,5 @@
-import { printPosts, createCommentBox } from '../../components/posts.js';
-import { navBar } from '../../components/navbar.js';
+import { printPosts, createCommentBox } from '../../components/post.js';
+import { createHeader } from '../../components/header.js';
 import { getPosts, createNewPost, getCurrentUser, getCommentsById } from '../../services/index.js';
 import { timelineMessageError } from '../../errors/index.js';
 
@@ -53,7 +53,7 @@ export const loadPosts = () => {
             })
           })
       });
-      header.appendChild(navBar());
+      header.appendChild(createHeader());
     });
 };
 

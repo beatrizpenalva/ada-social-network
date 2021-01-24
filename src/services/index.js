@@ -32,7 +32,7 @@ const singUpProvider = (provider) => {
 
 export const logOut = () => firebase.auth().signOut();
 
-export const record = (userEmail, userPassword) => firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);
+export const recordNewUser = (userEmail, userPassword) => firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);
 
 export const emailVerify = () => firebase.auth().currentUser.sendEmailVerification();
 

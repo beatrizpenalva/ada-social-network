@@ -136,7 +136,8 @@ const sendComment = (e) => {
         const commentId = res.id;
         commentBox.insertBefore(createCommentBox(newComment, commentId, newComment.userID), commentForm);
         commentText.value = ""
-        //criar botões e funções de dar like e de editar 1
+        //dar like
+        //editar 1
         //esconder os comentários 2
         //refatorar o código 3
       })
