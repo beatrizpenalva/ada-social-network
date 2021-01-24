@@ -126,16 +126,15 @@ const sendComment = (e) => {
   const commentBox = document.querySelector(`#comment-${postId}`);
   const newComment = createCommentObject(commentText.value, postId);
   addComment(newComment)
-    .then(() => {
-      commentBox.prepend(createCommentBox(newComment))
+    .then((res) => {
+      const commentId = res.id;
+      commentBox.prepend(createCommentBox(newComment, commentId, newComment.userID))
       commentText.value = ""
       //não deixar postar sem nada
       //rever ordem em que os comentários são printados, aqui é o inverso: os mais novos ficam embaixo
       //botões de curtir, excluir e editar
-      
       //esconder os comentários
       //refatorar o código
-
       //const commentForm = document.querySelector(`new-comment-${postId}`)
       //commentBox.insertBefore(createCommentBox(newComment), commentForm)
     })
@@ -167,7 +166,7 @@ const createCommentObject = (text, postId) => {
 
 export const createCommentBox = (doc, id, currentUser) => {
   const comment = doc;
-  console.log(currentUser)
+  console.log(currentUser) //if (post.userID !== currentUser)
   const commentContainer = document.createElement('section');
   commentContainer.innerHTML = `
   <section class="post-comment" id="${id}">
@@ -200,16 +199,16 @@ export const createCommentBox = (doc, id, currentUser) => {
   deleteCommentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
       const getEvent = e.target;
-      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
-      //como pegar a posição do array? ou como dar o nome ao objeto?
-      deleteComment(commentId) //chamar lá no import a função
-      .then(() => {
-        console.log("deletou do firebase")
-        //fazer os rolê de DOM
-      })
-      //.catch(() => {
-        //console.log("erro")
-      //})
+      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id
+      deleteComment(commentId)
+        .then(() => {
+          console.log("deletou do firebase")
+          //fazer os rolê de DOM
+        })
+        .catch(err => {
+          console.log(err)
+          //.catch(timelineMessageError);
+        })
     })
   })
 
