@@ -166,6 +166,7 @@ const createCommentObject = (text, postId) => {
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
     text,
     postId,
+    likes: [],
   }
 
   return comment;
@@ -188,6 +189,16 @@ export const createCommentBox = (doc, id, currentUser) => {
           </article>  
 
         <article class="comment-content">${comment.text}</article>
+
+        <section class="comment-buttons">
+          <input type="checkbox" id="like-${id}" class="comment-function like-comment" hidden>
+          
+          <label for="like-${id}">
+            ❤
+          </label>
+
+          <p class="comment-content" id="likeValue-${id}">${comment.likes.length}</p>
+        </section>
       </section>
     </section>
     `
@@ -221,8 +232,8 @@ export const createCommentBox = (doc, id, currentUser) => {
   deleteCommentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
       const getEvent = e.target;
-      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id
-      if (confirm('Você quer realmente quer excluir esse comentário?')) {
+      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.id
+      if (confirm('Você realmente quer excluir esse comentário?')) {
         deleteComment(commentId)
           .then(() => {
             const commentContainer = document.getElementById(commentId);
@@ -239,3 +250,5 @@ export const createCommentBox = (doc, id, currentUser) => {
 
   return commentContainer;
 }
+
+//linha 194${comment.likes.includes(currentUser) ? 'checked' : ''}
