@@ -136,10 +136,9 @@ const sendComment = (e) => {
         const commentId = res.id;
         commentBox.insertBefore(createCommentBox(newComment, commentId, newComment.userID), commentForm);
         commentText.value = ""
-        //esconder botões dos comentários de acordo com quem postou 2
-        //criar botões e funções de dar like e de editar 3
-        //esconder os comentários 4
-        //refatorar o código 5
+        //criar botões e funções de dar like e de editar 1
+        //esconder os comentários 2
+        //refatorar o código 3
       })
       .catch(err => {
         console.log(err)
@@ -173,34 +172,49 @@ const createCommentObject = (text, postId) => {
 
 export const createCommentBox = (doc, id, currentUser) => {
   const comment = doc;
-  console.log(currentUser) //if (post.userID !== currentUser)
   const commentContainer = document.createElement('section');
-  commentContainer.innerHTML = `
-  <section class="post-comment" id="${id}">
-    <section class="left-comment">
-      <figure>
-        <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
-      </figure>
-    </section>
+  if (comment.userID !== currentUser) {
+    commentContainer.innerHTML = `
+      <section class="post-comment" id="${id}">
+        <section class="left-comment">
+          <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
+        </section>
 
-    <section class="right-comment">
-      <article class="user-info-comment">  
-        <h4 class="username-comment">${comment.name}</h4>
-        <p class="post-date-comment">${comment.date}</p>
-      </article>  
+        <section class="right-comment">
+          <article class="user-info-comment">  
+            <h4 class="username-comment">${comment.name}</h4>
+            <p class="post-date-comment">${comment.date}</p>
+          </article>  
+
+        <article class="comment-content">${comment.text}</article>
+      </section>
+    </section>
+    `
+  }
+  else {
+    commentContainer.innerHTML = `
+    <section class="post-comment" id="${id}">
+      <section class="left-comment">
+        <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
+      </section>
+
+      <section class="right-comment">
+        <article class="user-info-comment">  
+          <h4 class="username-comment">${comment.name}</h4>
+          <p class="post-date-comment">${comment.date}</p>
+        </article>  
 
       <article class="comment-content">${comment.text}</article>
-      
+    
       <section class="comment-buttons">
         <button class="comment-function delete-comment" id="delete-${id}">
-          <figure>
-            <img src="../../img/delete.png" height="20px" width="20px">
-          </figure>
+          <img src="../../img/delete.png" height="20px" width="20px">
         </button>
       </section>
     </section>
   </section>
   `
+  }  
 
   const deleteCommentButtons = commentContainer.querySelectorAll('.delete-comment');
   deleteCommentButtons.forEach((button) => {
