@@ -6,15 +6,15 @@ import { timelineMessageError } from '../errors/index.js';
 export const sendDelete = (e) => {
   const getEvent = e.target;
   const postId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-  deletePost(postId)
-    .then(() => {
-      if (confirm('Você quer realmente quer excluir essa publicação?')) {
+  if (confirm('Você quer realmente quer excluir essa publicação?')) {
+    deletePost(postId)
+      .then(() => {
         const postCard = document.getElementById(postId);
         const parentElement = postCard.parentElement;
         parentElement.removeChild(postCard);
-      }
-    })
-    .catch(timelineMessageError);
+      })
+      .catch(timelineMessageError);
+  }
 };
 
 export const showEditContainer = (e) => {

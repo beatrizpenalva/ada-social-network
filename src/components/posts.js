@@ -203,16 +203,16 @@ export const createCommentBox = (doc, id, currentUser) => {
       if (confirm('Você quer realmente quer excluir esse comentário?')) {
         deleteComment(commentId)
           .then(() => {
-              const commentContainer = document.getElementById(commentId);
-              const parentElement = commentContainer.parentElement;
-              parentElement.removeChild(commentContainer);
-              console.log("deletou do firebase")
+            const commentContainer = document.getElementById(commentId);
+            const parentElement = commentContainer.parentElement;
+            parentElement.removeChild(commentContainer);
+            console.log("deletou do firebase")
           })
           .catch(err => {
             console.log(err)
             //.catch(timelineMessageError);
           })
-      }  
+      }
     })
   })
 
