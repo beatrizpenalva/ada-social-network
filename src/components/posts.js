@@ -129,14 +129,13 @@ const sendComment = (e) => {
   const commentForm = document.querySelector(`#new-comment-${postId}`);
   const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
-  if(commentText.Value !== null) {
+  if(commentText.value !== "") {
     const newComment = createCommentObject(commentText.value, postId);
     addComment(newComment)
       .then((res) => {
         const commentId = res.id;
         commentBox.insertBefore(createCommentBox(newComment, commentId, newComment.userID), commentForm);
         commentText.value = ""
-        //não deixar postar sem nada 1
         //esconder botões dos comentários de acordo com quem postou 2
         //criar botões e funções de dar like e de editar 3
         //esconder os comentários 4
@@ -148,7 +147,7 @@ const sendComment = (e) => {
       })
   }
   else {
-    alert("Você precisa escrever alguma coisa!")
+    alert("A caixa de comentário está vazia. Por favor, preencha o campo antes de publicar.")
   }  
 }
 
@@ -214,7 +213,6 @@ export const createCommentBox = (doc, id, currentUser) => {
             const commentContainer = document.getElementById(commentId);
             const parentElement = commentContainer.parentElement;
             parentElement.removeChild(commentContainer);
-            console.log("deletou do firebase")
           })
           .catch(err => {
             console.log(err)
