@@ -1,5 +1,5 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
-import { getCurrentUser, addComment, removeComment } from '../../services/index.js';
+import { getCurrentUser, addComment, deleteComment } from '../../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
@@ -125,7 +125,7 @@ const sendComment = (e) => {
   const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
   const newComment = createCommentObject(commentText.value, postId);
-  addComment(postId, newComment)
+  addComment(newComment)
     .then(() => {
       commentBox.prepend(createCommentBox(newComment))
       commentText.value = ""
@@ -165,11 +165,12 @@ const createCommentObject = (text, postId) => {
   return comment;
 }
 
-export const createCommentBox = (commentObject) => {
-  const comment = commentObject;
+export const createCommentBox = (doc, id, currentUser) => {
+  const comment = doc;
+  console.log(currentUser)
   const commentContainer = document.createElement('section');
   commentContainer.innerHTML = `
-  <section class="post-comment">
+  <section class="post-comment" id="${id}">
     <section class="left-comment">
       <figure>
         <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
@@ -185,7 +186,7 @@ export const createCommentBox = (commentObject) => {
       <article class="comment-content">${comment.text}</article>
       
       <section class="comment-buttons">
-        <button class="comment-function delete-comment" id="delete-${comment.postId}">
+        <button class="comment-function delete-comment" id="delete-${id}">
           <figure>
             <img src="../../img/delete.png" height="20px" width="20px">
           </figure>
@@ -199,10 +200,9 @@ export const createCommentBox = (commentObject) => {
   deleteCommentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
       const getEvent = e.target;
-      const postId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
       const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id
       //como pegar a posição do array? ou como dar o nome ao objeto?
-      removeComment(postId, commentId) //chamar lá no import a função
+      deleteComment(commentId) //chamar lá no import a função
       .then(() => {
         console.log("deletou do firebase")
         //fazer os rolê de DOM
@@ -215,4 +215,3 @@ export const createCommentBox = (commentObject) => {
 
   return commentContainer;
 }
-

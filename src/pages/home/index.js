@@ -1,6 +1,6 @@
 import { printPosts, createCommentBox } from '../../components/posts.js';
 import { navBar } from '../../components/navbar.js';
-import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js';
+import { getPosts, createNewPost, getCurrentUser, getCommentsById } from '../../services/index.js';
 import { timelineMessageError } from '../../errors/index.js';
 
 export const Home = () => {
@@ -42,10 +42,13 @@ export const loadPosts = () => {
     .then((snapshot) => {
       snapshot.forEach((post) => {
         feed.appendChild(printPosts(post.data(), post.id, currentUser.uid));
-        post.data().comments.forEach((comment) => {
-          const commentBox = document.querySelector(`#comment-${post.id}`);
-          commentBox.prepend(createCommentBox(comment))
-        })
+        getCommentsById(post.id)
+          .then((snapshot) => {
+            snapshot.forEach((comment) => {
+              const commentBox = document.querySelector(`#comment-${post.id}`);
+             commentBox.prepend(createCommentBox(comment.data(), comment.id, currentUser.uid))
+            })
+          })
       });
       header.appendChild(navBar());
     });
@@ -77,7 +80,6 @@ const createPostObject = (text) => {
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
     text,
     likes: [],
-    comments: [],
   };
 
   return post;

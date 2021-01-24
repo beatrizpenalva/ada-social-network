@@ -1,5 +1,5 @@
 import {
-  editPost, deletePost, getCurrentUser, alreadyLikedThisPost, removePost, likePost,
+  editPost, deletePost, getCurrentUser, alreadyLikedThisPost, removeLike, likePost,
 } from '../../services/index.js';
 import { timelineMessageError } from '../errors/index.js';
 
@@ -78,7 +78,7 @@ export const sendLike = (e) => {
           })
           .catch(timelineMessageError);
       } else {
-        removePost(postId, user.uid)
+        removeLike(postId, user.uid)
           .then(() => {
             const getNewValue = removeNewLikeValue(likeValue.innerText);
             likeValue.innerHTML = getNewValue;
