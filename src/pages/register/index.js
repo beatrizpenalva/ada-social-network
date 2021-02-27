@@ -1,4 +1,4 @@
-import { record, emailVerify } from '../../services/index.js';
+import { recordNewUser, emailVerify } from '../../services/index.js';
 import { onNavigate } from '../../utils/history.js';
 import { getError, printMessageError } from '../../errors/index.js';
 
@@ -50,7 +50,7 @@ const checkData = (emailValue, passwordValue, passwordConfirmed) => {
   } else if (passwordValue.length < 6) {
     printMessageError(weakPassowrd);
   } else {
-    record(emailValue, passwordValue)
+    recordNewUser(emailValue, passwordValue)
       .then(() => {
         emailVerify()
           .then(() => {

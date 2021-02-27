@@ -1,20 +1,20 @@
 import {
-  editPost, deletePost, getCurrentUser, alreadyLikedThisPost, removePost, likePost,
+  editPost, deletePost, getCurrentUser, alreadyLikedThisPost, removeLike, likePost,
 } from '../../services/index.js';
 import { timelineMessageError } from '../errors/index.js';
 
 export const sendDelete = (e) => {
   const getEvent = e.target;
   const postId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-  deletePost(postId)
-    .then(() => {
-      if (confirm('Você quer realmente quer excluir essa publicação?')) {
+  if (confirm('Você quer realmente quer excluir essa publicação?')) {
+    deletePost(postId)
+      .then(() => {
         const postCard = document.getElementById(postId);
         const parentElement = postCard.parentElement;
         parentElement.removeChild(postCard);
-      }
-    })
-    .catch(timelineMessageError);
+      })
+      .catch(timelineMessageError);
+  }
 };
 
 export const showEditContainer = (e) => {
@@ -24,7 +24,6 @@ export const showEditContainer = (e) => {
 
   const cancelEditButtonId = `#cancel-edition-${postID}`;
   const cancelEditionForm = postCard.querySelector(cancelEditButtonId);
-  console.log(cancelEditionForm)
   cancelEditionForm.addEventListener('click', () => {
     toggleEditContainer(postCard, false);
   });
@@ -65,7 +64,7 @@ function toggleEditContainer(post, show) {
 
 export const sendLike = (e) => {
   const getEvent = e.target;
-  const postId = getEvent.parentNode.parentNode.parentNode.id;
+  const postId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
   const user = getCurrentUser();
   const likeValue = document.querySelector(`#likeValue-${postId}`);
   alreadyLikedThisPost(postId)
@@ -79,7 +78,7 @@ export const sendLike = (e) => {
           })
           .catch(timelineMessageError);
       } else {
-        removePost(postId, user.uid)
+        removeLike(postId, user.uid)
           .then(() => {
             const getNewValue = removeNewLikeValue(likeValue.innerText);
             likeValue.innerHTML = getNewValue;

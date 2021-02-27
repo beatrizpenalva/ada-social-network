@@ -1,10 +1,10 @@
 import { logOut, getCurrentUser } from '../services/index.js';
 import { onNavigate } from '../../utils/history.js';
 
-export const navBar = () => {
+export const createHeader = () => {
   const user = getCurrentUser();
-  const navBarContainer = document.createElement('header');
-  navBarContainer.innerHTML = `
+  const headerContainer = document.createElement('header');
+  headerContainer.innerHTML = `
     <nav class="header">
       <figure class="current-user">
         <img class="avatar" src="${user.photoURL}" height="60px" width="60px">
@@ -16,10 +16,10 @@ export const navBar = () => {
     </nav>
   `;
 
-  const logOutButton = navBarContainer.querySelector('#logout');
+  const logOutButton = headerContainer.querySelector('#logout');
   logOutButton.addEventListener('click', sendLogOut);
 
-  return navBarContainer;
+  return headerContainer;
 };
 
 const sendLogOut = () => {

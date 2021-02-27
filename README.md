@@ -1,114 +1,82 @@
-# [Ada]
-
-![Imagem!](./src/img/logo.png)
-
-Uma rede social que visa conectar mulheres que atuam, ou desejam atuar na área de tecnologia, criando assim uma rede de apoio que promove troca de experiências, oportunidades e expanda conhecimento.
+:star2: Ada, code like a girl. A social network to integrate women in tech area. To access click [here]! :octocat: :star2:
 
 ---
-## Índice
 
-- [1. Introdução](#1-introdução)
-- [2. Planejamento e Organização](#2-planejamento-e-organização)
-- [3. Processo criativo](#3-processo-criativo)
-- [4. Desenvolvimento](#4-desenvolvimento)
-- [5. Funcionamento](#5-funcionamento)
-
----
-## 1. Introdução
-
-Rede social desenvolvida em conjunto, pelas alunas/futuras Desenvolvedoras Front-end [Beatriz Penalva](https://github.com/beatrizpenalva), [Gabrielle Almeida](https://github.com/GabrielleAlmeida), [Julia Terin](https://github.com/JuliaTerin) durante o Bootcamp Laboratória - Turma SAP005.
-
-### Sobre 
-
-[Ada] "Programe como uma garota", é mais que uma rede social, é um espaço seguro de compartilhamento de saberes, histórias e aprendizados para mulheres que atuam, ou querem atuar, como desenvolvedoras.
-
-Quem nos inspirou para o desenvolvimento deste projeto foi a  [Augusta Ada King](https://pt.wikipedia.org/wiki/Ada_Lovelace), mais conhecida como Ada Lovelace, considerada a primeira Programadora da História, foi responsável pelo desenvolvimento de um algoritmo que permitiu à máquina analítica de Charles Babbage computar os valores de funções matemáticas.
-
-O propósito desta Rede é auxiliar mulheres na formação umas das outras numa área predominantemente masculina, pois acreditamos que conectadas podemos nos fortalecer e florescer nessa área que historicamente é tão nossa.
+## Index
+- [1. About](#1-about)
+- [2. Process](#2-process)
+- [3. Product](#3-product)
+- [4. Produto](#4-produto)
+- [5. Ferramentas](#5-ferramentas)
+- [6. Créditos](#6-créditos)
 
 ---
-## 2. Planejamento e Organização
 
-O planejamento e organização do projeto foi feito com método Kanban, utilizando o [Trello](https://trello.com/) como ferramenta. Veja nosso quadro [aqui](https://trello.com/b/0PEjsA2s/ada-rede-social)!
+## 1. About
+The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace). Ada developed the first algorithm to be read by a machine, Charles Babbage's analytical machine.
 
+Although this place is historically ours and the lack of TI professionals in the Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and only 13% of the professionals employed were women and in leadership occupancy, they only represent 8% of the scenario, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
-#### Experiência de usuário
-Para desenvolver este aplicativo, alguns métodos de UX foram incorporados ao processo:
-- Protopersonas
-- Protopersonas validadas com entrevistas
-- Histórias de usuários
+Inspired by the Ada story and our story in Laboratoria, we created Ada, a social network for women in the tech area (or aspiring to) to meet, share support, experiences, opportunities, and knowledge.
 
-### Personas
+## 2. Process
 
-  ![Imagem!](./src/img/protopersonas.jpg)
+:mag_right: **User experience**
 
-### Histórias de usuários
+We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&feature=emb_title) method to develop the product, we imagine our proto personas and made the validation by making individuals interviews, then set our user stories, definition of done, and acceptance criteria. :octocat:
 
-Com base nas personas validadas partimos para as histórias de usuários. Geramos quatro histórias, cada uma contemplando necessidades identificadas através das três entrevistas realizadas, assim, gerando etapas de trabalho com as definições de pronto.
-As histórias são:
+![personas](./src/img/personas.svg)
 
-- História 1: "Eu como usuária, desejo ter acesso à aplicação por ser uma mulher com interesse no mundo da tecnologia"
-- História 2: "Eu como usuária, desejo criar um perfil para ter acesso a rede de mulheres interessadas em estudar tecnologia"
-- História 3: "Eu como usuária, desejo publicar textos para interagir com a rede"
-- História 4: "Eu como usuária, desejo visualizar os posts das demais usuárias e poder curtir e responder para interagir com a rede"
+:date: **Planning**
 
-Você pode acessar nossas histórias de usuário [1](https://trello.com/c/5bjq1Ybp/15-hist%C3%B3ria-1-eu-como-usu%C3%A1ria-desejo-ter-acesso-%C3%A0-aplica%C3%A7%C3%A3o-por-ser-uma-mulher-com-interesse-no-mundo-da-tecnologia), [2](https://trello.com/c/tn2pc25i/16-hist%C3%B3ria-2-eu-como-usu%C3%A1ria-desejo-criar-um-perfil-para-ter-acesso-a-rede-de-mulheres-interessadas-em-estudar-tecnologia), [3](https://trello.com/c/fmmifLKo/36-hist%C3%B3ria-3-eu-como-usu%C3%A1ria-desejo-publicar-textos-para-interagir-com-a-rede) e [4](https://trello.com/c/CYSdJ3aL/31-hist%C3%B3ria-4-eu-como-usu%C3%A1ria-desejo-visualizar-os-posts-das-demais-usu%C3%A1rias-e-poder-curtir-e-responder-para-interagir-com-a-rede) nos links com os critérios de aceitação e definições de pronto. 
+The project planning and organization were developed using the Kanban method. We divided the work by User Stories and the strategy of programming was code review. You can see our board by clicking [here](https://trello.com/b/0PEjsA2s/ada-rede-social). :muscle:
 
----
-## 3. Processo criativo
+## 3. Product
 
-### Marca
+:bulb: **Branding**
+Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
 
-[Ada]
-Como já dito, o nome da marca foi baseada na Condessa de Lovelace, seu nome é envolto por colchetes, que na linguagem Javascript são utilizados na declaração de arrays, usada para armazenar vários valores em uma única variável, que podem ser acessados juntos ou separadamente. Seu uso é uma alegoria a junção de pessoas e seus conhecimentos num só lugar, que pode ser acessado para ajudar, aprender ou ambos.
+![logo](./src/img/logo.png)
 
-### Cores
+:bulb: **Visual identity**
 
-A paleta de cores teve como base a cor laranja, na psicologia das cores laranja transmite alegria e confiança, sendo uma cor vibrante que estimula ação, apetite e a socialização. É uma cor de simbologia neutra, evitando o uso de cores estigmatizadas ao feminino. 
- 
-  ![Imagem!](./src/img/paleta.jpg)
+The color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
 
-### Protótipo
+![color-palette](./src/img/color-palette.svg)
 
-O processo criativo se deu inicialmente com o desenvolvimento do protótipo criado com a ferramente [Figma](https://www.figma.com/) em mobile first, após pesquisa de cores e estilo.
+We developed our prototypes based on the [Mobile First](https://medium.com/@Vincentxia77/what-is-mobile-first-design-why-its-important-how-to-make-it-7d3cf2e29d00) concept, we can see all screens by clicking [here](https://www.figma.com/file/67H6oBRw0TqcV3gYmzqInr/Ada-Social-Network?node-id=402%3A2).:iphone:
 
-  ![Imagem!](./src/img/prot_mobile.jpg)
-  ![Imagem!](./src/img/prot_loginDesktop.jpg)
-  ![Imagem!](./src/img/prot_perfiltimelineDesktop.jpg)
+![mobile](./src/img/mobile.png)
+![desktop-login](./src/img/desktop-login.svg)
+![desktop-timeline](./src/img/desktop-timeline.svg)
 
----
-## 4. Desenvolvimento
+## 4. Build With
 
-O desenvolvimento do projeto foi executado em quatro sprints. A primeira foi voltada para o trabalho de UX e UI, onde o tema da rede, o layout, as decisões conceituais e as pesquisas de usuários foram realizados. As demais sprints tiveram como foco o desenvolvimento do código, começando com o login que possibilitasse ao usuário o acesso a rede com sua conta do [Google](https://www.google.com/intl/pt-BR/account/about/), [Facebook](www.facebook.com), [GitHub](GitHubgithub.com) ou um novo registro com validação de email e criação de senha de acesso. Após o acesso a timeline foi desenvolvida contendo áreas de criação de posts, com possibilidade de edição, exclusão e curtida. 
-A aplicação foi desenvolvida como um [Single Page Application (SPA)](https://pt.wikipedia.org/wiki/Aplicativo_de_p%C3%A1gina_%C3%BAnica), se utilizando do [Firebase](https://firebase.google.com/) e suas ferramentas. A responsividade foi feita em conjunto com a execução do layout da página, e a interface hospedada usando o [Firebase Hosting](https://firebase.google.com/docs/hosting).
+:wrench: Vanilla JavaScript
+&nbsp;
 
+:wrench: HTML5
+&nbsp;
 
-### Tecnológias
+:wrench: CSS3
+&nbsp;
 
-Neste projeto foram usados:
+:wrench: Firebase
+&nbsp;
 
-<ul>
-<li>CSS3</li>
-<li>HTML5</li>
-<li>Vanilla JavaScript</li>
-<li>Firebase Authentication</li>
-<li>Cloud Firestore</li>
-<li>Visual Studio Code com extenção Node-js</li>
-</ul>
+## 5. Acknowledgments and credits
 
+[Laboratoria](https://www.laboratoria.la/) :yellow_heart:
 
-## 5. Funcionamento 
+## 6. Authors
 
-A rede social possibilita que mediante o acesso a usuária seja direcionada a sua timeline, onde possa postar, visualizar os posts das demais usuárias e curti-los.
+:octocat: Developed with :heart: by:
 
-O fluxograma a seguir exemplifica o funcionamento de acesso à aplicação:
+&nbsp;
+:princess: [Beatriz Penalva](https://github.com/beatrizpenalva)
 
-  ![Imagem!](./src/img/fluxograma.jpeg)
+&nbsp;
+:princess: [Gabrielle Almeida](https://github.com/GabrielleAlmeida)
 
-Após, a usuária acessa sua timeline onde pode criar posts, editar e deletar o mesmo, ver o post das demais usuárias e os curtir, assim como também visualizar o número de curtidas que recebeu em seus posts.
-
-
-
-## Acesse aqui a rede social [[Ada]](https://social-networl-4387c.web.app/login)
-
-### Desenvolvido por [Beatriz Penalva](https://github.com/beatrizpenalva), [Gabrielle Almeida](https://github.com/GabrielleAlmeida) e [Julia Terin](https://github.com/JuliaTerin) através do Projeto da [Laboratoria](https://www.laboratoria.la/).
+&nbsp;
+:princess: [Julia Terin](https://github.com/JuliaTerin) 

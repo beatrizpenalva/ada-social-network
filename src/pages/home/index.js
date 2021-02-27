@@ -1,6 +1,6 @@
-import { printPosts } from '../../components/posts.js';
-import { navBar } from '../../components/navbar.js';
-import { getPosts, createNewPost, getCurrentUser } from '../../services/index.js';
+import { printPosts, createCommentBox } from '../../components/post.js';
+import { createHeader } from '../../components/header.js';
+import { getPosts, createNewPost, getCurrentUser, getCommentsById } from '../../services/index.js';
 import { timelineMessageError } from '../../errors/index.js';
 
 export const Home = () => {
@@ -10,7 +10,6 @@ export const Home = () => {
       <section id="header"></section>
       <form id="publish-form">
         <textarea id="postText" class="text" spellcheck="true" maxlength="500" wrap="hard" placeholder="O que você quer compartilhar?" required></textarea>
-
           <section class="publish-button"> 
             <label for="file" class="hidden">
               <figure class="input-file">
@@ -43,8 +42,18 @@ export const loadPosts = () => {
     .then((snapshot) => {
       snapshot.forEach((post) => {
         feed.appendChild(printPosts(post.data(), post.id, currentUser.uid));
+       
+        getCommentsById(post.id)
+          .then((commentSnapshot) => {
+            if(commentSnapshot.empty) return
+            const commentsCollection = commentSnapshot.docs;
+            orderComments(commentsCollection).forEach((comment) => {
+              const commentBox = document.querySelector(`#comment-${post.id}`);
+              commentBox.prepend(createCommentBox(comment.data(), comment.id, currentUser.uid))
+            })
+          })
       });
-      header.appendChild(navBar());
+      header.appendChild(createHeader());
     });
 };
 
@@ -74,8 +83,16 @@ const createPostObject = (text) => {
     date: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
     text,
     likes: [],
-    comments: [],
   };
 
   return post;
 };
+
+const orderComments = (data) => {
+  const orderByTime = data.sort(function (a, b) {
+    if (a.data().time < b.data().time) return 1;
+    if (a.data().time > b.data().time) return -1;
+    return 0;
+  })
+  return orderByTime
+}

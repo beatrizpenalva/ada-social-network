@@ -33,5 +33,6 @@ export const printMessageError = (message) => {
 
 export const timelineMessageError = (err) => {
   window.alert('Ops! Ocorreu algum erro, por favor, tente novamente.');
+  //mostrar o erro de maneira correta pro desenvolvedor
   console.log(err);
 };
