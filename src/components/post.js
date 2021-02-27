@@ -1,5 +1,6 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
 import { getCurrentUser, addComment, deleteComment } from '../../services/index.js';
+import { alreadyLikedThisComment, removeLikeComment, likeComment } from '../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
@@ -248,7 +249,46 @@ export const createCommentBox = (doc, id, currentUser) => {
     })
   })
 
+  const likeCommentButtons = commentContainer.querySelector('.like-comment');
+  likeCommentButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const getEvent = e.target;
+      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
+      const user = getCurrentUser();
+      const likeValue = document.querySelector(`#likeValue-${commentId}`);
+        alreadyLikedThisComment(commentId)
+          .then((doc) => {
+            const checkLike = doc.data().likes.includes(user.uid);
+            if (!checkLike) {
+              likeComment(commentId, user.uid)
+                .then(() => {
+                  const getNewValue = addNewLikeValue(likeValue.innerText);
+                  likeValue.innerHTML = getNewValue;
+                })
+                //.catch(timelineMessageError);
+            } 
+            else {
+              removeLikeComment(postId, user.uid)
+                .then(() => {
+                  const getNewValue = removeNewLikeValue(likeValue.innerText);
+                  likeValue.innerHTML = getNewValue;
+                })
+                //.catch(timelineMessageError);
+            }
+          })
+          //.catch(timelineMessageError);
+      })
+  })
+      
+      function addNewLikeValue(num) {
+        return Number(num) + 1;
+      }
+      
+      function removeNewLikeValue(num) {
+        return Number(num) - 1;
+      }
+  
   return commentContainer;
 }
-
-//linha 194${comment.likes.includes(currentUser) ? 'checked' : ''}
+  
+//linha 194${comment.likes.includes(currentUser) ? 'checked' : ''

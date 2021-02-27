@@ -56,8 +56,8 @@ export const getCommentsById = (postId) => firebase.firestore().collection('comm
 
 export const deleteComment = (commentID) => firebase.firestore().collection('comments').doc(commentID).delete();
 
-//export const alreadyLikedThisComment = (commentID) => firebase.firestore().collection('comments').doc(commentID).get();
+export const alreadyLikedThisComment = (commentID) => firebase.firestore().collection('comments').doc(commentID).get();
 
-//export const removeLikeComment = (commentID, userID) => firebase.firestore().collection('comments').doc(commentID).update({ likes: firebase.firestore.FieldValue.arrayRemove(userID) });
+export const removeLikeComment = (commentID, userID) => firebase.firestore().collection('comments').doc(commentID).update({ likes: firebase.firestore.FieldValue.arrayRemove(userID) });
 
-//export const likeComment = (commentID, userID) => firebase.firestore().collection('comments').doc(commentID).update({ likes: firebase.firestore.FieldValue.arrayUnion(userID) });
+export const likeComment = (commentID, userID) => firebase.firestore().collection('comments').doc(commentID).update({ likes: firebase.firestore.FieldValue.arrayUnion(userID) });
