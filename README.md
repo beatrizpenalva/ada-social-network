@@ -71,6 +71,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 
 ## 5. Acknowledgments and credits
 
+&nbsp;
 [Laboratoria](https://www.laboratoria.la/) :yellow_heart:
 
 ## 6. Authors
