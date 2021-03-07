@@ -79,10 +79,10 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 Developed with :heart: by:
 
 &nbsp;
-:princess: [Beatriz Penalva](https://github.com/beatrizpenalva)
+🦸 [Beatriz Penalva](https://github.com/beatrizpenalva)
 
 &nbsp;
-:princess: [Gabrielle Almeida](https://github.com/GabrielleAlmeida)
+🦸 [Gabrielle Almeida](https://github.com/GabrielleAlmeida)
 
 &nbsp;
-:princess: [Julia Terin](https://github.com/JuliaTerin) 
+🦸 [Julia Terin](https://github.com/JuliaTerin) 
