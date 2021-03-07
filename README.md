@@ -27,7 +27,7 @@ Inspired by the Ada story and our story in Laboratoria, we created Ada, a social
 
 :mag_right: **User experience**
 
-We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&feature=emb_title) method to develop the product, we imagine our proto personas and made the validation by making individuals interviews, then set our user stories, definition of done, and acceptance criteria. :octocat::dancers:
+We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&feature=emb_title) method to develop the product, we imagine our proto personas and made the validation by making individuals interviews, then set our user stories, definition of done, and acceptance criteria. :dancers:
 
 ![personas](./src/img/personas.svg)
 
@@ -43,7 +43,7 @@ Our name is in honor of Ada Lovelace's story and the square brackets are an inte
 
 ![logo](./src/img/logo.png)
 
-:bulb: **Visual identity**
+🎨 **Visual identity**
 
 The color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
 
