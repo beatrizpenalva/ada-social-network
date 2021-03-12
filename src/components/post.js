@@ -267,7 +267,6 @@ export const createCommentBox = (doc, id, currentUser) => {
     checkbox.addEventListener("change", (e) => {
       const getEvent = e.target;
       const commentId = getEvent.parentNode.parentNode.parentNode.id;
-      console.log(commentId)
       const user = getCurrentUser();
       const likeValue = document.querySelector(`#likeValue-${commentId}`);
       alreadyLikedThisComment(commentId).then((doc) => {
@@ -278,8 +277,9 @@ export const createCommentBox = (doc, id, currentUser) => {
             likeValue.innerHTML = getNewValue;
           });
           //.catch(timelineMessageError);
-        } else {
-          removeLikeComment(postId, user.uid).then(() => {
+        } 
+        else {
+          removeLikeComment(commentId, user.uid).then(() => {
             const getNewValue = removeNewLikeValue(likeValue.innerText);
             likeValue.innerHTML = getNewValue;
           });
