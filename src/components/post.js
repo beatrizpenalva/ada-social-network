@@ -1,10 +1,14 @@
-import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
-import { getCurrentUser, addComment, deleteComment } from '../../services/index.js';
+import { sendDelete, showEditContainer, sendLike } from "./postsfunctions.js";
+import {
+  getCurrentUser,
+  addComment,
+  deleteComment,
+} from "../../services/index.js";
 import { alreadyLikedThisComment, removeLikeComment, likeComment } from '../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
-  const postContainer = document.createElement('section');
+  const postContainer = document.createElement("section");
   if (post.userID !== currentUser) {
     postContainer.innerHTML = `
       <section class="post-container" id="${id}">
@@ -22,11 +26,15 @@ export const printPosts = (doc, id, currentUser) => {
             <article class="post-content">${post.text}</article>
 
             <section class="post-buttons">
-              <input type="checkbox" id="like-${id}" class="post-function like" hidden ${post.likes.includes(currentUser) ? 'checked' : ''}>
+              <input type="checkbox" id="like-${id}" class="post-function like" hidden ${
+      post.likes.includes(currentUser) ? "checked" : ""
+    }>
               <label for="like-${id}">
                 ❤
               </label>
-              <p class="post-content" id="likeValue-${id}">${post.likes.length}</p>
+              <p class="post-content" id="likeValue-${id}">${
+      post.likes.length
+    }</p>
             </section>
           </section>
         </section>  
@@ -93,33 +101,33 @@ export const printPosts = (doc, id, currentUser) => {
      `;
   }
 
-  const deleteButtons = postContainer.querySelectorAll('.delete');
+  const deleteButtons = postContainer.querySelectorAll(".delete");
   deleteButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener("click", (e) => {
       sendDelete(e);
     });
   });
 
-  const editButtons = postContainer.querySelectorAll('.edit');
+  const editButtons = postContainer.querySelectorAll(".edit");
   editButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener("click", (e) => {
       showEditContainer(e);
     });
   });
 
-  const likeButtons = postContainer.querySelectorAll('.like');
+  const likeButtons = postContainer.querySelectorAll(".like");
   likeButtons.forEach((checkbox) => {
-    checkbox.addEventListener('change', (e) => {
+    checkbox.addEventListener("change", (e) => {
       sendLike(e);
     });
   });
 
-  const commentButtons = postContainer.querySelectorAll('.comment-button');
+  const commentButtons = postContainer.querySelectorAll(".comment-button");
   commentButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener("click", (e) => {
       sendComment(e);
-    })
-  })
+    });
+  });
 
   return postContainer;
 };
@@ -130,27 +138,27 @@ const sendComment = (e) => {
   const commentForm = document.querySelector(`#new-comment-${postId}`);
   const commentText = document.querySelector(`#commentText-${postId}`);
   const commentBox = document.querySelector(`#comment-${postId}`);
-  if(commentText.value !== "") {
+  if (commentText.value !== "") {
     const newComment = createCommentObject(commentText.value, postId);
     addComment(newComment)
       .then((res) => {
         const commentId = res.id;
-        commentBox.insertBefore(createCommentBox(newComment, commentId, newComment.userID), commentForm);
-        commentText.value = ""
-        //dar like
-        //editar 1
-        //esconder os comentários 2
-        //refatorar o código 3
+        commentBox.insertBefore(
+          createCommentBox(newComment, commentId, newComment.userID),
+          commentForm
+        );
+        commentText.value = "";
       })
-      .catch(err => {
-        console.log(err)
+      .catch((err) => {
+        console.log(err);
         //.catch(timelineMessageError);
-      })
+      });
+  } else {
+    alert(
+      "A caixa de comentário está vazia. Por favor, preencha o campo antes de publicar."
+    );
   }
-  else {
-    alert("A caixa de comentário está vazia. Por favor, preencha o campo antes de publicar.")
-  }  
-}
+};
 
 const createCommentObject = (text, postId) => {
   const user = getCurrentUser();
@@ -168,19 +176,21 @@ const createCommentObject = (text, postId) => {
     text,
     postId,
     likes: [],
-  }
+  };
 
   return comment;
-}
+};
 
 export const createCommentBox = (doc, id, currentUser) => {
   const comment = doc;
-  const commentContainer = document.createElement('section');
+  const commentContainer = document.createElement("section");
   if (comment.userID !== currentUser) {
     commentContainer.innerHTML = `
       <section class="post-comment" id="${id}">
         <section class="left-comment">
-          <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
+          <img class="avatar-comment" src="${
+            comment.avatar
+          }" height="60px" width="60px">
         </section>
 
         <section class="right-comment">
@@ -192,18 +202,21 @@ export const createCommentBox = (doc, id, currentUser) => {
         <article class="comment-content">${comment.text}</article>
 
         <section class="comment-buttons">
-          <input type="checkbox" id="like-${id}" class="comment-function like-comment" hidden>
+          <input type="checkbox" id="like-${id}" class="comment-function like-comment" ${
+      comment.likes.includes(currentUser) ? "checked" : ""
+    } hidden>
           
           <label for="like-${id}">
             ❤
           </label>
-
-          <p class="comment-content" id="likeValue-${id}">${comment.likes.length}</p>
+          <p class="comment-content" id="likeValue-${id}">${
+      comment.likes.length
+    }</p>
         </section>
       </section>
     </section>
-    `
-  }
+    `;
+  } 
   else {
     commentContainer.innerHTML = `
     <section class="post-comment" id="${id}">
@@ -226,69 +239,64 @@ export const createCommentBox = (doc, id, currentUser) => {
       </section>
     </section>
   </section>
-  `
-  }  
+  `;
+  }
 
-  const deleteCommentButtons = commentContainer.querySelectorAll('.delete-comment');
+  const deleteCommentButtons = commentContainer.querySelectorAll(".delete-comment");
   deleteCommentButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener("click", (e) => {
       const getEvent = e.target;
-      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.id
-      if (confirm('Você realmente quer excluir esse comentário?')) {
+      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
+      if (confirm("Você realmente quer excluir esse comentário?")) {
         deleteComment(commentId)
           .then(() => {
             const commentContainer = document.getElementById(commentId);
             const parentElement = commentContainer.parentElement;
             parentElement.removeChild(commentContainer);
           })
-          .catch(err => {
-            console.log(err)
+          .catch((err) => {
+            console.log(err);
             //.catch(timelineMessageError);
-          })
+          });
       }
-    })
-  })
+    });
+  });
 
-  const likeCommentButtons = commentContainer.querySelector('.like-comment');
-  likeCommentButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+  const likeCommentButtons = commentContainer.querySelectorAll(".like-comment");
+  likeCommentButtons.forEach((checkbox) => {
+    checkbox.addEventListener("change", (e) => {
       const getEvent = e.target;
-      const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
+      const commentId = getEvent.parentNode.parentNode.parentNode.id;
       const user = getCurrentUser();
       const likeValue = document.querySelector(`#likeValue-${commentId}`);
-        alreadyLikedThisComment(commentId)
-          .then((doc) => {
-            const checkLike = doc.data().likes.includes(user.uid);
-            if (!checkLike) {
-              likeComment(commentId, user.uid)
-                .then(() => {
-                  const getNewValue = addNewLikeValue(likeValue.innerText);
-                  likeValue.innerHTML = getNewValue;
-                })
-                //.catch(timelineMessageError);
-            } 
-            else {
-              removeLikeComment(postId, user.uid)
-                .then(() => {
-                  const getNewValue = removeNewLikeValue(likeValue.innerText);
-                  likeValue.innerHTML = getNewValue;
-                })
-                //.catch(timelineMessageError);
-            }
-          })
+      alreadyLikedThisComment(commentId).then((doc) => {
+        const checkLike = doc.data().likes.includes(user.uid);
+        if (!checkLike) {
+          likeComment(commentId, user.uid).then(() => {
+            const getNewValue = addNewLikeValue(likeValue.innerText);
+            likeValue.innerHTML = getNewValue;
+          });
           //.catch(timelineMessageError);
-      })
-  })
-      
-      function addNewLikeValue(num) {
-        return Number(num) + 1;
-      }
-      
-      function removeNewLikeValue(num) {
-        return Number(num) - 1;
-      }
-  
+        } 
+        else {
+          removeLikeComment(commentId, user.uid).then(() => {
+            const getNewValue = removeNewLikeValue(likeValue.innerText);
+            likeValue.innerHTML = getNewValue;
+          });
+          //.catch(timelineMessageError);
+        }
+      });
+      //.catch(timelineMessageError);
+    });
+  });
+
+  function addNewLikeValue(num) {
+    return Number(num) + 1;
+  }
+
+  function removeNewLikeValue(num) {
+    return Number(num) - 1;
+  }
+
   return commentContainer;
-}
-  
-//linha 194${comment.likes.includes(currentUser) ? 'checked' : ''
+};
