@@ -1,6 +1,6 @@
 import { sendDelete, showEditContainer, sendLike } from './postsfunctions.js';
 import { getCurrentUser, addComment, deleteComment } from '../../services/index.js';
-import { alreadyLikedThisComment, removeLikeComment, likeComment } from '../services/index.js';
+// import { alreadyLikedThisComment, removeLikeComment, likeComment } from '../services/index.js';
 
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
@@ -121,6 +121,7 @@ export const printPosts = (doc, id, currentUser) => {
     })
   })
 
+
   return postContainer;
 };
 
@@ -229,6 +230,7 @@ export const createCommentBox = (doc, id, currentUser) => {
   `
   }  
 
+  /*
   const deleteCommentButtons = commentContainer.querySelectorAll('.delete-comment');
   deleteCommentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
@@ -248,7 +250,9 @@ export const createCommentBox = (doc, id, currentUser) => {
       }
     })
   })
+  */
 
+  /*
   const likeCommentButtons = commentContainer.querySelector('.like-comment');
   likeCommentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
@@ -287,8 +291,9 @@ export const createCommentBox = (doc, id, currentUser) => {
       function removeNewLikeValue(num) {
         return Number(num) - 1;
       }
-  
+      */
+
   return commentContainer;
 }
-  
+
 //linha 194${comment.likes.includes(currentUser) ? 'checked' : ''
