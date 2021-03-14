@@ -1,4 +1,5 @@
 const verifyErrorCode = {
+  'mismatch-password': 'As senhas não são iguais. Por favor, escreva novamente.',
   'auth/invalid-email': 'O endereço de e-mail não é válido. Por favor, preencha novamente.',
   'auth/wrong-password': 'Senha incorreta. Por favor, tente novamente.',
   'auth/email-already-in-use': 'O e-mail fornecido já está cadastrado. Por favor, forneça um novo endereço.',
@@ -16,7 +17,7 @@ const verifyErrorCode = {
 
 export const getError = (err) => {
   const errorCode = err.code;
-  const errorMessage = verifyErrorCode[errorCode];
+  let errorMessage = verifyErrorCode[errorCode];
   if (!errorMessage) {
     errorMessage = 'Ops! Ocorreu algum erro, por favor, tente novamente.';
   }

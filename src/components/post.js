@@ -9,12 +9,13 @@ import { alreadyLikedThisComment, removeLikeComment, likeComment } from '../serv
 export const printPosts = (doc, id, currentUser) => {
   const post = doc;
   const postContainer = document.createElement("section");
+
   if (post.userID !== currentUser) {
     postContainer.innerHTML = `
       <section class="post-container" id="${id}">
         <section class="top-post">
           <section class="left-post">
-            <img class="avatar" src="${post.avatar}" height="60px" width="60px">
+            <img class="avatar" src="${post.avatar || "../img/avatar-default.jpg"}" height="60px" width="60px">
           </section>
 
           <section class="right-post">
@@ -50,7 +51,8 @@ export const printPosts = (doc, id, currentUser) => {
         </section>
       </section>
     `;
-  } else {
+  } 
+  else {
     postContainer.innerHTML = `
       <section class="post-container" id="${id}">
         <section class="top-post">
@@ -189,7 +191,7 @@ export const createCommentBox = (doc, id, currentUser) => {
       <section class="post-comment" id="${id}">
         <section class="left-comment">
           <img class="avatar-comment" src="${
-            comment.avatar
+            comment.avatar || "../img/avatar-default.jpg"
           }" height="60px" width="60px">
         </section>
 
@@ -221,7 +223,7 @@ export const createCommentBox = (doc, id, currentUser) => {
     commentContainer.innerHTML = `
     <section class="post-comment" id="${id}">
       <section class="left-comment">
-        <img class="avatar-comment" src="${comment.avatar}" height="60px" width="60px">
+        <img class="avatar-comment" src="${comment.avatar || "../img/avatar-default.jpg"}" height="60px" width="60px">
       </section>
 
       <section class="right-comment">
