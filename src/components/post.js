@@ -31,7 +31,9 @@ export const printPosts = (doc, id, currentUser) => {
       post.likes.includes(currentUser) ? "checked" : ""
     }>
               <label for="like-${id}">
-                ❤
+                <span class="material-icons">
+                 favorite
+                </span>
               </label>
               <p class="post-content" id="likeValue-${id}">${
       post.likes.length
@@ -70,11 +72,15 @@ export const printPosts = (doc, id, currentUser) => {
 
             <section class="post-buttons">
               <button class="post-function edit" id="edit-${id}">
-                <img src="../../img/edit.png" height="20px" width="20px">
+                <span class="material-icons post-features">
+                  edit
+                </span>
               </button>
 
               <button class="post-function delete" id="delete-${id}">
-                <img src="../../img/delete.png" height="20px" width="20px">
+                <span class="material-icons post-features">
+                  delete
+                </span>
               </button>
             </section>
 
@@ -82,7 +88,9 @@ export const printPosts = (doc, id, currentUser) => {
               <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500" wrap="hard" required>${post.text}</textarea>
                 <fieldset class="edition-buttons">
                   <button class="post-function cancel-edition" id="cancel-edition-${id}">
-                    <img src="../../img/cancel.png" height="20px" width="20px">
+                    <span class="material-icons post-features">
+                    cancel
+                    </span>
                   </button>    
 
                   <button type="submit" class="send-button">Salvar</button>
@@ -209,7 +217,9 @@ export const createCommentBox = (doc, id, currentUser) => {
     } hidden>
           
           <label for="like-${id}">
-            ❤
+            <span class="material-icons">
+            favorite
+            </span>
           </label>
           <p class="comment-content" id="likeValue-${id}">${
       comment.likes.length
@@ -236,7 +246,9 @@ export const createCommentBox = (doc, id, currentUser) => {
     
       <section class="comment-buttons">
         <button class="comment-function delete-comment" id="delete-${id}">
-          <img src="../../img/delete.png" height="20px" width="20px">
+          <span class="material-icons post-features">
+            delete
+          </span>
         </button>
       </section>
     </section>

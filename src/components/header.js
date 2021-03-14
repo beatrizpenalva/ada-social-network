@@ -9,10 +9,17 @@ export const createHeader = () => {
       <figure class="current-user">
         <img class="avatar" src="${user.photoURL || "../img/avatar-default.jpg"}" height="60px" width="60px">
         <figcaption class="greetings">
-          Olá, ${user.displayName}! ❤
+          Olá, ${user.displayName}!
+          <span class="material-icons">
+            favorite
+         </span>
         </figcaption>
       </figure>
-      <button id="logout" class="button-icon-feed"><img src="../../img/logout.png" height="35px" width="35px"></button>
+      <button id="logout" class="button-icon-feed">
+        <span class="material-icons logout">
+          logout
+        </span>
+      </button>
     </nav>
   `;
 
