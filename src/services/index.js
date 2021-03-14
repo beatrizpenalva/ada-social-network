@@ -34,7 +34,7 @@ export const logOut = () => firebase.auth().signOut();
 
 export const saveUserProfile = (userName) => {
   const user = getCurrentUser()
-  user.updateProfile({displayName: userName, avatar: '../img/avatar-default.jpg'});
+  user.updateProfile({displayName: userName});
 }
 
 export const recordNewUser = (userEmail, userPassword) => firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);

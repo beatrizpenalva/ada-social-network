@@ -53,10 +53,9 @@ const checkData = (emailValue, passwordValue, passwordConfirmed, userName) => {
     getError("mismatch-password");
   } else {
     recordNewUser(emailValue, passwordValue)
+      .then((user) => user)
       .then((loggedUser) => {
-        console.log(loggedUser)
-        saveUserProfile(loggedUser.user, emailValue, userName);
-        console.log(loggedUser.user, emailValue, userName)
+        saveUserProfile(userName);
         onNavigate('/')
       })
       .catch((err) => {
