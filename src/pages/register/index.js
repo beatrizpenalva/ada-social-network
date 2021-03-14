@@ -1,9 +1,12 @@
-import { recordNewUser, emailVerify } from '../../services/index.js';
-import { onNavigate } from '../../utils/history.js';
-import { getError, printMessageError } from '../../errors/index.js';
+import {
+  recordNewUser,
+  saveUserProfile
+} from "../../services/index.js";
+import { onNavigate } from "../../utils/history.js";
+import { getError } from "../../errors/index.js";
 
 export const Register = () => {
-  const rootElement = document.createElement('div');
+  const rootElement = document.createElement("div");
   rootElement.innerHTML = `
   <section class="register-page"> 
     <section class="left">  
@@ -15,9 +18,8 @@ export const Register = () => {
       <form id="registerSingIn"> 
           <fieldset class="right">
             <input type="text" class="input-in-line" id="name" placeholder="Nome"/>
-            <input type="text" class="input-in-line" id="lastName" placeholder="Sobrenome" required />
             <input type="email" class="input-in-line" id="email" placeholder="Email" required/>
-            <input type="password" class="input-in-line" id="password" placeholder="Senha" required/>
+            <input type="password" class="input-in-line" minlength="6" id="password" placeholder="Senha" required/>
             <input type="password" class="input-in-line" id="passwordConfirmation" placeholder="Confirme sua senha" required/>
             <section id="error-login" class="error-message"></section>
           </fieldset> 
@@ -30,35 +32,31 @@ export const Register = () => {
   </section>  
   `;
 
-  rootElement.querySelector('#registerSingIn').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = rootElement.querySelector('#email').value;
-    const password = rootElement.querySelector('#password').value;
-    const passwordConfirmed = rootElement.querySelector('#passwordConfirmation').value;
-    checkData(email, password, passwordConfirmed);
-  });
+  rootElement
+    .querySelector("#registerSingIn")
+    .addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = rootElement.querySelector("#email").value;
+      const password = rootElement.querySelector("#password").value;
+      const passwordConfirmed = rootElement.querySelector(
+        "#passwordConfirmation"
+      ).value;
+      const userName = rootElement.querySelector("#name").value;
+      checkData(email, password, passwordConfirmed, userName);
+    });
 
   return rootElement;
 };
 
-const passwordMismatch = 'As senhas não são iguais. Por favor, escreva novamente.';
-const weakPassowrd = 'Sua senha tem que conter no minimo 6 caracteres. Por favor, escreva uma senha maior.';
-
-const checkData = (emailValue, passwordValue, passwordConfirmed) => {
+const checkData = (emailValue, passwordValue, passwordConfirmed, userName) => {
   if (passwordValue !== passwordConfirmed) {
-    printMessageError(passwordMismatch);
-  } else if (passwordValue.length < 6) {
-    printMessageError(weakPassowrd);
+    getError("mismatch-password");
   } else {
     recordNewUser(emailValue, passwordValue)
-      .then(() => {
-        emailVerify()
-          .then(() => {
-            onNavigate('/login');
-          })
-          .catch((err) => {
-            getError(err);
-          });
+      .then((user) => user)
+      .then((loggedUser) => {
+        saveUserProfile(userName);
+        onNavigate('/')
       })
       .catch((err) => {
         getError(err);

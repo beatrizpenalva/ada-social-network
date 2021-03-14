@@ -32,9 +32,12 @@ const singUpProvider = (provider) => {
 
 export const logOut = () => firebase.auth().signOut();
 
-export const recordNewUser = (userEmail, userPassword) => firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);
+export const saveUserProfile = (userName) => {
+  const user = getCurrentUser()
+  user.updateProfile({displayName: userName});
+}
 
-export const emailVerify = () => firebase.auth().currentUser.sendEmailVerification();
+export const recordNewUser = (userEmail, userPassword) => firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword);
 
 export const getPosts = () => firebase.firestore().collection('posts').orderBy('time', 'desc').get();
 

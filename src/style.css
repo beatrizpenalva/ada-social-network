@@ -41,14 +41,14 @@ figure {
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background: #FF780F;
+    background: #d3cbc3;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #FF780F;
+    background: #d3cbc3;
 }
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px rgb(105, 109, 109);
+    box-shadow: inset 0 0 5px rgb(167, 166, 166);
     border-radius: 2px;
 }
 .login-page, .register-page {
@@ -316,9 +316,6 @@ figure {
     flex-direction: row;
     align-items: center;
 }    
-.edit:hover, .delete:hover {
-    opacity: .70;
-}
 [type="checkbox"]:checked + label {
     color: #FF780F;
   }
@@ -356,6 +353,9 @@ figure {
     text-align: center;
     color: #FFFFFF;
     outline: transparent;
+}
+.send-button:hover, .send-button:active {
+    background-color: #FF780F;
 }
 .comment-container {
     display: flex;
@@ -396,6 +396,23 @@ figure {
 .form-comment {
     display: flex;
     flex-direction: row;
+}
+.post-features {
+    font-size: 21px;
+    color:#d3cbc3;
+    outline: none;
+    padding: 0 2px;
+    background-color: transparent;
+}
+.post-features:hover, .post-features:active, .comment-button:hover, .comment-button:active {
+    color: #FF780F;
+}
+.logout {
+    font-size: 36px;
+    color: #d3cbc3;
+}
+.logout:hover, .logout:active {
+    color: #FF780F;
 }
 @media (max-width: 375px) {
     #publish-form, .post-container, .header, .post-comment {
