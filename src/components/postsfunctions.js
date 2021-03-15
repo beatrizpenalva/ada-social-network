@@ -25,6 +25,7 @@ export const showEditContainer = (e) => {
   const cancelEditButtonId = `#cancel-edition-${postID}`;
   const cancelEditionForm = postCard.querySelector(cancelEditButtonId);
   cancelEditionForm.addEventListener('click', () => {
+    e.preventDefault();
     toggleEditContainer(postCard, false);
   });
 
