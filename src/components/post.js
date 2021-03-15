@@ -87,7 +87,7 @@ export const printPosts = (doc, id, currentUser) => {
             <form id="edit-post-form-${id}" class="on-edition">
               <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500" wrap="hard" required>${post.text}</textarea>
                 <fieldset class="edition-buttons">
-                  <button class="post-function cancel-edition" id="cancel-edition-${id}">
+                  <button type="button" class="post-function cancel-edition" id="cancel-edition-${id}">
                     <span class="material-icons post-features">
                     cancel
                     </span>
