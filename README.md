@@ -81,7 +81,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 Icons: [Material Design](https://material.io/) ✒️
 
 &nbsp;
-Typography [Roboto](https://fonts.google.com/specimen/Roboto?) ✏️
+Typography: [Roboto](https://fonts.google.com/specimen/Roboto?) ✏️
 
 ## Authors
 
