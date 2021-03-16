@@ -4,26 +4,26 @@
 
 ## Index
 
-[1. About](#1-about)
+<p align="center">
+ <a href="#about">About</a> •
+ <a href="#process">Process</a> •
+ <a href="#product">Product</a> • 
+ <a href="#build-with">Build With</a> • 
+ <a href="#acknowledgments-and-credits">Acknowledgments and credits</a> • 
+ <a href="#-créditos">Créditos</a> • 
+ <a href="#authors">Authors</a> • 
+</p>
 
-[2. Process](#2-process)
+---
 
-[3. Product](#3-product)
-
-[4. Build With](#4-build-with)
-
-[5. Acknowledgments and credits](#5-acknowledgments-and-credits)
-
-[6. Authors](#6-authors)
-
-## 1. About
+## About
 :wave: The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace). Ada developed the first algorithm to be read by a machine, Charles Babbage's analytical machine.
 
 Although this place is historically ours and the lack of TI professionals in the Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and only 13% of the professionals employed were women and in leadership occupancy, they only represent 8% of the scenario, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
 Inspired by the Ada story and our story in Laboratoria, we created Ada, a social network for women in the tech area (or aspiring to) to meet, share support, experiences, opportunities, and knowledge.
 
-## 2. Process
+## Process
 
 :mag_right: **User experience**
 
@@ -35,7 +35,7 @@ We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&f
 
 The project planning and organization were developed using the Kanban method. We divided the work by User Stories and the strategy of programming was code review. You can see our board by clicking [here](https://trello.com/b/0PEjsA2s/ada-rede-social). :muscle:
 
-## 3. Product
+## Product
 
 :bulb: **Branding**
 
@@ -55,7 +55,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 ![desktop-login](./src/img/desktop-login.svg)
 ![desktop-timeline](./src/img/desktop-timeline.svg)
 
-## 4. Build With
+## Build With
 
 :wrench: Vanilla JavaScript
 &nbsp;
@@ -69,12 +69,12 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 :wrench: Firebase
 &nbsp;
 
-## 5. Acknowledgments and credits
+## Acknowledgments and credits
 
 &nbsp;
 [Laboratoria](https://www.laboratoria.la/) :yellow_heart:
 
-## 6. Authors
+## Authors
 
 Developed with :heart: by:
 
