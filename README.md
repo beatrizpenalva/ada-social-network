@@ -1,4 +1,6 @@
-:star2: Ada, code like a girl. A social network to integrate women in tech area. To access click [here](https://social-networl-4387c.web.app/login) :star2:
+<p align="center">
+ :star2: Ada, code like a girl. A social network to integrate women in tech area. To access click [here](https://social-networl-4387c.web.app/login) :star2:
+</p>
 
 ---
 
@@ -10,7 +12,6 @@
  <a href="#product">Product</a> • 
  <a href="#build-with">Build With</a> • 
  <a href="#acknowledgments-and-credits">Acknowledgments and credits</a> • 
- <a href="#-créditos">Créditos</a> • 
  <a href="#authors">Authors</a> • 
 </p>
 
