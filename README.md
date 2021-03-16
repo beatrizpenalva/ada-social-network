@@ -4,7 +4,7 @@
 
 ## Index
 
-<p align="center">
+<p>
  <a href="#about">About</a> •
  <a href="#process">Process</a> •
  <a href="#product">Product</a> • 
