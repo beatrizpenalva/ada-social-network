@@ -31,9 +31,7 @@ export const printPosts = (doc, id, currentUser) => {
       post.likes.includes(currentUser) ? "checked" : ""
     }>
               <label for="like-${id}">
-                <span class="material-icons">
-                 favorite
-                </span>
+                <i class="fas fa-heart post-features"></i>
               </label>
               <p class="post-content" id="likeValue-${id}">${
       post.likes.length
@@ -72,15 +70,11 @@ export const printPosts = (doc, id, currentUser) => {
 
             <section class="post-buttons">
               <button class="post-function edit" id="edit-${id}">
-                <span class="material-icons post-features">
-                  edit
-                </span>
+                <i class="fas fa-edit post-features"></i>
               </button>
 
               <button class="post-function delete" id="delete-${id}">
-                <span class="material-icons post-features">
-                  delete
-                </span>
+                <i class="fas fa-trash post-features"></i>
               </button>
             </section>
 
@@ -88,9 +82,7 @@ export const printPosts = (doc, id, currentUser) => {
               <textarea class="edition-content text" id="edition-content-${id}" spellcheck="true" maxlength="500" wrap="hard" required>${post.text}</textarea>
                 <fieldset class="edition-buttons">
                   <button type="button" class="post-function cancel-edition" id="cancel-edition-${id}">
-                    <span class="material-icons post-features">
-                    cancel
-                    </span>
+                    <i class="far fa-window-close post-features"></i>
                   </button>    
 
                   <button type="submit" class="send-button">Salvar</button>
@@ -217,9 +209,7 @@ export const createCommentBox = (doc, id, currentUser) => {
     } hidden>
           
           <label for="like-${id}">
-            <span class="material-icons">
-            favorite
-            </span>
+            <i class="fas fa-heart post-features"></i>
           </label>
           <p class="comment-content" id="likeValue-${id}">${
       comment.likes.length
@@ -246,9 +236,7 @@ export const createCommentBox = (doc, id, currentUser) => {
     
       <section class="comment-buttons">
         <button class="comment-function delete-comment" id="delete-${id}">
-          <span class="material-icons post-features">
-            delete
-          </span>
+          <i class="fas fa-trash post-features"></i>
         </button>
       </section>
     </section>

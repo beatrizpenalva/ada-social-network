@@ -1,11 +1,14 @@
-import { onNavigate } from '../../utils/history.js';
-import { getError } from '../../errors/index.js';
+import { onNavigate } from "../../utils/history.js";
+import { getError } from "../../errors/index.js";
+import { createFooter } from "../../components/footer.js";
 import {
-  getGoogleProvider, getFacebookProvider, getGitHubProvider, signInEmail,
-} from '../../services/index.js';
+  signUpGoogle,
+  singUpGithub,
+  signInEmail,
+} from "../../services/index.js";
 
 export const Login = () => {
-  const rootElement = document.createElement('main');
+  const rootElement = document.createElement("main");
   rootElement.innerHTML = `
     <section class="login-page">  
       <section class="left">  
@@ -16,8 +19,16 @@ export const Login = () => {
       <section class="right">
         <form id="signin-form">
           <fieldset class="right">
+            <label for="email" class="label-form">
+              E-mail <span class="required-item">*</span>
+            </label>
             <input type="email" id="email" class="input-in-line" placeholder="E-mail" required>
-            <input type="password" id="password" class="input-in-line" placeholder="Senha" required>
+            
+            <label for="password" class="label-form">
+              Password <span class="required-item">*</span>
+            </label> 
+              <input type="password" id="password" class="input-in-line" placeholder="Senha" required>
+            
             <section id="error-login" class="error-message"></section>
           </fieldset>
           
@@ -29,38 +40,46 @@ export const Login = () => {
         <p class="subtitle">_______________ OU _______________</p>
         
         <section class="providers-buttons">
-          <button id="google-button" class="button-icon"><img src="../../img/google.svg" height="50px" width="50px"></button>
-          <button id="facebook-button" class="button-icon"><img src="../../img/facebook.svg" height="50px" width="50px"></button>
-          <button id="github-button" class="button-icon"><img src="../../img/github.svg" height="50px" width="50px"></button>
+          <button id="google-button" class="button-icon">
+            <i class="fab fa-google font-icons"></i>
+            <span>Entrar com conta Google</span>
+          </button>
+
+          <button id="github-button" class="button-icon">
+            <i class="fab fa-github-alt font-icons"></i>
+            <span>Entrar com conta GitHub</span>
+          </button>
         </section>  
 
         <p class="subtitle">Não tem uma conta?
           <button id="button-register" class="button-in-text">Registre-se</button>
         </p>
       </section>
+      <footer id="footer"></footer>
     </section>    
   `;
 
-  const signInButton = rootElement.querySelector('#signin-form');
-  const goRegisterButton = rootElement.querySelector('#button-register');
-  const signUpGoogleButton = rootElement.querySelector('#google-button');
-  const signUpFbButton = rootElement.querySelector('#facebook-button');
-  const signUpGhButton = rootElement.querySelector('#github-button');
+  const signInButton = rootElement.querySelector("#signin-form");
+  const goRegisterButton = rootElement.querySelector("#button-register");
+  const signUpGoogleButton = rootElement.querySelector("#google-button");
+  const signUpGhButton = rootElement.querySelector("#github-button");
 
-  signInButton.addEventListener('submit', (event) => {
+  const getFooter = rootElement.querySelector("#footer");
+  getFooter.appendChild(createFooter());
+
+  signInButton.addEventListener("submit", (event) => {
     event.preventDefault();
-    const email = rootElement.querySelector('#email').value;
-    const password = rootElement.querySelector('#password').value;
+    const email = rootElement.querySelector("#email").value;
+    const password = rootElement.querySelector("#password").value;
     sendLogin(email, password);
   });
 
-  signUpGoogleButton.addEventListener('click', getGoogleProvider);
-  signUpFbButton.addEventListener('click', getFacebookProvider);
-  signUpGhButton.addEventListener('click', getGitHubProvider);
+  signUpGoogleButton.addEventListener("click", signUpGoogle);
+  signUpGhButton.addEventListener("click", singUpGithub);
 
-  goRegisterButton.addEventListener('click', (event) => {
+  goRegisterButton.addEventListener("click", (event) => {
     event.preventDefault();
-    onNavigate('/register');
+    onNavigate("/register");
   });
 
   return rootElement;
@@ -69,7 +88,7 @@ export const Login = () => {
 const sendLogin = (email, password) => {
   signInEmail(email, password)
     .then(() => {
-      onNavigate('/');
+      onNavigate("/");
     })
     .catch((err) => {
       getError(err);
