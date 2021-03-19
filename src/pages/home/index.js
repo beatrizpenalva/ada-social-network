@@ -9,7 +9,7 @@ export const Home = () => {
     <section class="timeline">
       <section id="header"></section>
       <form id="publish-form">
-        <textarea id="postText" class="text" spellcheck="true" maxlength="500" wrap="hard" placeholder="O que você quer compartilhar?" required></textarea>
+        <textarea id="postText" class="text" spellcheck="true" maxlength="500" wrap="hard" placeholder="What do you want to share?" required></textarea>
           <section class="publish-button"> 
             <label for="file" class="hidden">
               <figure class="input-file">
@@ -17,7 +17,7 @@ export const Home = () => {
               </figure>  
               <input type="file" id="file" accept="image/png, image/jpeg">
             </label>
-            <button type="submit" id="publish" class="submit-button">Publicar</button> 
+            <button type="submit" id="publish" class="submit-button">Publish</button> 
           </section>  
       </form>  
       <section id="feed"></section>

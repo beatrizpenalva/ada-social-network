@@ -31,7 +31,7 @@ export const printPosts = (doc, id, currentUser) => {
       post.likes.includes(currentUser) ? "checked" : ""
     }>
               <label for="like-${id}">
-                <i class="fas fa-heart post-features"></i>
+                <i class="fas fa-heart"></i>
               </label>
               <p class="post-content" id="likeValue-${id}">${
       post.likes.length
@@ -43,8 +43,8 @@ export const printPosts = (doc, id, currentUser) => {
         <section class="bottom-post">
           <section id="comment-${id}" class="comment-container">
             <section id="new-comment-${id}" class="form-comment">
-              <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
-              <button class="comment-button">Publicar</button> 
+              <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Post your reply" required></textarea>
+              <button class="comment-button">Publish</button> 
             </section>
 
           </section>
@@ -85,7 +85,7 @@ export const printPosts = (doc, id, currentUser) => {
                     <i class="far fa-window-close post-features"></i>
                   </button>    
 
-                  <button type="submit" class="send-button">Salvar</button>
+                  <button type="submit" class="send-button">Send</button>
                 </fieldset>
             </form>
           </section>  
@@ -94,8 +94,8 @@ export const printPosts = (doc, id, currentUser) => {
         <section class="bottom-post">
           <section id="comment-${id}" class="comment-container">
             <section id="new-comment-${id}" class="form-comment">
-              <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Adicione seu comentário." required></textarea>
-              <button class="comment-button">Publicar</button> 
+              <textarea id="commentText-${id}" class="comment-text" spellcheck="true" maxlength="250" wrap="hard" placeholder="Post your reply" required></textarea>
+              <button class="comment-button">Publish</button> 
             </section>
           </section>
         </section>
