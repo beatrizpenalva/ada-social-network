@@ -31,7 +31,7 @@ export const printPosts = (doc, id, currentUser) => {
       post.likes.includes(currentUser) ? "checked" : ""
     }>
               <label for="like-${id}">
-                <span class="material-icons">
+                <span class="material-icons post-features">
                  favorite
                 </span>
               </label>
