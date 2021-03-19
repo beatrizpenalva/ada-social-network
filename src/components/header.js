@@ -16,9 +16,7 @@ export const createHeader = () => {
         </figcaption>
       </figure>
       <button id="logout" class="button-icon-feed">
-        <span class="material-icons logout">
-          logout
-        </span>
+        <i class="fas fa-sign-out-alt logout"></i>
       </button>
     </nav>
   `;
