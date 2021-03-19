@@ -8,22 +8,21 @@ export const getCurrentUser = () => firebase.auth().currentUser;
 export const signInEmail = (email, password) =>
   firebase.auth().signInWithEmailAndPassword(email, password);
 
-export const getGoogleProvider = () => {
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-  singUpProvider(googleProvider);
+export const signUpGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase
+  .auth()
+  .signInWithPopup(provider)
+  .then((user) => {
+    saveUserProfile(user.user);
+  })
+  .catch((err) => {
+    getError(err);
+  });
 };
 
-export const getFacebookProvider = () => {
-  const facebookProvider = new firebase.auth.FacebookAuthProvider();
-  singUpProvider(facebookProvider);
-};
-
-export const getGitHubProvider = () => {
-  const githubProvider = new firebase.auth.GithubAuthProvider();
-  singUpProvider(githubProvider);
-};
-
-const singUpProvider = (provider) => {
+export const singUpGithub = () => {
+  const provider = new firebase.auth.GithubAuthProvider();
   provider.addScope("user");
   firebase
     .auth()
