@@ -78,7 +78,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 [Laboratoria](https://www.laboratoria.la/) 💛
 
 &nbsp;
-Icons: [Material Design](https://material.io/) ✒️
+Icons: [Font Awesome](https://fontawesome.com/) ✒️
 
 &nbsp;
 Typography: [Roboto](https://fonts.google.com/specimen/Roboto?) ✏️
