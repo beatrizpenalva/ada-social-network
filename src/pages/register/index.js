@@ -16,7 +16,7 @@ export const Register = () => {
     <section class="register-sections"> 
       <section class="left">
         <img src="../../img/ada-lovelace.svg" width="175px" height="175px" alt="Desenho do rosto de Ada Lovelace em preto com um fundo redondo alaranjado">
-        <p class="logo-theme"><span class="logo-name">[Ada]</span> Programe como uma mulher.</p>
+        <p class="logo-theme"><span class="logo-name">[Ada]</span> Code like a woman.</p>
       </section>
 
       <section class="right">
@@ -25,28 +25,28 @@ export const Register = () => {
               <label for="name" class="label-form">
                 Name <span class="required-item">*</span>
               </label> 
-              <input type="text" class="input-in-line" id="name" placeholder="Nome"/>
+              <input type="text" class="input-in-line" id="name" placeholder="Name"/>
 
               <label for="email" class="label-form">
                 E-mail <span class="required-item">*</span>
               </label> 
-              <input type="email" class="input-in-line" id="email" placeholder="Email" required/>
+              <input type="email" class="input-in-line" id="email" placeholder="email@email.com" required/>
               
               <label for="password" class="label-form">
                 Password <span class="required-item">*</span>
               </label> 
-              <input type="password" class="input-in-line" minlength="6" id="password" placeholder="Senha" required/>
+              <input type="password" class="input-in-line" minlength="6" id="password" placeholder="******" required/>
 
               <label for="passwordConfirmation" class="label-form">
                 Confirm password <span class="required-item">*</span>
               </label> 
-              <input type="password" class="input-in-line" id="passwordConfirmation" placeholder="Confirme sua senha" required/>
+              <input type="password" minlength="6" class="input-in-line" id="passwordConfirmation" placeholder="******" required/>
 
               <section id="error-login" class="error-message"></section>
             </fieldset> 
 
             <fieldset class="register-button">
-              <button type="submit" class="submit-button" id="newRegister">Registrar</button>
+              <button type="submit" class="submit-button" id="newRegister">Sign Up</button>
             </fieldset>
         </form>
       </section>

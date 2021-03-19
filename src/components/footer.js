@@ -4,11 +4,11 @@ export const createFooter = () => {
       <section class="footer">
         <p>
             <i class="fab fa-github-alt footer-icon"></i>
-            Desenvolvido por
+            Developed by
             <a class="devas" href="https://github.com/beatrizpenalva" target="blank" title="GITHUB PROFILE">Beatriz Penalva</a> 
             ,
             <a class="devas" href="https://github.com/beatrizpenalva" target="blank" title="GITHUB PROFILE">Gabrielle Almeida</a>
-            e 
+            & 
             <a class="devas" href="https://github.com/beatrizpenalva" target="blank" title="GITHUB PROFILE">Julia Terin</a>
             . 
         </p>

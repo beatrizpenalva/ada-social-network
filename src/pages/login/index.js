@@ -13,7 +13,7 @@ export const Login = () => {
     <section class="login-page">  
       <section class="left">  
         <img src="../../img/ada-lovelace.svg" width="175px" height="175px">
-        <p class="logo-theme"><span class="logo-name">[Ada]</span> Programe como uma mulher.</p>
+        <p class="logo-theme"><span class="logo-name">[Ada]</span> Code like a woman.</p>
       </section>
       
       <section class="right">
@@ -22,37 +22,37 @@ export const Login = () => {
             <label for="email" class="label-form">
               E-mail <span class="required-item">*</span>
             </label>
-            <input type="email" id="email" class="input-in-line" placeholder="E-mail" required>
+            <input type="email" id="email" class="input-in-line" placeholder="email@email.com" required>
             
             <label for="password" class="label-form">
               Password <span class="required-item">*</span>
             </label> 
-              <input type="password" id="password" class="input-in-line" placeholder="Senha" required>
+              <input type="password" minlength="6" id="password" class="input-in-line" placeholder="******" required>
             
             <section id="error-login" class="error-message"></section>
           </fieldset>
           
           <fieldset class="login-button">
-            <button type="submit" class="submit-button" id="login-button">Entrar</button> 
+            <button type="submit" class="submit-button" id="login-button">Sign In</button> 
           </fieldset>
         </form> 
 
-        <p class="subtitle">_______________ OU _______________</p>
+        <p class="subtitle">_______________ OR _______________</p>
         
         <section class="providers-buttons">
           <button id="google-button" class="button-icon">
             <i class="fab fa-google font-icons"></i>
-            <span>Entrar com conta Google</span>
+            <span>Sign in with Google</span>
           </button>
 
           <button id="github-button" class="button-icon">
             <i class="fab fa-github-alt font-icons"></i>
-            <span>Entrar com conta GitHub</span>
+            <span>Sign in with GitHub</span>
           </button>
         </section>  
 
-        <p class="subtitle">Não tem uma conta?
-          <button id="button-register" class="button-in-text">Registre-se</button>
+        <p class="subtitle">Do not have an account?
+          <button id="button-register" class="button-in-text">Sign up</button>
         </p>
       </section>
       <footer id="footer"></footer>
