@@ -23,7 +23,7 @@
 
 Although this place is historically ours and the lack of TI professionals in the Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and only 13% of the professionals employed were women and in leadership occupancy, they only represent 8% of the scenario, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
-Inspired by the Ada story and our story in Laboratoria, we created Ada, a social network for women in the tech area (or aspiring to) to meet, share support, experiences, opportunities, and knowledge. 💪
+Inspired by the Ada story and our journey in Laboratoria, we created a social network for women in the tech area (or aspiring to) to meet, share support, experiences, opportunities, and knowledge. 💪
 
 ## Process
 
