@@ -20,7 +20,7 @@ Hi there! 👋
 
 The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace). Ada developed the first algorithm to be read by a machine, Charles Babbage's analytical machine. 👩‍💻
 
-![ada-lovelace-drawn](./src/img/ada-lovelace-dribbble.png)
+<img align='center' src='./src/img/ada-lovelace-dribbble.png' width=350 frameBorder="0" ></img>
 
 Although this place is historically ours and the lack of TI professionals in the Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and only 13% of the professionals employed were women and in leadership occupancy, they only represent 8% of the scenario, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
@@ -44,7 +44,7 @@ The project planning and organization were developed using the Kanban method. We
 
 Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
 
-![logo](./src/img/logo.svg)
+<img align='right' src='./src/img/logo.svg' width=350 frameBorder="0" ></img>
 
 🎨 **Visual identity**
 
@@ -52,8 +52,8 @@ Originally, the color palette was developed based on orange because in color psy
 
 However, I have continuing to work with this project and decided to create an user interface that also brings Ada's essence. So, the new color palette and all the design system was based on an interpretation of her famous [portrait](https://pt.wikipedia.org/wiki/Ada_Lovelace#/media/Ficheiro:Ada_lovelace.jpg).
 
-![ada-gif](./src/img/ada-animation.gif)
-![color-palette](./src/img/new-color-palette.png)
+<img align='center' src='./src/img/ada-animation.gif' width=350 frameBorder="0" ></img>
+<img align='center' src='./src/img/new-color-palette.png' width=350 frameBorder="0" ></img>
 
 ✍️ **Prototype**
 
