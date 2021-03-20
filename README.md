@@ -1,4 +1,4 @@
-🌟 Ada, code like a girl. A social network to integrate women in tech area. To access click [here](https://social-networl-4387c.web.app/login) 🌟
+🌟 Ada, code like a girl. A social network to integrate women in tech area. To access click [here](https://ada-social-network.web.app) 🌟
 
 ---
 
