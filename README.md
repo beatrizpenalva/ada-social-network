@@ -23,7 +23,7 @@
 
 Although this place is historically ours and the lack of TI professionals in Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women and in leadership occupancy, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
-Inspired by Ada biography and our journey in Laboratoria, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge. 💪
+Inspired by Ada biography and our journey, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge. 💪
 
 ## Process
 
@@ -47,8 +47,10 @@ Our name is in honor of Ada Lovelace's story and the square brackets are an inte
 
 🎨 **Visual identity**
 
-<img align='left' src='./src/img/ada-animation.gif' width=320 frameBorder="0" ></img>
-<img align='left' src='./src/img/new-color-palette.png' width=320 frameBorder="0" ></img>
+<p align='left'>
+ <img src='./src/img/ada-animation.gif' width=320 frameBorder="0" ></img>
+ <img src='./src/img/new-color-palette.png' width=320 frameBorder="0" ></img>
+</p>
 
 Originally, the color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
 
