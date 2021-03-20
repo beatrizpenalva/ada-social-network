@@ -15,7 +15,8 @@
     "stylelint": "stylelint --aei src/**/*.css",
     "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
     "test": "jest --coverage",
-    "start": "firebase serve --only hosting"
+    "start": "firebase serve --only hosting",
+    "deploy": "firebase -P ada-social-network deploy"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
