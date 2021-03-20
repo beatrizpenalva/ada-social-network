@@ -15,16 +15,16 @@
 
 ---
 
-## About
-Hi there! 👋 
-
-The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace). Ada developed the first algorithm to be read by a machine, Charles Babbage's analytical machine. 👩‍💻
-
-<img align='center' src='./src/img/ada-lovelace-dribbble.png' width=350 frameBorder="0" ></img>
+## About 
+<p align='left'>
+👋 The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace). Ada developed the first algorithm to be read by a machine, Charles Babbage's analytical machine. 👩‍💻
 
 Although this place is historically ours and the lack of TI professionals in the Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and only 13% of the professionals employed were women and in leadership occupancy, they only represent 8% of the scenario, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
 Inspired by the Ada story and our story in Laboratoria, we created Ada, a social network for women in the tech area (or aspiring to) to meet, share support, experiences, opportunities, and knowledge. 💪
+</p>
+
+<img align='right' src='./src/img/ada-lovelace-dribbble.png' width=350 frameBorder="0" ></img>
 
 ## Process
 
