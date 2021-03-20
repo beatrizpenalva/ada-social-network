@@ -41,9 +41,9 @@ The project planning and organization were developed using the Kanban method. We
 
 💡 **Branding**
 
-Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
+<img align='right' src='./src/img/logo.svg' width=150 frameBorder="0" ></img>
 
-<img align='right' src='./src/img/logo.svg' width=350 frameBorder="0" ></img>
+Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
 
 🎨 **Visual identity**
 
