@@ -44,13 +44,16 @@ The project planning and organization were developed using the Kanban method. We
 
 Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
 
-![logo](./src/img/logo.png)
+![logo](./src/img/logo.svg)
 
 🎨 **Visual identity**
 
-The color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
+Originally, the color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
 
-![color-palette](./src/img/color-palette.svg)
+However, I have continuing to work with this project and decided to create an user interface that also brings Ada's essence. So, the new color palette and all the design system was based on an interpretation of her famous [portrait](https://pt.wikipedia.org/wiki/Ada_Lovelace#/media/Ficheiro:Ada_lovelace.jpg).
+
+![ada-gif](./src/img/ada-animation.gif)
+![color-palette](./src/img/new-color-palette.png)
 
 ✍️ **Prototype**
 
@@ -84,6 +87,9 @@ Icons: [Font Awesome](https://fontawesome.com/) ✒️
 
 &nbsp;
 Typography: [Roboto](https://fonts.google.com/specimen/Roboto?) ✏️
+
+&nbsp;
+Animated Ada: [Julia Vedenyapina](https://dribbble.com/shots/5588411-Ada) 🎨
 
 ## Authors
 
