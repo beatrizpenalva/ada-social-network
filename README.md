@@ -19,9 +19,9 @@
 
 <img align='left' src='./src/img/ada-lovelace-dribbble.png' width=435 frameBorder="0" ></img>
 
-👋 The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace), she developed the first algorithm to be read by a machine. 👩‍💻
+The first known programmer in history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace), she developed the first algorithm to be read by a machine. 👩‍💻
 
-Although this place is historically ours and the lack of TI professionals in Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women and in leadership occupancy, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
+Although this place is historically ours and the lack of TI professionals in Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women in leadership occupancy, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola) (2019).
 
 Inspired by Ada biography and our journey, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge. 💪
 
@@ -49,8 +49,8 @@ Our name is in honor of Ada Lovelace's story and the square brackets are an inte
 
 <p align='left'>
  <img align='left' src='./src/img/ada-animation.gif' width=320 frameBorder="0" ></img>
- <br>
  <img align='left' src='./src/img/new-color-palette.png' width=320 frameBorder="0" ></img>
+  <br>
 </p>
 
 Originally, the color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
