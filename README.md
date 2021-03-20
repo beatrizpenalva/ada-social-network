@@ -53,7 +53,7 @@ Originally, the color palette was developed based on orange because in color psy
 
 However, I have continuing to work with this project and decided to create an user interface that also brings Ada's essence. So, the new color palette and all the design system was based on an interpretation of her famous [portrait](https://pt.wikipedia.org/wiki/Ada_Lovelace#/media/Ficheiro:Ada_lovelace.jpg).
 
-<img align='center' src='./src/img/new-color-palette.png' width=450 frameBorder="0" ></img>
+<img align='center' src='./src/img/new-color-palette.png' width=385 frameBorder="0" ></img>
 
 ✍️ **Prototype**
 
