@@ -20,8 +20,8 @@ Hi there! 👋
 
 The first known programmer in human history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace). Ada developed the first algorithm to be read by a machine, Charles Babbage's analytical machine. 👩‍💻
 
-![ada](./src/img/ada-lovelace-dribbble.png)
-![ada](./src/img/ada-lovelace-dribbble.png)
+![ada-lovelace-drawn](./src/img/ada-lovelace-dribbble.png)
+![ada-art](./src/img/ada-lovelace.png)
 
 Although this place is historically ours and the lack of TI professionals in the Brazilian market, only 17% of the jobs opportunities in the TI area were offered to women and only 13% of the professionals employed were women and in leadership occupancy, they only represent 8% of the scenario, these numbers references from 2019, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola).
 
@@ -78,7 +78,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 ## Acknowledgments and credits
 
 &nbsp;
-[Laboratoria](https://www.laboratoria.la/) 💛
+Project developed in [Laboratoria](https://www.laboratoria.la/) Bootcamp 💛
 
 &nbsp;
 Icons: [Font Awesome](https://fontawesome.com/) ✒️
