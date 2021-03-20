@@ -3,6 +3,10 @@
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif, normal, normal;
+}
+body {
+    background-color: #FDFCFD;
+    color: #2C3759;
 } 
 fieldset {
     border: none;
@@ -54,7 +58,7 @@ button {
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     padding: 15px 0px;
 }
 .left {
@@ -66,17 +70,14 @@ button {
     margin: 20px 0px 10px;
     font-weight: 550;
     font-size: 24px;
-    color: #231911;
     line-height: 25px;
-    width: 200px;
 }
 .logo-name {
-    color: #FF780F;
+    color: #8C6883;
 }
 .right, .form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
 }
 .providers-buttons {
     display: flex;
@@ -89,56 +90,69 @@ button {
     height: 35px;
     border-radius: 10px;
     border-style: none;
-    background: #FF780F;
+    background: #FAAC19;
     font-weight: 500;
     font-size: 18px;
     text-align: center;
-    color: #FFFFFF;
+    color: #FAE8E4;
     outline: transparent;
+    transition: 0.5s ease-in-out;
 }
 .submit-button:hover {
-    background-color:#FEBB86;
+    color: #FAAC19;
+    background-color: transparent;
+    border: solid 3px #FAAC19;
 }
 .subtitle {
     font-weight: normal;
     font-size: 14px;
     text-align: center;
-    color: #231911;
     margin: 15px 0;
 }
 .button-in-text {
-    color: #FF780F;
+    color: #8C6883;
     font-size: 14px;
-    font-weight: medium;
+    font-weight: 500;
     border-style: none;
-    background-color: #FFFFFF;
     outline: transparent;
+    transition: 0.3s ease-in-out;
 }
 .button-in-text:hover {
     text-decoration: underline;
+    color: #FAAC19;
 }
 .input-in-line {
     width: 255px;
     border: none;
-    border-bottom: 1.5px solid #231911;
+    border-bottom: 2px solid #8C6883;
     padding: 8px;
-    outline-color: #FF780F;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+.input-in-line:focus {
+    background-color: #F2D8EE;
 }
 .button-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     width: 100%;
     height: 35px;
-    border-radius: 10px;
-    border-style: none;
-    background-color: #FF780F;
-    outline: transparent;
+    margin-bottom: 10px;
     font-weight: 500;
     font-size: 14px;
-    text-align: center;
-    color: #FFFFFF;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    outline: transparent;
+    color: #FAAC19;
+    background-color: transparent;
+    border: solid 3px #FAAC19;
+    transition: 0.5s ease-in-out;
+}
+.button-icon:hover {
+    color: #FAE8E4;
+    background: #FAAC19;
 }
 .error-message {
     display: flex;
@@ -150,7 +164,7 @@ button {
     font-weight: normal;
     font-size: 12px;
     text-align: center;
-    color: #db0b0b;
+    color: #D48573;
 }
 .timeline {
     display: flex;
@@ -183,7 +197,7 @@ button {
     flex-wrap: wrap;
     font-weight: 500;
     font-size: 24px;
-    color: #FF780F;
+    color: #8C6883;
     margin: 10px;
 }
 #publish-form {
@@ -199,7 +213,7 @@ button {
 }
 .text {
     border: none;
-    border-bottom: solid 2px #d3cbc3;
+    border-bottom: solid 2px #8C6883;
     background-color: #F2EEEA;
     width: 100%;
     height: 108px;
@@ -207,8 +221,10 @@ button {
     font-size: 16px;
     text-align: left;
     resize: none;
-    color: #231911;
-    outline-color: #d3cbc3;
+    outline-color: #F2D8EE;
+}    
+.text:focus {
+    background-color: #F2D8EE;
 }
 #postText {
     padding: 10px;
@@ -222,21 +238,12 @@ button {
 }
 #publish {
     width: 120px;
-    height: 35px;
-    font-weight: 500;
-    font-size: 18px;
-    text-align: center;
-    color: #FFFFFF;
-    outline: transparent;
-}
-.button-icon:hover {
-    opacity: .60;
 }
 .input-file {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FF780F;
+    background-color: #8C6883;
     width: 35px;
     height: 35px;
     border-radius: 50px;
@@ -263,7 +270,7 @@ button {
     flex-direction: row;
     width: 100%;
     border: none;
-    border-top: solid 2px #d3cbc3;
+    border-top: solid 2px #8C6883;
 }
 .left-post, .left-comment {
     display: flex;
@@ -274,9 +281,11 @@ button {
 .avatar, .avatar-comment {
     width: 60px;
     height: 60px;
+    padding: 5px;
     border-radius: 100%;
     object-fit: cover; 
-    background-color: #FEBB86;
+    border: solid 2px #FDFCFD;
+    background-color: #F2D8EE;
 }
 .right-post, .right-comment {
     display: flex;
@@ -291,11 +300,9 @@ button {
 .username, .username-comment {
     font-weight: 500;
     font-size: 16px;
-    color: #231911;
 }
 .post-date, .post-date-comment {
     font-size: 12px;
-    color: #b6a89a;
 }
 .post-content, .comment-content {
     display: flex;
@@ -306,7 +313,7 @@ button {
     font-weight: lighter;
     font-size: 14px;
     line-height: 1.25em;
-    color: #231911;
+    color: #2C3759;
     word-break: break-word;
     max-width: 420px;
 }
@@ -329,8 +336,8 @@ button {
     flex-direction: row;
     align-items: center;
 }    
-[type="checkbox"]:checked + label {
-    color: #FF780F;
+[type="checkbox"]:checked + label i {
+    color: #D48573;
   }
 .on-edition {
     display: none;
@@ -360,15 +367,18 @@ button {
     height: 25px;
     border-radius: 6px;
     border-style: none;
-    background: #B6A89A;
+    background: #FAAC19;
     font-weight: 500;
     font-size: 14px;
     text-align: center;
-    color: #FFFFFF;
+    color: #FDFCFD;
     outline: transparent;
+    transition: 0.3s ease-in-out;
 }
 .send-button:hover, .send-button:active {
-    background-color: #FF780F;
+    color: #FAAC19;
+    background-color: transparent;
+    border: solid 2px #FAAC19;
 }
 .comment-container {
     display: flex;
@@ -384,25 +394,25 @@ button {
     font-size: 14px;
     text-align: left;
     resize: none;
-    color: #231911;
     border: none;
-    outline-color: #d3cbc3;
+    outline: none;
     padding: 8px 15px 0px;
 }
 .comment-button {
-    color: #9b928a;
+    color: #FAAC19;
     font-size: 14px;
     font-weight: 500;
     border-style: none;
     outline: transparent;
     padding: 0px 8px;
+    transition: 0.3s ease-in-out;
 }
 .post-comment {
     display: flex;
     flex-direction: row;
     width: 600px;
     padding: 15px;
-    border-bottom: solid 0.5px #d3cbc3;
+    border-bottom: solid 0.5px #8C6883;
     flex-wrap: wrap;
     overflow: auto;
 }
@@ -417,15 +427,13 @@ button {
     padding: 0 2px;
     background-color: transparent;
 }
-.post-features:hover, .post-features:active, .comment-button:hover, .comment-button:active {
-    color: #FF780F;
+.post-features:hover, .post-features:active, .comment-button:hover, .comment-button:active, .logout:hover, .logout:active {
+    color: #8C6883;
 }
 .logout {
     font-size: 36px;
-    color: #d3cbc3;
-}
-.logout:hover, .logout:active {
-    color: #FF780F;
+    color: #FAAC19;
+    transition: 0.3s ease-in-out;
 }
 label.label-form {
     display: flex;
@@ -434,21 +442,21 @@ label.label-form {
     text-align: left;
     font-size: 16px;
     font-weight: 500;
-    color: #231910;
 }
 .required-item {
     font-size: 12px;
     font-weight: bold;
-    color: #FF780F;
+    color: #D48573;
     margin-left: 5px;
 }
 .back-button {
-    color: #FF780F;
+    color: #8C6883;
     font-size: 36px;
     font-weight: 900;
+    transition: 0.5s ease-in-out;
 }
 .back-button:hover, .back-button:active {
-    color: #FEBB86;
+    color: #FAAC19;
 }
 #back {
     background-color: transparent;
@@ -460,7 +468,7 @@ label.label-form {
     position: fixed;
     top: 0;
     left: 0;
-    padding: 30px;
+    padding: 30px 0 0 30px;
 }    
 footer {
     display: flex;
@@ -472,19 +480,19 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: #d3cbc3;
-    color: #231910;
+    background-color: #F2D8EE;
     font-size: 12px;
     font-weight: lighter;
 }
 a {
     text-decoration: none;
-    color: #231910;
+    color: #2C3759;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
 }
 a:hover {
-    color: #FF780F;
+    color: #FAAC19;
 }
 .font-icons {
     font-size: 18px;
@@ -493,6 +501,12 @@ a:hover {
 .footer-icon {
     font-size: 16px;
     margin-right: 8px;
+}
+img {
+    border-top-left-radius: 85%;
+    border-top-right-radius: 60%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 75%;
 }
 @media (max-width: 375px) {
     #publish-form, .post-container, .header, .post-comment {

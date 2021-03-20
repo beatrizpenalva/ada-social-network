@@ -12,7 +12,7 @@ export const Login = () => {
   rootElement.innerHTML = `
     <section class="login-page">  
       <section class="left">  
-        <img src="../../img/ada-lovelace.svg" width="175px" height="175px">
+        <img src="../../img/ada-animation.gif" width="400px" height="300px">
         <p class="logo-theme"><span class="logo-name">[Ada]</span> Code like a woman.</p>
       </section>
       
@@ -52,7 +52,7 @@ export const Login = () => {
         </section>  
 
         <p class="subtitle">Do not have an account?
-          <button id="button-register" class="button-in-text">Sign up</button>
+          <button id="button-register" class="button-in-text">Sign up!</button>
         </p>
       </section>
       <footer id="footer"></footer>

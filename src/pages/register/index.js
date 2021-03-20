@@ -15,7 +15,7 @@ export const Register = () => {
     </button>  
     <section class="register-sections"> 
       <section class="left">
-        <img src="../../img/ada-lovelace.svg" width="175px" height="175px" alt="Desenho do rosto de Ada Lovelace em preto com um fundo redondo alaranjado">
+      <img src="../../img/ada-animation.gif" width="400px" height="300px">
         <p class="logo-theme"><span class="logo-name">[Ada]</span> Code like a woman.</p>
       </section>
 
