@@ -7,7 +7,7 @@ export const createHeader = () => {
   headerContainer.innerHTML = `
     <nav class="header">
       <figure class="current-user">
-        <img class="avatar" src="${user.photoURL || "../img/avatar-default.jpg"}" height="60px" width="60px">
+        <img class="avatar" src="${user.photoURL || "../img/avatar-default.png"}" height="30px" width="30px">
         <figcaption class="greetings">
           Hi, ${user.displayName}! ❤
         </figcaption>

@@ -15,7 +15,7 @@ export const printPosts = (doc, id, currentUser) => {
       <section class="post-container" id="${id}">
         <section class="top-post">
           <section class="left-post">
-            <img class="avatar" src="${post.avatar || "../img/avatar-default.jpg"}" height="60px" width="60px">
+            <img class="avatar" src="${post.avatar || "../img/avatar-default.png"}" height="60px" width="60px">
           </section>
 
           <section class="right-post">
@@ -57,7 +57,7 @@ export const printPosts = (doc, id, currentUser) => {
       <section class="post-container" id="${id}">
         <section class="top-post">
           <section class="left-post">
-            <img class="avatar" src="${post.avatar}" height="60px" width="60px">
+            <img class="avatar" src="${post.avatar || "../img/avatar-default.png"}" height="60px" width="60px">
           </section>
 
           <section class="right-post">
@@ -157,7 +157,7 @@ const sendComment = (e) => {
       });
   } else {
     alert(
-      "A caixa de comentário está vazia. Por favor, preencha o campo antes de publicar."
+      "There is nothing to publish. Please, type something to continue."
     );
   }
 };
@@ -191,7 +191,7 @@ export const createCommentBox = (doc, id, currentUser) => {
       <section class="post-comment" id="${id}">
         <section class="left-comment">
           <img class="avatar-comment" src="${
-            comment.avatar || "../img/avatar-default.jpg"
+            comment.avatar || "../img/avatar-default.png"
           }" height="60px" width="60px">
         </section>
 
@@ -223,7 +223,7 @@ export const createCommentBox = (doc, id, currentUser) => {
     commentContainer.innerHTML = `
     <section class="post-comment" id="${id}">
       <section class="left-comment">
-        <img class="avatar-comment" src="${comment.avatar || "../img/avatar-default.jpg"}" height="60px" width="60px">
+        <img class="avatar-comment" src="${comment.avatar || "../img/avatar-default.png"}" height="60px" width="60px">
       </section>
 
       <section class="right-comment">
@@ -249,7 +249,7 @@ export const createCommentBox = (doc, id, currentUser) => {
     button.addEventListener("click", (e) => {
       const getEvent = e.target;
       const commentId = getEvent.parentNode.parentNode.parentNode.parentNode.id;
-      if (confirm("Você realmente quer excluir esse comentário?")) {
+      if (confirm("Do you really want to delete it?")) {
         deleteComment(commentId)
           .then(() => {
             const commentContainer = document.getElementById(commentId);

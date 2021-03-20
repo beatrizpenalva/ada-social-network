@@ -6,7 +6,7 @@ import { timelineMessageError } from '../errors/index.js';
 export const sendDelete = (e) => {
   const getEvent = e.target;
   const postId = getEvent.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-  if (confirm('Você quer realmente quer excluir essa publicação?')) {
+  if (confirm('Do you really want to delete it?')) {
     deletePost(postId)
       .then(() => {
         const postCard = document.getElementById(postId);
