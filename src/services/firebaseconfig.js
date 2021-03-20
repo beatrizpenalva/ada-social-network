@@ -1,9 +1,9 @@
 const firebaseConfig = {
-  apiKey: 'AIzaSyDmwp1jfjDwqvXaxWh7_pwLFjLFoc7unA4',
-  authDomain: 'social-networl-4387c.firebaseapp.com',
-  projectId: 'social-networl-4387c',
-  storageBucket: 'social-networl-4387c.appspot.com',
-  messagingSenderId: '970569290942',
-  appId: '1:970569290942:web:c2fe9dad4904f263457aef',
+    apiKey: "AIzaSyCjAngCr8lyq8lOSLjsidHgf2h4UY99hbI",
+    authDomain: "ada-social-network.firebaseapp.com",
+    projectId: "ada-social-network",
+    storageBucket: "ada-social-network.appspot.com",
+    messagingSenderId: "315189969399",
+    appId: "1:315189969399:web:6a1b5a1c01411e97296ef2"
 };
 firebase.initializeApp(firebaseConfig);
