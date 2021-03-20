@@ -49,11 +49,13 @@ Our name is in honor of Ada Lovelace's story and the square brackets are an inte
 
 <img align='left' src='./src/img/ada-animation.gif' width=385 frameBorder="0" ></img>
 
+<p align='right'>
 Originally, the color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
 
 However, I have continuing to work with this project and decided to create an user interface that also brings Ada's essence. So, the new color palette and all the design system was based on an interpretation of her famous [portrait](https://pt.wikipedia.org/wiki/Ada_Lovelace#/media/Ficheiro:Ada_lovelace.jpg).
 
 <img align='center' src='./src/img/new-color-palette.png' width=385 frameBorder="0" ></img>
+</p>
 
 ✍️ **Prototype**
 
