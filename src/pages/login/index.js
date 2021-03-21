@@ -11,9 +11,6 @@ export const Login = () => {
   const rootElement = document.createElement("main");
   rootElement.innerHTML = `
     <section class="login-page">
-      <button type="button" id="back" class="hidden">
-        <i class="fas fa-chevron-left back-button"></i>
-      </button>   
       <section class="left">  
         <img src="../../img/ada-animation.gif" width="400px" height="300px">
         <p class="logo-theme"><span class="logo-name">[Ada]</span> Code like a woman.</p>
