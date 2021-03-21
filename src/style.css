@@ -58,7 +58,7 @@ button {
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     padding: 15px 0px;
 }
 .left {
@@ -508,11 +508,15 @@ img {
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 75%;
 }
-@media (max-width: 375px) {
+@media (max-width: 415px) {
     #publish-form, .post-container, .header, .post-comment {
         width: 300px;
     }
     .comment-text {
         width: 210px
+    }
+    img {
+        width: 200px;
+        height: 150px;
     }
 }
