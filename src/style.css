@@ -58,6 +58,7 @@ button {
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
+    height: 100vh;
     padding: 15px 0px;
 }
 .left {
@@ -517,5 +518,8 @@ img {
     img {
         width: 200px;
         height: 150px;
+    }
+    .login-page, .register-sections {
+        height: 0;
     }
 }
