@@ -21,7 +21,7 @@
 
 The first known programmer in history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace), she developed the first algorithm to be read by a machine. 👩‍💻 
 
-Although this place is historically ours, only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women in leadership occupancy, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola) (2019). 
+Although this place is historically ours, in Brazil only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women in leadership occupancy, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola) (2019). 
 
 Inspired by Ada biography and our journey, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge. 💪
 
