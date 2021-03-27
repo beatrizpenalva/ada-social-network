@@ -1,4 +1,4 @@
-<img align='center' src='./src/img/app-gif' width='600'></img>
+<img align='center' src='./src/img/app-gif.gif'></img>
 
 🌟 Ada, code like a girl. A social network to integrate women in tech area. To access click [here](https://ada-social-network.web.app) 🌟
 
