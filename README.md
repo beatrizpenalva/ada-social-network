@@ -1,3 +1,5 @@
+<img align='center' src='https://media3.giphy.com/media/2yIytWkgWLxX5O0vow/giphy.gif' frameBorder="0" ></img>
+
 🌟 Ada, code like a girl. A social network to integrate women in tech area. To access click [here](https://ada-social-network.web.app) 🌟
 
 ---
