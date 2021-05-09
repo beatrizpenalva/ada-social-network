@@ -1,4 +1,4 @@
-<h1 align="center" id="top"> 👩‍💻 Ada Social Network </h1>
+<h1 align="center" id="top"> 👭👩‍💻💜📱♀️ Ada Social Network </h1>
 
 <p align="center">
   A social network to integrate women in tech area
@@ -6,7 +6,7 @@
   ⚡ To access click <a href="https://ada-social-network.web.app">here</a>! ⚡  
 </p>
 
-<p>
+<p align="center">
  <a href="#-challenge">Challenge</a> •
  <a href="#about">About</a> •
  <a href="#development">Development</a> • 
@@ -19,9 +19,7 @@
 
 ## 🎯 Challenge
 
-The challenge in this project was to develop a Social Network that allows any user to create an access account, log in with it, create, edit, delete and give likes to publications. 
-
-The interface has to be created using the Mobile Frist concept and the app must be developed as a Single-page Application (SPA), using only Vanilla JavaScript, HTML, CSS and Firebase. 
+The challenge in this project was to develop a Social Network that allows any user to create an access account, log in with it, create, edit, delete and give likes to publications. The interface has to be created using the Mobile Frist concept and the app must be developed as a Single-page Application (SPA), using only Vanilla JavaScript, HTML, CSS and Firebase. 
 
 <p align="center">
   <img src="https://i.giphy.com/media/l2SpRK14D6cvy6Uxi/giphy.webp" alt="Woman asking Who here is on social?"></img>
@@ -35,13 +33,9 @@ The interface has to be created using the Mobile Frist concept and the app must 
 
 ## 💡 About 
 
-The first known programmer in history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace), she developed the first algorithm to be read by a machine.
+The first known programmer in history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace), she developed the first algorithm to be read by a machine. Although this place is historically ours, in Brazil only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women in leadership occupancy, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola) (2019). Inspired by Ada biography and our journey, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge.
 
-Although this place is historically ours, in Brazil only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women in leadership occupancy, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola) (2019). 
-
-Inspired by Ada biography and our journey, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge.
-
-<img align="center" src="./src/img/ada-lovelace-dribbble.png" width="450"></img>
+<img align="center" src="./src/img/ada-lovelace-dribbble.png"></img>
 
 <p align="right">
   <a href="#top"> Back to the top. </a>
@@ -99,9 +93,11 @@ Originally, the color palette was developed based on orange because in color psy
 However, I have continuing to work with this project and decided to create an user interface that also brings Ada's essence. So, the new color palette and all the design system was based on an interpretation of her famous [portrait](https://pt.wikipedia.org/wiki/Ada_Lovelace#/media/Ficheiro:Ada_lovelace.jpg), the animated Ada was design by [Julia Vedenyapina](https://dribbble.com/shots/5588411-Ada). 
 
 #### Color palette
-
-<img src="./src/img/ada-animation.gif" width="450" align="center"></img>
-<img src="./src/img/new-color-palette.png" width="450" align="center"></img>
+<p align="center">
+  <img src="./src/img/ada-animation.gif" width="450" align="center"></img>
+  <br>
+  <img src="./src/img/new-color-palette.png" width="450" align="center"></img>
+</p>
 
 #### Logo
 
@@ -113,7 +109,7 @@ Our name is in honor of Ada Lovelace's story and the square brackets are an inte
 
 It was used [Roboto](https://fonts.google.com/specimen/Roboto?) as the family font and the icons of [Font Awesome](https://fontawesome.com/) in the app.
 
-<img align="center" src="./src/img/fonts.png" width="100"></img>
+<img align="center" src="./src/img/fonts.png"></img>
 
 #### Prototype
 
@@ -140,7 +136,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 ##### High fidelity desktop prototype | Timeline
 
 <p align="center">
-    <img src="./src/img/./src/img/desktop-timeline.svg" alt="Timeline desktop prototype"></img>
+    <img src="./src/img/desktop-timeline.svg" alt="Timeline desktop prototype"></img>
     <br>
     🔎 Click on the image to enlarge 
 </p>
@@ -159,11 +155,13 @@ It was conducted usability tests during the app development, the feedback was:
 
 &nbsp;
 ❌ The user missed a button to go back to the login page on the register page.
+
 &nbsp;
 ✔️ It was added a back button on the top of the page.
 
 &nbsp;
 ❌ The user forgot what to type when clicking in the input on the form.
+
 &nbsp;
 ✔️ It was added a label in all inputs on the form.
 
@@ -268,7 +266,7 @@ $ git push origin my-feature
 
 ---
 
-## Build With
+## 👩‍💻 Build With
 
 &nbsp;
 🛠 Vanilla JavaScript
