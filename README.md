@@ -115,7 +115,9 @@ Our name is in honor of Ada Lovelace's story and the square brackets are an inte
 
 It was used [Roboto](https://fonts.google.com/specimen/Roboto?) as the family font and the icons of [Font Awesome](https://fontawesome.com/) in the app.
 
-<img align="center" src="./src/img/fonts.png"></img>
+<p align="center">
+  <img src="./src/img/fonts.png"></img>
+</p>  
 
 #### Prototype
 
