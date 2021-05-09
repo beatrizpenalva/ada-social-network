@@ -97,13 +97,17 @@ However, I have continuing to work with this project and decided to create an us
 #### Color palette
 <p align="center">
   <img src="./src/img/ada-animation.gif" width="450" align="center"></img>
-  <br>
+</p>  
+
+<p align="center">
   <img src="./src/img/new-color-palette.png" width="450" align="center"></img>
 </p>
 
 #### Logo
 
-<img align="center" src="./src/img/logo.svg" width="100"></img>
+<p align="center">
+  <img src="./src/img/logo.svg" width="200"></img>
+</p>
 
 Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
 
