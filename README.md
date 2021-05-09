@@ -1,4 +1,4 @@
-<h1 align="center" id="top"> 👭👩‍💻💜📱♀️ Ada Social Network </h1>
+<h1 align="center" id="top"> 💻🙋 Ada Social Network </h1>
 
 <p align="center">
   A social network to integrate women in tech area
@@ -35,7 +35,9 @@ The challenge in this project was to develop a Social Network that allows any us
 
 The first known programmer in history was Augusta Ada King, better known as [Ada Lovelace](https://pt.wikipedia.org/wiki/Ada_Lovelace), she developed the first algorithm to be read by a machine. Although this place is historically ours, in Brazil only 17% of the jobs opportunities in the TI area were offered to women and 13% of the professionals employed were women in leadership occupancy, according to this [reaserch](https://economia.uol.com.br/noticias/redacao/2020/10/06/mulheres-avancam-na-area-de-tecnologia-mas-diferenca-de-salarios-aumenta.htm?cmpid=copiaecola) (2019). Inspired by Ada biography and our journey, we created a social network for women in tech (or aspiring to) to share support, experiences, opportunities, and knowledge.
 
-<img align="center" src="./src/img/ada-lovelace-dribbble.png"></img>
+<p align="center">
+  <img src="./src/img/ada-lovelace-dribbble.png" width="450"></img>
+</p>
 
 <p align="right">
   <a href="#top"> Back to the top. </a>
