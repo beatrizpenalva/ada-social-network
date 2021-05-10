@@ -8,11 +8,11 @@
 
 <p align="center">
  <a href="#-challenge">Challenge</a> •
- <a href="#about">About</a> •
- <a href="#development">Development</a> • 
+ <a href="#-about">About</a> •
+ <a href="#-development">Development</a> • 
  <a href="#-getting-started">Getting Started</a> • 
- <a href="#build-with">Build With</a> • 
- <a href="#authors">Authors</a>
+ <a href="#-build-with">Build With</a> • 
+ <a href="#-authors">Authors</a>
 </p>
 
 ---
