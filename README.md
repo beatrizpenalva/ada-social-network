@@ -19,7 +19,7 @@
 
 ## 🎯 Challenge
 
-The challenge in this project was to develop a Social Network that allows any user to create an access account, log in with it, create, edit, delete and give likes to publications. The interface has to be created using the Mobile Frist concept and the app must be developed as a Single-page Application (SPA), using only Vanilla JavaScript, HTML, CSS and Firebase. 
+The challenge in this project was to develop a Social Network that allows any user to create an access account, log in with it, create, edit, delete and give likes to publications. The interface has to be created using the Mobile Frist concept and the app must be developed as a Single-page Application (SPA), using only Vanilla JavaScript, HTML, CSS and Firebase. To know more about the challenge click [here](https://github.com/Laboratoria/SAP005-social-network).
 
 <p align="center">
   <img src="https://i.giphy.com/media/l2SpRK14D6cvy6Uxi/giphy.webp" alt="Woman asking Who here is on social?"></img>
@@ -96,11 +96,17 @@ However, I have continuing to work with this project and decided to create an us
 
 #### Color palette
 <p align="center">
-  <img src="./src/img/ada-animation.gif" width="450" align="center"></img>
+  <img src="./src/img/ada-animation.gif" width="600" align="center"></img>
 </p>  
 
 <p align="center">
-  <img src="./src/img/new-color-palette.png" width="450" align="center"></img>
+  <img src="./src/img/new-color-palette.png" width="600" align="center"></img>
+</p>
+
+To check if the colors used have good contrast for people with daltonism, the color palette was tested using the [Adobe Accessibility Tool](https://color.adobe.com/pt/create/color-accessibility). The Color blindness simulator shows what colors are in conflict, attending people with Deuteranopia, Protanopia and Tritanopia.
+
+<p align="center">
+  <img src="./src/img/accessibility-colors.png" width="600" align="center"></img>
 </p>
 
 #### Logo
@@ -123,7 +129,7 @@ It was used [Roboto](https://fonts.google.com/specimen/Roboto?) as the family fo
 
 We developed our prototypes based on the [Mobile First](https://medium.com/@Vincentxia77/what-is-mobile-first-design-why-its-important-how-to-make-it-7d3cf2e29d00) concept, we can see all screens by clicking [here](https://www.figma.com/file/67H6oBRw0TqcV3gYmzqInr/Ada-Social-Network?node-id=402%3A2).
 
-##### High fidelity mobile prototype
+##### Medium fidelity mobile prototype
 
 <p align="center">
     <img src="./src/img/mobile.png" alt="Mobile prototype"></img>
@@ -132,7 +138,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 </p>
 
 
-##### High fidelity desktop prototype | Login
+##### Medium fidelity desktop prototype - Login
 
 <p align="center">
     <img src="./src/img/desktop-login.svg" alt="Login desktop prototype"></img>
@@ -141,7 +147,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
 </p>
 
 
-##### High fidelity desktop prototype | Timeline
+##### Medium fidelity desktop prototype - Timeline
 
 <p align="center">
     <img src="./src/img/desktop-timeline.svg" alt="Timeline desktop prototype"></img>
@@ -149,7 +155,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
     🔎 Click on the image to enlarge 
 </p>
 
-##### Final interface | Desktop
+##### Final interface - Desktop
 
 <p align="center">
     <img align="center" src="./src/img/app-gif.gif"></img>
