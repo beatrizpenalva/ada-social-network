@@ -251,8 +251,8 @@ $ npm run start
 
 # The app will be open on port:5000 - access http://localhost:5000
 
-# To deploy on GitHub-Pages run:
-$ npm run deploy
+# To deploy on Firebase run:
+$ firebase deploy
 
 ```
 
