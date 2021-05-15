@@ -70,12 +70,14 @@ We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&f
 📌 User story 01: *"As a user, I want to create an account to have access to the social network feed."*
   - [x] User can create an account giving a name, email address and password
   - [x] User can not use an email already in use
+##
  
 📌 User story 02: *"As a user, I want to have access to the feed page by being a woman interested in the tech area."*
   - [x] User can sign in with email and password
   - [x] User can sign in or sign up with Google and GitHub accounts
   - [x] User can go to the register page
   - [x] If something went wrong, describe messages will be shown to help the user
+##
 
 📌 User story 03: *"As a user, I want to publish texts to interact with other users of the social network."*
   - [x] Users must be logged in to access the feed page
@@ -83,10 +85,12 @@ We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&f
   - [x] Users can see others people's posts
   - [x] Users can write and publish a post
   - [x] Users can edit and delete their own post
+##
 
 📌 User story 04: *"As a user, I want to visualize other users' publications and like them."*
   - [x] User can give one like per post and take it back
   - [x] User can see how many likes the post has
+##
  
 📌 User story 05: *"As a user, I want to make comments in others user's publications to interact in the social network."*
   - [x] Users can comment in their own posts and other people's publication
