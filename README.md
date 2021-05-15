@@ -51,6 +51,8 @@ The first known programmer in history was Augusta Ada King, better known as [Ada
 
 The project planning and organization were developed using the Kanban method. We divided the work by User Stories and the strategy of programming was code review. You can see our board by clicking [here](https://trello.com/b/0PEjsA2s/ada-rede-social).
 
+##
+
 ### ✍ User experience
 
 We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&feature=emb_title) method to develop the product, we imagine our proto personas and made the validation by making individuals interviews, then set our user stories, definition of done, and acceptance criteria.
@@ -60,6 +62,8 @@ We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&f
 <p align="center">
   <img src="./src/img/personas.svg" alt="Protopersonas"></img>
 </p>
+
+##
 
 #### User stories
 
@@ -88,11 +92,15 @@ We use part of the [Desing Sprint](https://www.youtube.com/watch?v=aWQUSiOZ0x8&f
   - [x] Users can comment in their own posts and other people's publication
   - [x] Users can delete their own posts
 
+##
+
 ### 🎨 User Interface
 
 Originally, the color palette was developed based on orange because in color psychology it symbolized joy and confidence, being a vibrant color, stimulate action and socialization. And also, is a "neutral" color for our society, avoiding the colors stigmatized for the female gender. 
 
 However, I have continuing to work with this project and decided to create an user interface that also brings Ada's essence. So, the new color palette and all the design system was based on an interpretation of her famous [portrait](https://pt.wikipedia.org/wiki/Ada_Lovelace#/media/Ficheiro:Ada_lovelace.jpg), the animated Ada was design by [Julia Vedenyapina](https://dribbble.com/shots/5588411-Ada). 
+
+##
 
 #### Color palette
 <p align="center">
@@ -109,6 +117,8 @@ To check if the colors used have good contrast for people with daltonism, the co
   <img src="./src/img/accessibility-colors.png" width="600" align="center"></img>
 </p>
 
+##
+
 #### Logo
 
 <p align="center">
@@ -117,6 +127,8 @@ To check if the colors used have good contrast for people with daltonism, the co
 
 Our name is in honor of Ada Lovelace's story and the square brackets are an interpretation of what this symbol represents in JavaScript. In the code language, they are used to create an array, which means, a group of values saved in one variable, that can be accessed together or individually. In the Ada branding context, they represent the proximity of women and knowledge in one place, that can be access to help, learn or both. 
 
+##
+
 #### Typography
 
 It was used [Roboto](https://fonts.google.com/specimen/Roboto?) as the family font and the icons of [Font Awesome](https://fontawesome.com/) in the app.
@@ -124,6 +136,8 @@ It was used [Roboto](https://fonts.google.com/specimen/Roboto?) as the family fo
 <p align="center">
   <img src="./src/img/fonts.png"></img>
 </p>  
+
+##
 
 #### Prototype
 
@@ -137,6 +151,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
     🔎 Click on the image to enlarge 
 </p>
 
+##
 
 ##### Medium fidelity desktop prototype - Login
 
@@ -146,6 +161,7 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
     🔎 Click on the image to enlarge 
 </p>
 
+##
 
 ##### Medium fidelity desktop prototype - Timeline
 
@@ -155,6 +171,8 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
     🔎 Click on the image to enlarge 
 </p>
 
+##
+
 ##### Final interface - Desktop
 
 <p align="center">
@@ -162,6 +180,8 @@ We developed our prototypes based on the [Mobile First](https://medium.com/@Vinc
     <br>
     🔎 Click on the image to enlarge 
 </p>
+
+##
 
 ### 🕵️‍♀️ Usability test
 
@@ -172,12 +192,15 @@ It was conducted usability tests during the app development, the feedback was:
 
 &nbsp;
 ✔️ It was added a back button on the top of the page.
+##
 
 &nbsp;
 ❌ The user forgot what to type when clicking in the input on the form.
 
 &nbsp;
 ✔️ It was added a label in all inputs on the form.
+
+##
 
 ### 🚧 Future implementations
 
